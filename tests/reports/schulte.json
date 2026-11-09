@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-09",
+  "inventory": [
+    "Archive source unchanged; 30 levels imported",
+    "14 cards and original Schulte menu launch",
+    "Native 30 levels via touch, rules, error, hint and next",
+    "Original save and collection progress round trip",
+    "Daily table, timer toggle, sound toggle, parents view",
+    "360x640, 390x844 and desktop navigation visibility",
+    "Existing 13 games still launch and finish",
+    "Production build, subdirectory hosting and distinct offline navigation caches"
+  ],
+  "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "checks": [
+    "All 30 original levels passed by touch; results, stars and run history saved; catalog displays 30/30",
+    "Native sound/timer switches round trip, parents gate and statistics open, daily table completes and saves streak",
+    "Native error and hint work; all 13 collection games finish a round without changing shulte.v3; browser Back returns to catalog",
+    "Original 5x5 table and collection navigation fit 360x640; menu also verified at 390x844 and 1280x800",
+    "Production first level completed by touching visible numbers; shared assets and return navigation work when hosted under /neurons/"
+  ],
+  "errors": [],
+  "resources": [],
+  "production": {
+    "debugAbsent": true,
+    "initialHomeSchulteRequests": 0,
+    "originalProgressPreserved": true,
+    "separateNavigationCaches": true,
+    "offlineRoundTrip": true,
+    "errors": [],
+    "resources": [],
+    "subdirectory": {
+      "url": "http://127.0.0.1:4180/neurons/",
+      "firstLevelPassedByTouch": true,
+      "returnAndProgress": true,
+      "errors": [],
+      "resources": []
+    }
+  },
+  "build": "passed",
+  "unitTests": {
+    "passed": 14,
+    "failed": 0
+  }
+}

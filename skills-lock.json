@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-11-08",
+  "new_installation": {
+    "repository": "https://github.com/Stanestane/game-design-skills-bundle",
+    "commit": "1868c5635d1937f599ebc918904533e69a194039",
+    "license": "PolyForm Noncommercial 1.0.0",
+    "required_notice": "Copyright Stanislav Stankovic (https://www.stane-island.net/)",
+    "user_confirmed_use": "noncommercial-or-educational",
+    "installer": "Codex skill-installer/scripts/install-skill-from-github.py",
+    "skills": [
+      {
+        "name": "game-design-core-loop-extractor",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-design-core-loop-extractor",
+        "source_path": "game-design-core-loop-extractor",
+        "skill_sha256": "084816481d46c309865ecbe68e199864264d3f26adbb84e0f03257a3d857d5c7",
+        "file_count": 5,
+        "reviewed_source_files_match": true,
+        "license_copy_present": true
+      },
+      {
+        "name": "game-design-design-pillars-extractor",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-design-design-pillars-extractor",
+        "source_path": "game-design-design-pillars-extractor",
+        "skill_sha256": "e85726fe525d0ed7aca851320cc68ab99ded1abde89dcdc2a798ec15ddf06abe",
+        "file_count": 5,
+        "reviewed_source_files_match": true,
+        "license_copy_present": true
+      },
+      {
+        "name": "game-design-one-page-design-doc",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-design-one-page-design-doc",
+        "source_path": "game-design-one-page-design-doc",
+        "skill_sha256": "d46a799e13632b0c0b3d8ea87cbfeb9a20bce0c27701b17369903becf1cc1883",
+        "file_count": 8,
+        "reviewed_source_files_match": true,
+        "license_copy_present": true
+      },
+      {
+        "name": "game-design-feature-prioritization",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-design-feature-prioritization",
+        "source_path": "game-design-feature-prioritization",
+        "skill_sha256": "570a48cf057bdf4af42aec92ca01d244ae0a9413b45db45613ea268dab4d5bff",
+        "file_count": 4,
+        "reviewed_source_files_match": true,
+        "license_copy_present": true
+      },
+      {
+        "name": "game-design-ftue-hero-journey-audit",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-design-ftue-hero-journey-audit",
+        "source_path": "game-design-ftue-hero-journey-audit",
+        "skill_sha256": "8cc0b34878bbed7487d8c9e61534aee165aaafc78990b9c6cfeb0e36d43802d6",
+        "file_count": 5,
+        "reviewed_source_files_match": true,
+        "license_copy_present": true
+      },
+      {
+        "name": "game-design-flow-audit",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-design-flow-audit",
+        "source_path": "game-design-flow-audit",
+        "skill_sha256": "a84af41277536cca496d1f029d083b62f597487734b8b48737d4d75fb35c3b6a",
+        "file_count": 5,
+        "reviewed_source_files_match": true,
+        "license_copy_present": true
+      },
+      {
+        "name": "game-design-fairness-frustration-audit",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-design-fairness-frustration-audit",
+        "source_path": "game-design-fairness-frustration-audit",
+        "skill_sha256": "c2b76b10c17c14397a105a67fab0e849f50331a7979795be53c770db89008b17",
+        "file_count": 5,
+        "reviewed_source_files_match": true,
+        "license_copy_present": true
+      },
+      {
+        "name": "game-design-failure-loop-audit",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-design-failure-loop-audit",
+        "source_path": "game-design-failure-loop-audit",
+        "skill_sha256": "647151cc2934f34b108414f4ed02da398fdd00a7321589fbff30fe2cf6dec81b",
+        "file_count": 5,
+        "reviewed_source_files_match": true,
+        "license_copy_present": true
+      },
+      {
+        "name": "design-red-team-audit",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\design-red-team-audit",
+        "source_path": "design-red-team-audit",
+        "skill_sha256": "ecd8ac5353f9d4e24ae9374515a1b65893f2a0004efb2fcca78411e30d18ff4b",
+        "file_count": 5,
+        "reviewed_source_files_match": true,
+        "license_copy_present": true
+      }
+    ]
+  },
+  "existing_gamedev_skills": {
+    "repository": "https://github.com/gamedev-skills/awesome-gamedev-agent-skills",
+    "reviewed_commit": "19d93f97c9c1ea0f8b306e77aa81e0d3e352d3e9",
+    "license": "Apache-2.0",
+    "note": "Профильные навыки уже установлены. Локальные версии сохранены; этот commit описывает просмотренный upstream, а не версию прежней установки.",
+    "skills": [
+      {
+        "name": "router",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\router",
+        "skill_sha256": "548b9c354f4bc152607b4f00f575f40786d28be92d1f4354c8802437f958488e",
+        "reviewed_upstream_path": "router/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "phaser-core",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\phaser-core",
+        "skill_sha256": "101c9382dd8a68f2573ef83d978bd19432f61512c5aa83e8c2a5cf7e7e3e38b4",
+        "reviewed_upstream_path": "skills/web-engines/phaser-core/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "phaser-arcade-physics",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\phaser-arcade-physics",
+        "skill_sha256": "4b7186f03c236bbe83dfd8f24467cc4429ff47cb870e04ef939320165b6bcd04",
+        "reviewed_upstream_path": "skills/web-engines/phaser-arcade-physics/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "game-ui-ux",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-ui-ux",
+        "skill_sha256": "8a094c84a377503aa8f4c40df676d1c6b6fc07d36ff95554ce06467f1614397e",
+        "reviewed_upstream_path": "skills/disciplines/game-ui-ux/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "create-game-assets",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\create-game-assets",
+        "skill_sha256": "c178cde20316f7d326f2a853a76522b375b325346b5b8797ef52aa98740aff18",
+        "reviewed_upstream_path": "skills/disciplines/create-game-assets/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "input-systems",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\input-systems",
+        "skill_sha256": "4cb79ad13d54b5b7412efc978d8c5bc3dab529182feb531f304d7d75879f2308",
+        "reviewed_upstream_path": "skills/disciplines/input-systems/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "game-feel",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\game-feel",
+        "skill_sha256": "68fc818ad939151be2db9e358e4295a71830c19d61f3aff849f1599307f39f9d",
+        "reviewed_upstream_path": "skills/disciplines/game-feel/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "audio-design",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\audio-design",
+        "skill_sha256": "4d8418660c0423164a0319d4429a196ee0ec86b4f05f764bae1a212f73e287e1",
+        "reviewed_upstream_path": "skills/disciplines/audio-design/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "save-systems",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\save-systems",
+        "skill_sha256": "bf9184965b3eb4bc0b20be00681d08ef1af63fd85ca5b7afb7453ca09e80e490",
+        "reviewed_upstream_path": "skills/disciplines/save-systems/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "level-design",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\level-design",
+        "skill_sha256": "f1656cb00b9af8dc625a9655448b410b37ce6f1e523048a5abf09fda25cbfd32",
+        "reviewed_upstream_path": "skills/disciplines/level-design/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "performance-optimization",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\performance-optimization",
+        "skill_sha256": "ddfc68c927f9a482d78cc0e103edb2e2711bc876a5965ff53eabd9a7d308dfab",
+        "reviewed_upstream_path": "skills/disciplines/performance-optimization/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "physics-tuning",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\physics-tuning",
+        "skill_sha256": "faa9a50d465c16d0060af8c8e20533efb829e07616ec01de4cbdb8d536a7d986",
+        "reviewed_upstream_path": "skills/disciplines/physics-tuning/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "puzzle",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\puzzle",
+        "skill_sha256": "a2f40c5c684b0d0f09d0b1db1cfcb04ca7e4e6e8bca946022f8318f5fbc44b4c",
+        "reviewed_upstream_path": "skills/genres/puzzle/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "platformer",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\platformer",
+        "skill_sha256": "ffa6800e26702c371543ebafc721593ba7d19eb9864b6e28dec3c3155b15f1a7",
+        "reviewed_upstream_path": "skills/genres/platformer/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "prototype-fast",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\prototype-fast",
+        "skill_sha256": "02491395c621833d2252f7a33a96aa11f26eb48523fea167c68272fb3c785ba1",
+        "reviewed_upstream_path": "skills/workflows/prototype-fast/SKILL.md",
+        "status": "pre-existing-preserved"
+      },
+      {
+        "name": "camera-systems",
+        "installed_path": "C:\\Users\\alexg\\.codex\\skills\\camera-systems",
+        "skill_sha256": "cec5e9ef16aaf8d42a7b86e3b17678d57920ab7692bbbfe710a34ac0d09b32c7",
+        "reviewed_upstream_path": "skills/disciplines/camera-systems/SKILL.md",
+        "status": "pre-existing-preserved"
+      }
+    ]
+  },
+  "official_phaser_skills": {
+    "repository": "https://github.com/phaserjs/phaser/tree/master/skills",
+    "used_from_existing_installation": [
+      "game-setup-and-config",
+      "scale-and-responsive"
+    ]
+  }
+}

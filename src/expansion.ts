@@ -1,0 +1,62 @@
+import { random,shuffled } from './rules.ts';
+
+export const SEARCH_COUNTS=[3,3,4,4,5,5,6,6] as const;
+const SEARCH_PROPS=['key','book','apple','cup','ball','fish','hammer','leaf','clock','rocket','cake','cheese'];
+export function searchLesson(level:number){
+  const rng=random(7900+level),visible=shuffled(SEARCH_PROPS,rng).slice(0,Math.min(12,6+level));
+  return {visible,targets:shuffled(visible,rng).slice(0,SEARCH_COUNTS[level])};
+}
+
+export const PAINT_COLORS=['#6fb7df','#f0b766','#a98bd0','#7fbea4','#ee9e9e','#d3bde7'];
+export interface PaintProblem {expression:string;answer:number;a:number;b:number;operation:'+'|'−';}
+export function paintLesson(level:number){
+  const rng=random(8600+level),max=level>=4?20:10,count=level===0?4:6;
+  const answers=shuffled(Array.from({length:max-1},(_,i)=>i+2),rng).slice(0,count);
+  const problems:PaintProblem[]=answers.map((answer,i)=>{
+    if(level>=2&&(level%2===0||i%2===1)){
+      const b=1+Math.floor(rng()*(max-answer)),a=answer+b;
+      return {a,b,answer,operation:'−',expression:a+' − '+b};
+    }
+    const a=1+Math.floor(rng()*(answer-1)),b=answer-a;
+    return {a,b,answer,operation:'+',expression:a+' + '+b};
+  });
+  return {max,count,problems,theme:level%3===1?'rocket':'robot'};
+}
+
+export interface Riddle {id:string;text:string;answer:string;hint:string;}
+export const RIDDLES:Riddle[]=[
+  {id:'cat',text:'Мягкие лапки, усы и хвост. Кто говорит «мяу»?',answer:'cat',hint:'Этот домашний зверёк умеет мурлыкать.'},
+  {id:'house',text:'Есть крыша, окна и входная дверь. Люди живут внутри. Что это?',answer:'house',hint:'Это здание, в которое возвращаются домой.'},
+  {id:'key',text:'Он маленький, с зубчиками. Поверни его в замке — и дверь откроется.',answer:'key',hint:'Его вставляют в замочную скважину.'},
+  {id:'ball',text:'Круглый, упругий, умеет прыгать. Его бросают, ловят и пинают в игре.',answer:'ball',hint:'С ним играют в футбол.'},
+  {id:'book',text:'Внутри у неё страницы с буквами и картинками. Откроешь — и начнёшь читать.',answer:'book',hint:'Она рассказывает истории на своих страницах.'},
+  {id:'clock',text:'На круглом лице — числа и стрелки. Показывают, который час.',answer:'clock',hint:'Помогают узнать время.'},
+  {id:'cup',text:'У неё есть ручка, но она не дверь. Из неё пьют чай.',answer:'cup',hint:'Это посуда для горячего напитка.'},
+  {id:'fish',text:'Живёт в воде, машет плавниками. Вместо ног у неё хвост.',answer:'fish',hint:'Она плавает в реке, море или аквариуме.'},
+  {id:'leaf',text:'Весной растёт на ветке. Осенью желтеет и падает с дерева.',answer:'leaf',hint:'Летом он чаще всего зелёный.'},
+  {id:'apple',text:'Круглый плод растёт на яблоне. Под кожурой — мякоть и семечки.',answer:'apple',hint:'Его можно сорвать с яблони.'},
+  {id:'moon',text:'Ночью видна в небе. Иногда круглая, иногда похожа на тонкий серп.',answer:'moon',hint:'Это спутник Земли.'},
+  {id:'rocket',text:'С огнём из двигателя взлетает высоко. На ней отправляются в космос.',answer:'rocket',hint:'Она нужна космонавтам для полёта.'},
+  {id:'hammer',text:'У инструмента рукоятка и тяжёлая головка. Им забивают гвозди.',answer:'hammer',hint:'Он ударяет по шляпке гвоздя.'},
+  {id:'lamp',text:'Стоит на столе и светит на книгу. Помогает читать, когда темно.',answer:'lamp',hint:'В ней горит лампочка.'},
+  {id:'flask',text:'Стеклянный сосуд с узким горлышком. Учёный смешивает в нём жидкости.',answer:'flask',hint:'Её используют для опытов в лаборатории.'},
+  {id:'compass',text:'В круглом корпусе живёт стрелка. Она указывает на север и помогает найти направление.',answer:'compass',hint:'Его берут в поход, чтобы не заблудиться.'},
+  {id:'cheese',text:'Его делают из молока, кладут на бутерброд. Иногда в нём бывают дырочки.',answer:'cheese',hint:'Это молочный продукт, который режут ломтиками.'},
+  {id:'cake',text:'Коржи и сладкий крем. На день рождения в него ставят свечки.',answer:'cake',hint:'Этот большой десерт делят на кусочки.'},
+  {id:'beetle',text:'У этого насекомого шесть лапок. Твёрдые надкрылья защищают его крылья.',answer:'beetle',hint:'Божья коровка тоже относится к таким насекомым.'},
+  {id:'sign',text:'Стоит у дороги на столбе. Подсказывает водителям правила движения.',answer:'sign',hint:'На нём может быть нарисовано предупреждение.'},
+  {id:'screw',text:'Металлический стержень с резьбой по спирали. Его вкручивают отвёрткой.',answer:'screw',hint:'Его вращают, чтобы скрепить детали.'},
+  {id:'nail',text:'Есть шляпка и острый кончик. Его забивают молотком в доску.',answer:'nail',hint:'Этот крепёж забивают, а не вкручивают.'},
+  {id:'box',text:'Картонные стенки и крышка. В неё складывают вещи или упаковывают подарок.',answer:'box',hint:'Её удобно закрыть и поставить на полку.'},
+  {id:'cable',text:'От прибора к розетке тянется длинная гибкая линия. По ней идёт электрический ток.',answer:'cable',hint:'На конце бывает вилка для розетки.'},
+];
+export const RIDDLE_COUNTS=[2,2,3,3,3,3,4,4] as const;
+export function riddleLesson(level:number){
+  const offset=RIDDLE_COUNTS.slice(0,level).reduce((sum,n)=>sum+n,0),riddles=RIDDLES.slice(offset,offset+RIDDLE_COUNTS[level]);
+  const order=shuffled(riddles.map((_,i)=>i),random(8900+level));
+  return {riddles,order,choiceCount:level<2?3:4};
+}
+export function riddleChoices(answer:string,level:number,sector:number,count:number){
+  const rng=random(9000+level*17+sector);
+  return shuffled([answer,...shuffled(RIDDLES.map(r=>r.answer).filter(key=>key!==answer),rng).slice(0,count-1)],rng);
+}

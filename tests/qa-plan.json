@@ -1,0 +1,24 @@
+{
+  "scope": "10 distinct games with 8 tasks each, mobile browser, shared UI and local progress",
+  "functional": [
+    "Open every game from the collection and complete tasks using actual pointer input",
+    "Check hints, restart, home navigation and reopening",
+    "Drag letters, symbols, clocks and memory objects; verify tap alternatives",
+    "Trace labyrinth routes and each crossing wire without skipping required steps",
+    "Solve colour puzzles with legal moves, cancel a move and recover from an illegal pour",
+    "Verify progress after reload and after returning home",
+    "Malformed local storage and an interrupted drag do not prevent playing",
+    "Production loading, no console errors or failed assets, service worker and offline revisits",
+    "Rules are available during every game without losing partial progress",
+    "A partially completed task asks before restarting; cancel keeps the exact task state",
+    "Opening a modal pauses game input and in-progress timers; closing it resumes play",
+    "Difficulty introduces whole hours, afternoon time and half hours in separate steps"
+  ],
+  "visual": [
+    "Home, intro, active task and success at 390x844",
+    "Game field plus controls fit 360x640, 390x844 and 768x1024",
+    "Desktop home and game at 1280x950",
+    "Resize during an unfinished game preserves round state",
+    "Review silhouettes, letter legibility, overlapping wires, analog clocks and full tubes"
+  ]
+}

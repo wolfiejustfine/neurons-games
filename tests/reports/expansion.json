@@ -1,0 +1,596 @@
+{
+  "date": "2026-11-08",
+  "games": 13,
+  "targetAge": 8,
+  "childPlaytest": false,
+  "inventory": [
+    "All 24 new rounds by normal taps",
+    "13-game collection counts and preservation of old completed levels",
+    "Hidden-object targets, distractors, hints and completed list",
+    "Math: correct, wrong, empty, erase, close, keyboard and completed colouring",
+    "Wheel: spin, no repeat, hints, wrong answer, replay, recorded Russian audio and mute",
+    "Rules pause spin and preserve scene state",
+    "Small portrait, desktop and phone landscape notice",
+    "Production PWA, cached audio and saved progress",
+    "Regression: all 80 earlier rounds"
+  ],
+  "completed": [
+    {
+      "game": "hidden-objects",
+      "level": 1
+    },
+    {
+      "game": "hidden-objects",
+      "level": 2
+    },
+    {
+      "game": "hidden-objects",
+      "level": 3
+    },
+    {
+      "game": "hidden-objects",
+      "level": 4
+    },
+    {
+      "game": "hidden-objects",
+      "level": 5
+    },
+    {
+      "game": "hidden-objects",
+      "level": 6
+    },
+    {
+      "game": "hidden-objects",
+      "level": 7
+    },
+    {
+      "game": "hidden-objects",
+      "level": 8
+    },
+    {
+      "game": "math-coloring",
+      "level": 1
+    },
+    {
+      "game": "math-coloring",
+      "level": 2
+    },
+    {
+      "game": "math-coloring",
+      "level": 3
+    },
+    {
+      "game": "math-coloring",
+      "level": 4
+    },
+    {
+      "game": "math-coloring",
+      "level": 5
+    },
+    {
+      "game": "math-coloring",
+      "level": 6
+    },
+    {
+      "game": "math-coloring",
+      "level": 7
+    },
+    {
+      "game": "math-coloring",
+      "level": 8
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 1
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 2
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 3
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 4
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 5
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 6
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 7
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 8
+    }
+  ],
+  "checks": [
+    "Math: empty/wrong answers, erase, keyboard, cancel and help preserve correct colouring",
+    "Search: distractor does not remove requested objects; hint and help retain found items",
+    "Recorded MP3 played with increasing currentTime; mute stopped playback",
+    "Wheel: incorrect answer retains question and permits a correct retry",
+    "All 104 rounds completed on 360x640; 13/13 collection count and saved progress survived reload",
+    "Help pauses the spinning wheel and returns to the same round",
+    "Resizing during spin does not stall the next riddle",
+    "Desktop search with 12 objects is completable; phone landscape notice offers return home",
+    "Fresh-profile first offline reload renders the app; cached MP3 plays and a full wheel round completes offline; old and new progress survive another offline reload"
+  ],
+  "errors": [],
+  "audioEvidence": [
+    {
+      "src": "http://127.0.0.1:5173/audio/riddle-cat.mp3",
+      "duration": null,
+      "time": 0,
+      "paused": true
+    },
+    {
+      "src": "http://127.0.0.1:5173/audio/riddle-cat.mp3",
+      "duration": 6.505958,
+      "time": 0.435344,
+      "paused": false
+    }
+  ],
+  "resourceErrors": [],
+  "completedDate": "2026-11-09",
+  "regression": [
+    {
+      "game": "shadows",
+      "level": 1
+    },
+    {
+      "game": "shadows",
+      "level": 2
+    },
+    {
+      "game": "shadows",
+      "level": 3
+    },
+    {
+      "game": "shadows",
+      "level": 4
+    },
+    {
+      "game": "shadows",
+      "level": 5
+    },
+    {
+      "game": "shadows",
+      "level": 6
+    },
+    {
+      "game": "shadows",
+      "level": 7
+    },
+    {
+      "game": "shadows",
+      "level": 8
+    },
+    {
+      "game": "anagrams",
+      "level": 1
+    },
+    {
+      "game": "anagrams",
+      "level": 2
+    },
+    {
+      "game": "anagrams",
+      "level": 3
+    },
+    {
+      "game": "anagrams",
+      "level": 4
+    },
+    {
+      "game": "anagrams",
+      "level": 5
+    },
+    {
+      "game": "anagrams",
+      "level": 6
+    },
+    {
+      "game": "anagrams",
+      "level": 7
+    },
+    {
+      "game": "anagrams",
+      "level": 8
+    },
+    {
+      "game": "ciphers",
+      "level": 1
+    },
+    {
+      "game": "ciphers",
+      "level": 2
+    },
+    {
+      "game": "ciphers",
+      "level": 3
+    },
+    {
+      "game": "ciphers",
+      "level": 4
+    },
+    {
+      "game": "ciphers",
+      "level": 5
+    },
+    {
+      "game": "ciphers",
+      "level": 6
+    },
+    {
+      "game": "ciphers",
+      "level": 7
+    },
+    {
+      "game": "ciphers",
+      "level": 8
+    },
+    {
+      "game": "proofreading",
+      "level": 1
+    },
+    {
+      "game": "proofreading",
+      "level": 2
+    },
+    {
+      "game": "proofreading",
+      "level": 3
+    },
+    {
+      "game": "proofreading",
+      "level": 4
+    },
+    {
+      "game": "proofreading",
+      "level": 5
+    },
+    {
+      "game": "proofreading",
+      "level": 6
+    },
+    {
+      "game": "proofreading",
+      "level": 7
+    },
+    {
+      "game": "proofreading",
+      "level": 8
+    },
+    {
+      "game": "alarms",
+      "level": 1
+    },
+    {
+      "game": "alarms",
+      "level": 2
+    },
+    {
+      "game": "alarms",
+      "level": 3
+    },
+    {
+      "game": "alarms",
+      "level": 4
+    },
+    {
+      "game": "alarms",
+      "level": 5
+    },
+    {
+      "game": "alarms",
+      "level": 6
+    },
+    {
+      "game": "alarms",
+      "level": 7
+    },
+    {
+      "game": "alarms",
+      "level": 8
+    },
+    {
+      "game": "rearrangement",
+      "level": 1
+    },
+    {
+      "game": "rearrangement",
+      "level": 2
+    },
+    {
+      "game": "rearrangement",
+      "level": 3
+    },
+    {
+      "game": "rearrangement",
+      "level": 4
+    },
+    {
+      "game": "rearrangement",
+      "level": 5
+    },
+    {
+      "game": "rearrangement",
+      "level": 6
+    },
+    {
+      "game": "rearrangement",
+      "level": 7
+    },
+    {
+      "game": "rearrangement",
+      "level": 8
+    },
+    {
+      "game": "color-sort",
+      "level": 1
+    },
+    {
+      "game": "color-sort",
+      "level": 2
+    },
+    {
+      "game": "color-sort",
+      "level": 3
+    },
+    {
+      "game": "color-sort",
+      "level": 4
+    },
+    {
+      "game": "color-sort",
+      "level": 5
+    },
+    {
+      "game": "color-sort",
+      "level": 6
+    },
+    {
+      "game": "color-sort",
+      "level": 7
+    },
+    {
+      "game": "color-sort",
+      "level": 8
+    },
+    {
+      "game": "maze-codes",
+      "level": 1
+    },
+    {
+      "game": "maze-codes",
+      "level": 2
+    },
+    {
+      "game": "maze-codes",
+      "level": 3
+    },
+    {
+      "game": "maze-codes",
+      "level": 4
+    },
+    {
+      "game": "maze-codes",
+      "level": 5
+    },
+    {
+      "game": "maze-codes",
+      "level": 6
+    },
+    {
+      "game": "maze-codes",
+      "level": 7
+    },
+    {
+      "game": "maze-codes",
+      "level": 8
+    },
+    {
+      "game": "maze-sort",
+      "level": 1
+    },
+    {
+      "game": "maze-sort",
+      "level": 2
+    },
+    {
+      "game": "maze-sort",
+      "level": 3
+    },
+    {
+      "game": "maze-sort",
+      "level": 4
+    },
+    {
+      "game": "maze-sort",
+      "level": 5
+    },
+    {
+      "game": "maze-sort",
+      "level": 6
+    },
+    {
+      "game": "maze-sort",
+      "level": 7
+    },
+    {
+      "game": "maze-sort",
+      "level": 8
+    },
+    {
+      "game": "tangles",
+      "level": 1
+    },
+    {
+      "game": "tangles",
+      "level": 2
+    },
+    {
+      "game": "tangles",
+      "level": 3
+    },
+    {
+      "game": "tangles",
+      "level": 4
+    },
+    {
+      "game": "tangles",
+      "level": 5
+    },
+    {
+      "game": "tangles",
+      "level": 6
+    },
+    {
+      "game": "tangles",
+      "level": 7
+    },
+    {
+      "game": "tangles",
+      "level": 8
+    }
+  ],
+  "recheck": [
+    {
+      "game": "hidden-objects",
+      "level": 1
+    },
+    {
+      "game": "hidden-objects",
+      "level": 2
+    },
+    {
+      "game": "hidden-objects",
+      "level": 3
+    },
+    {
+      "game": "hidden-objects",
+      "level": 4
+    },
+    {
+      "game": "hidden-objects",
+      "level": 5
+    },
+    {
+      "game": "hidden-objects",
+      "level": 6
+    },
+    {
+      "game": "hidden-objects",
+      "level": 7
+    },
+    {
+      "game": "hidden-objects",
+      "level": 8
+    },
+    {
+      "game": "math-coloring",
+      "level": 1
+    },
+    {
+      "game": "math-coloring",
+      "level": 2
+    },
+    {
+      "game": "math-coloring",
+      "level": 3
+    },
+    {
+      "game": "math-coloring",
+      "level": 4
+    },
+    {
+      "game": "math-coloring",
+      "level": 5
+    },
+    {
+      "game": "math-coloring",
+      "level": 6
+    },
+    {
+      "game": "math-coloring",
+      "level": 7
+    },
+    {
+      "game": "math-coloring",
+      "level": 8
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 1
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 2
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 3
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 4
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 5
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 6
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 7
+    },
+    {
+      "game": "riddle-wheel",
+      "level": 8
+    }
+  ],
+  "viewports": [
+    "360x640",
+    "390x844"
+  ],
+  "production": {
+    "url": "http://localhost:4173/",
+    "firstOfflineReload": true,
+    "recordedAudioOffline": true,
+    "oldAndNewProgressPreserved": true,
+    "debugApiAbsent": true,
+    "audioEvidence": [
+      {
+        "src": "http://localhost:4173/audio/riddle-cat.mp3",
+        "time": 0,
+        "duration": null,
+        "paused": true
+      },
+      {
+        "src": "http://localhost:4173/audio/riddle-cat.mp3",
+        "time": 0.638154,
+        "duration": 6.505958,
+        "paused": false
+      }
+    ],
+    "errors": [],
+    "consoleErrors": []
+  },
+  "unitTests": {
+    "passed": 12,
+    "failed": 0
+  },
+  "build": "passed",
+  "pwaFix": "Ignore Vary headers for same-origin static-cache lookups so install-time cached entry JS/CSS/fonts satisfy CORS requests."
+}

@@ -1,0 +1,374 @@
+{
+  "date": "2026-11-08",
+  "revision": "mentor-fixes-8yo",
+  "childPlaytest": false,
+  "viewports": [
+    "390x844",
+    "360x640"
+  ],
+  "inventory": [
+    "All 80 rounds via normal pointer input",
+    "Complete board persists until Next",
+    "Name-picture button works with sound muted",
+    "Clock zoom preserves selected clock and matched meetings",
+    "Clock and cipher visual examples with readable rules",
+    "Maze letter waits for explicit continue",
+    "Memory re-peek preserves correct placements",
+    "Tube monochrome partial state gets precise goal feedback",
+    "Missing-letter feedback is accurate",
+    "Sort bins visible before first step",
+    "Active wire remains above crossings",
+    "Rules voice button exists in all ten games",
+    "Replay and last-level return home",
+    "Production build smoke and saved progress"
+  ],
+  "completed": [
+    {
+      "game": "shadows",
+      "level": 1
+    },
+    {
+      "game": "shadows",
+      "level": 2
+    },
+    {
+      "game": "shadows",
+      "level": 3
+    },
+    {
+      "game": "shadows",
+      "level": 4
+    },
+    {
+      "game": "shadows",
+      "level": 5
+    },
+    {
+      "game": "shadows",
+      "level": 6
+    },
+    {
+      "game": "shadows",
+      "level": 7
+    },
+    {
+      "game": "shadows",
+      "level": 8
+    },
+    {
+      "game": "anagrams",
+      "level": 1
+    },
+    {
+      "game": "anagrams",
+      "level": 2
+    },
+    {
+      "game": "anagrams",
+      "level": 3
+    },
+    {
+      "game": "anagrams",
+      "level": 4
+    },
+    {
+      "game": "anagrams",
+      "level": 5
+    },
+    {
+      "game": "anagrams",
+      "level": 6
+    },
+    {
+      "game": "anagrams",
+      "level": 7
+    },
+    {
+      "game": "anagrams",
+      "level": 8
+    },
+    {
+      "game": "ciphers",
+      "level": 1
+    },
+    {
+      "game": "ciphers",
+      "level": 2
+    },
+    {
+      "game": "ciphers",
+      "level": 3
+    },
+    {
+      "game": "ciphers",
+      "level": 4
+    },
+    {
+      "game": "ciphers",
+      "level": 5
+    },
+    {
+      "game": "ciphers",
+      "level": 6
+    },
+    {
+      "game": "ciphers",
+      "level": 7
+    },
+    {
+      "game": "ciphers",
+      "level": 8
+    },
+    {
+      "game": "proofreading",
+      "level": 1
+    },
+    {
+      "game": "proofreading",
+      "level": 2
+    },
+    {
+      "game": "proofreading",
+      "level": 3
+    },
+    {
+      "game": "proofreading",
+      "level": 4
+    },
+    {
+      "game": "proofreading",
+      "level": 5
+    },
+    {
+      "game": "proofreading",
+      "level": 6
+    },
+    {
+      "game": "proofreading",
+      "level": 7
+    },
+    {
+      "game": "proofreading",
+      "level": 8
+    },
+    {
+      "game": "alarms",
+      "level": 1
+    },
+    {
+      "game": "alarms",
+      "level": 2
+    },
+    {
+      "game": "alarms",
+      "level": 3
+    },
+    {
+      "game": "alarms",
+      "level": 4
+    },
+    {
+      "game": "alarms",
+      "level": 5
+    },
+    {
+      "game": "alarms",
+      "level": 6
+    },
+    {
+      "game": "alarms",
+      "level": 7
+    },
+    {
+      "game": "alarms",
+      "level": 8
+    },
+    {
+      "game": "rearrangement",
+      "level": 1
+    },
+    {
+      "game": "rearrangement",
+      "level": 2
+    },
+    {
+      "game": "rearrangement",
+      "level": 3
+    },
+    {
+      "game": "rearrangement",
+      "level": 4
+    },
+    {
+      "game": "rearrangement",
+      "level": 5
+    },
+    {
+      "game": "rearrangement",
+      "level": 6
+    },
+    {
+      "game": "rearrangement",
+      "level": 7
+    },
+    {
+      "game": "rearrangement",
+      "level": 8
+    },
+    {
+      "game": "color-sort",
+      "level": 1
+    },
+    {
+      "game": "color-sort",
+      "level": 2
+    },
+    {
+      "game": "color-sort",
+      "level": 3
+    },
+    {
+      "game": "color-sort",
+      "level": 4
+    },
+    {
+      "game": "color-sort",
+      "level": 5
+    },
+    {
+      "game": "color-sort",
+      "level": 6
+    },
+    {
+      "game": "color-sort",
+      "level": 7
+    },
+    {
+      "game": "color-sort",
+      "level": 8
+    },
+    {
+      "game": "maze-codes",
+      "level": 1
+    },
+    {
+      "game": "maze-codes",
+      "level": 2
+    },
+    {
+      "game": "maze-codes",
+      "level": 3
+    },
+    {
+      "game": "maze-codes",
+      "level": 4
+    },
+    {
+      "game": "maze-codes",
+      "level": 5
+    },
+    {
+      "game": "maze-codes",
+      "level": 6
+    },
+    {
+      "game": "maze-codes",
+      "level": 7
+    },
+    {
+      "game": "maze-codes",
+      "level": 8
+    },
+    {
+      "game": "maze-sort",
+      "level": 1
+    },
+    {
+      "game": "maze-sort",
+      "level": 2
+    },
+    {
+      "game": "maze-sort",
+      "level": 3
+    },
+    {
+      "game": "maze-sort",
+      "level": 4
+    },
+    {
+      "game": "maze-sort",
+      "level": 5
+    },
+    {
+      "game": "maze-sort",
+      "level": 6
+    },
+    {
+      "game": "maze-sort",
+      "level": 7
+    },
+    {
+      "game": "maze-sort",
+      "level": 8
+    },
+    {
+      "game": "tangles",
+      "level": 1
+    },
+    {
+      "game": "tangles",
+      "level": 2
+    },
+    {
+      "game": "tangles",
+      "level": 3
+    },
+    {
+      "game": "tangles",
+      "level": 4
+    },
+    {
+      "game": "tangles",
+      "level": 5
+    },
+    {
+      "game": "tangles",
+      "level": 6
+    },
+    {
+      "game": "tangles",
+      "level": 7
+    },
+    {
+      "game": "tangles",
+      "level": 8
+    }
+  ],
+  "checks": [
+    "Solved board stayed visible for 1.8 seconds and advanced only on Next",
+    "Expected image name available with sound muted",
+    "Clock zoom preserved matched meetings and selected clock",
+    "Memory re-peek preserved correct placement",
+    "Maze letter waited for explicit continue",
+    "All ten help dialogs contain visual example, three steps and Listen; small viewport tools remain visible",
+    "Missing-letter feedback distinguishes omission; first two hints preserve tool and do not mark answers",
+    "Monochrome partial tubes explain the missing full-column goal, then complete legally",
+    "CDP touchscreen drags placed a clock and a letter",
+    "Production: normal touch solved first task, board persisted, saved progress survived reload; visited game reopened offline; no debug API",
+    "Replay restarted the same task; last task in all ten games returned home"
+  ],
+  "finalRegressionViewport": "360x640",
+  "production": {
+    "url": "http://localhost:4173/",
+    "errors": [],
+    "progressPreserved": true,
+    "visitedGameOffline": true
+  },
+  "unitTests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "build": "passed",
+  "inputTiming": "Normal tap/drag events; frame settling after scene and memory-preview transitions",
+  "errors": []
+}

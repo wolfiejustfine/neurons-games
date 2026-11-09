@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.cmd text eol=crlf
+
+# Preserve the imported archive byte for byte, including its line endings.
+vendor/schulte/** -text

@@ -1,0 +1,592 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-08",
+  "source": "Материалы, переданные пользователем в этом чате",
+  "usage": "Материалы проекта «Нейроны»; общей открытой лицензии пользователь не объявлял",
+  "source_files_unchanged": true,
+  "asset_count": 25,
+  "total_bytes": 36685792,
+  "notes": [
+    "Проверена фактическая прозрачность после декодирования палитровых PNG.",
+    "Lancy.png содержит несколько отдельных существ; это не описанный спрайт-лист анимации.",
+    "На Page 36.png и Brainville.png есть английские надписи презентации.",
+    "Облегчённые производные персонажей и мира находятся в public/art; исходники не изменялись."
+  ],
+  "assets": [
+    {
+      "id": "Aris1",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Aris1.png",
+      "kind": "character-pose",
+      "width": 2048,
+      "height": 2048,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        422,
+        531,
+        1694,
+        1847
+      ],
+      "bytes": 1779356,
+      "sha256": "97bd695353e21bdac04f71f6bb25920c601d87988e55ce7253b736b08180e4fb",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Aris2",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Aris2.png",
+      "kind": "character-pose",
+      "width": 1977,
+      "height": 1585,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        0,
+        0,
+        1977,
+        1585
+      ],
+      "bytes": 1946770,
+      "sha256": "a9b9651091ced2ce1920a6c74a86a009aa18777e183c690f4a03814842adf691",
+      "runtime_derivative": "public/art/Aris.webp",
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Aris3",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Aris3.png",
+      "kind": "character-pose",
+      "width": 1976,
+      "height": 1585,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        0,
+        0,
+        1976,
+        1585
+      ],
+      "bytes": 1691014,
+      "sha256": "37461af6eefcfea0f9dafba3873e8594e64b3f2e67e42bb8dfba8f629286f018",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Jays1",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Jays1.png",
+      "kind": "character-pose",
+      "width": 2048,
+      "height": 2048,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        495,
+        62,
+        1649,
+        1947
+      ],
+      "bytes": 906908,
+      "sha256": "5e43bff118f23d61abfc3364ab8d3b9243c0e42231a7a6ce7c0e658f9f7b2cfe",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Jays2",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Jays2.png",
+      "kind": "character-pose",
+      "width": 567,
+      "height": 2048,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        0,
+        0,
+        567,
+        2048
+      ],
+      "bytes": 634868,
+      "sha256": "b76c6b08caeef31bed960cf355c349adcbe3fb103a964861ebc29ebf7f800b9e",
+      "runtime_derivative": "public/art/Jays.webp",
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Jays3",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Jays3.png",
+      "kind": "character-pose",
+      "width": 2048,
+      "height": 2048,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        675,
+        45,
+        1454,
+        2021
+      ],
+      "bytes": 1133699,
+      "sha256": "44db78bde3fee012fe4026af7170edaa5a8f16e10e24c6067faad38cdf9fe698",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Lancy",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Lancy.png",
+      "kind": "character-sheet",
+      "width": 2643,
+      "height": 1990,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        104,
+        102,
+        2536,
+        1754
+      ],
+      "bytes": 1628140,
+      "sha256": "eeaed6c1bbda253a6937d7f019bf2a0aa87bfd3c9250ec62282936ad2f105ab0",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Newt1",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Newt1.png",
+      "kind": "character-pose",
+      "width": 4764,
+      "height": 4672,
+      "source_mode": "P",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        1138,
+        87,
+        3533,
+        4584
+      ],
+      "bytes": 2218653,
+      "sha256": "7697399adb70174f7cfeb984e453726020d6fea949d2ac3d03320c9fa1ac3c53",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Newt2",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Newt2.png",
+      "kind": "character-pose",
+      "width": 4764,
+      "height": 4672,
+      "source_mode": "P",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        790,
+        243,
+        3975,
+        4427
+      ],
+      "bytes": 2333675,
+      "sha256": "33c330f6be5177e5253116b6edd667fa9d4e7f78952368b7735df55cf68c2a9c",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Newt3",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Newt3.png",
+      "kind": "character-pose",
+      "width": 1166,
+      "height": 2055,
+      "source_mode": "P",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        2,
+        1,
+        1165,
+        2054
+      ],
+      "bytes": 452927,
+      "sha256": "0b4fb1ac3a5ee924c60576de99b15874fa85c1a303d29e39a151e29ce1de08c1",
+      "runtime_derivative": "public/art/Newt.webp",
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Ren1",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Ren1.png",
+      "kind": "character-pose",
+      "width": 4764,
+      "height": 4672,
+      "source_mode": "P",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        349,
+        303,
+        4317,
+        4470
+      ],
+      "bytes": 1107425,
+      "sha256": "505bc858903e2cad1cac4091d8a86a2e8934024722f98b101815129d95bc86db",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Ren2",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Ren2.png",
+      "kind": "character-pose",
+      "width": 852,
+      "height": 2121,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        0,
+        0,
+        852,
+        2121
+      ],
+      "bytes": 589934,
+      "sha256": "d1085a7c28b365c7f2c3884b085a6bdf6c99155a35818625d2f754d3a41ab521",
+      "runtime_derivative": "public/art/Ren.webp",
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Ren3",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Ren3.png",
+      "kind": "character-pose",
+      "width": 1433,
+      "height": 2198,
+      "source_mode": "P",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        2,
+        2,
+        1431,
+        2197
+      ],
+      "bytes": 407657,
+      "sha256": "2c6ffc92048045db59f1df28d17db309879a5acbfacc897c25e7275ead2b5726",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Ren4",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Ren4.png",
+      "kind": "character-pose",
+      "width": 4764,
+      "height": 4672,
+      "source_mode": "P",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        1455,
+        85,
+        3308,
+        4585
+      ],
+      "bytes": 1294087,
+      "sha256": "4ee6097ac045db800ac0c4ad84c45e6b83adb7f7f8f330e9f5e271203c22963b",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Vinch1",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Vinch1.png",
+      "kind": "character-pose",
+      "width": 1800,
+      "height": 2021,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        681,
+        93,
+        1206,
+        1899
+      ],
+      "bytes": 777460,
+      "sha256": "7e723830735a709e0122bc07047df02856e6e23bf937b11182275a5bf372cdca",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Vinch2",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Vinch2.png",
+      "kind": "character-pose",
+      "width": 1166,
+      "height": 2819,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        0,
+        0,
+        1166,
+        2819
+      ],
+      "bytes": 699314,
+      "sha256": "2f71eb8978ce7e24f2a0f0a14ae0a692188c97c6cdfc75800a20f9f23d08e7b1",
+      "runtime_derivative": "public/art/Vinch.webp",
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Vinch3",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Персонажи\\Vinch3.png",
+      "kind": "character-pose",
+      "width": 776,
+      "height": 1879,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        0,
+        0,
+        776,
+        1879
+      ],
+      "bytes": 889847,
+      "sha256": "e8fa47f789ec9c308a16482d2e6988aaab4f1e1f78925bd9a398813dc536a9cd",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "icon_cogweel",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Всячь\\icon_cogweel.png",
+      "kind": "ui-icon",
+      "width": 210,
+      "height": 210,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        5,
+        9,
+        204,
+        200
+      ],
+      "bytes": 42582,
+      "sha256": "c5335bf5111967fad2aae2bff88e0395c91d442be69fb03e0906f1492cfd7cf1",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "icon_lupa",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Всячь\\icon_lupa.png",
+      "kind": "ui-icon",
+      "width": 211,
+      "height": 211,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        9,
+        6,
+        210,
+        210
+      ],
+      "bytes": 35581,
+      "sha256": "7fa59b16ce65db786d7ddf134bdaf1f1da618d3a3dbe07ed06d010dee5e094bf",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "icon_pallete",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Всячь\\icon_pallete.png",
+      "kind": "ui-icon",
+      "width": 223,
+      "height": 222,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        9,
+        23,
+        213,
+        196
+      ],
+      "bytes": 43660,
+      "sha256": "5cbd025064561b063b964bea2ea2831c17385c7a656b5d7056ad16521752173d",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "icon_quetsion",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Всячь\\icon_quetsion.png",
+      "kind": "ui-icon",
+      "width": 255,
+      "height": 255,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        7,
+        14,
+        248,
+        240
+      ],
+      "bytes": 44131,
+      "sha256": "fbb3001bf8aa4b924d61a80e4b0988c91d08ce70f77663e17f187202d9d42e2c",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "icon_smth",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Всячь\\icon_smth.png",
+      "kind": "ui-icon",
+      "width": 187,
+      "height": 187,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        3,
+        9,
+        186,
+        177
+      ],
+      "bytes": 31817,
+      "sha256": "73c3fbcda1fc0a7093673b5a05e0a2ccaab4737d83f8068f7822270406f0fa99",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "icon_universe",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Всячь\\icon_universe.png",
+      "kind": "ui-icon",
+      "width": 227,
+      "height": 227,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        0,
+        255
+      ],
+      "has_transparency": true,
+      "visible_bounds": [
+        7,
+        18,
+        227,
+        227
+      ],
+      "bytes": 49300,
+      "sha256": "89a7ef88db65a5147ffcc0d326589f0612715828e06531edf586717d3d0ad2b1",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Page 36",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Всячь\\Page 36.png",
+      "kind": "world-reference",
+      "width": 1920,
+      "height": 1080,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        255,
+        255
+      ],
+      "has_transparency": false,
+      "visible_bounds": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "bytes": 1842171,
+      "sha256": "b279c8183f4a90735b02b46196f28ff5b8b70b1bf0fb7f5f2e4a3b5658de0204",
+      "runtime_derivative": null,
+      "status": "source-reviewed-not-runtime-validated"
+    },
+    {
+      "id": "Brainville",
+      "source_path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\TicTacToe\\Всячь\\Brainville.png",
+      "kind": "world-reference",
+      "width": 7680,
+      "height": 4320,
+      "source_mode": "RGBA",
+      "effective_alpha_range": [
+        255,
+        255
+      ],
+      "has_transparency": false,
+      "visible_bounds": [
+        0,
+        0,
+        7680,
+        4320
+      ],
+      "bytes": 14104816,
+      "sha256": "328e636bf29c627586b846ea7ecc6eec9b97c858b564a363a9df408c9ae8c4f0",
+      "runtime_derivative": "public/art/world.webp",
+      "status": "source-reviewed-not-runtime-validated"
+    }
+  ]
+}

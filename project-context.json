@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "updated_on": "2026-11-09",
+  "project_name": "Игры «Нейроны»",
+  "project_use": "noncommercial-or-educational-user-confirmed",
+  "confirmed_requirements": {
+    "audience": "дети; возраст определяется отдельно для каждой игры",
+    "game_type": "2D casual, arcade and educational",
+    "primary_devices": [
+      "phones",
+      "tablets"
+    ],
+    "distribution": "mobile browser by URL, add to home screen via PWA",
+    "engine": "Phaser",
+    "load_priority": "fast first playable interaction"
+  },
+  "proposed_new_game_stack": [
+    "Phaser 4",
+    "TypeScript",
+    "Vite",
+    "PWA manifest and service worker when preparing distribution"
+  ],
+  "sources": {
+    "schulte_reference": {
+      "url": "https://github.com/wolfiejustfine/shulte-tables",
+      "reviewed_commit": "d62fe45b0ca6246d4adee73a4042569c030a3aeb",
+      "observed_stack": {
+        "phaser": "^4.2.1",
+        "vite": "^8.3.2",
+        "language": "JavaScript"
+      },
+      "stated_audience": "6–9 years",
+      "observed_design_canvas_width": 720,
+      "observed_design_canvas_height_range": [
+        1280,
+        1600
+      ],
+      "review_scope": "README, dependency manifest, game configuration, menu and UI source, boot loading and asset pipeline; not a full gameplay/browser test"
+    },
+    "psychologist_proposals": {
+      "path": "C:\\Users\\alexg\\OneDrive\\Документы\\00 Neurons\\00_GAMES\\01 Варианты игр от Насти Л..docx",
+      "sha256": "054ee1706d750b2717476c0f1e51b330fa09391b1c8ee191adc6d1997d643700",
+      "paragraph_count": 213,
+      "unique_mechanic_count": 14,
+      "note": "В документе список механик изложен дважды; в каталоге оставлены 14 уникальных идей. Перечни умений отражают намерения автора, а не измеренный эффект."
+    },
+    "visual_assets_manifest": "assets/source-manifest.json"
+  },
+  "world": {
+    "russian_name": "Мозгополис",
+    "english_name_on_art": "Brainville",
+    "locations_from_supplied_slide": [
+      "остров ремёсел и безопасности",
+      "остров науки и техники",
+      "остров искусств",
+      "остров гуманитарных знаний",
+      "остров лени"
+    ],
+    "visual_traits": [
+      "парящие острова, мосты и облака",
+      "мягкие округлые объёмные формы",
+      "голубой и бирюзовый фон, фиолетовые оттенки",
+      "тёплые жёлтые и оранжевые акценты",
+      "мягкие блики и спокойные фоновые детали"
+    ]
+  },
+  "characters_from_materials": [
+    {
+      "name": "Арис",
+      "filename_prefix": "Aris",
+      "pose_count": 3
+    },
+    {
+      "name": "Джейс",
+      "filename_prefix": "Jays",
+      "pose_count": 3
+    },
+    {
+      "name": "Ньют",
+      "filename_prefix": "Newt",
+      "pose_count": 3
+    },
+    {
+      "name": "Рэн",
+      "filename_prefix": "Ren",
+      "pose_count": 4
+    },
+    {
+      "name": "Винч",
+      "filename_prefix": "Vinch",
+      "pose_count": 3
+    },
+    {
+      "name": "Lancy",
+      "file": "Lancy.png",
+      "note": "Несколько существ на одном изображении; русское имя и роль не подтверждены."
+    }
+  ],
+  "missing_or_unconfirmed_materials": [
+    "Изображение Страба, упоминаемого в документе Насти",
+    "Отдельный брендбук в этом чате пока не предоставлен",
+    "Чистые версии изображений мира без презентационных надписей"
+  ],
+  "reference_game_style": {
+    "heading_font": "Neuronus",
+    "body_font": "Rubik",
+    "fallback_font": "Nunito",
+    "palette_from_reference_code": {
+      "cyan": "#2aa3e7",
+      "green": "#2ce186",
+      "purple": "#ae86d2",
+      "navy": "#11132c",
+      "orange": "#ff7f47",
+      "violet": "#614dec",
+      "red": "#ff5345",
+      "gray": "#f2f2f2"
+    },
+    "note": "Значения прочитаны из src/config.js референса; отдельный брендбук не проверялся."
+  },
+  "game_ideas": [
+    {
+      "id": "schulte",
+      "title": "Таблицы Шульте",
+      "mechanic": "Последовательно нажимать числа в прямом или обратном порядке.",
+      "author_intended_skills": "внимание, быстрота реакции",
+      "variants_stated_in_document": 3,
+      "status": "original-game-integrated",
+      "levels": 30,
+      "archive_source": "assets/schulte-import.json"
+    },
+    {
+      "id": "maze-codes",
+      "title": "Лабиринты-коды",
+      "mechanic": "Проводить пальцем путь от числа к букве и собирать кодовое слово.",
+      "author_intended_skills": "внимание, логика",
+      "variants_stated_in_document": null,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "color-sort",
+      "title": "Пробирки / краски / кулинария",
+      "mechanic": "Переливать содержимое ёмкостей, собирая в каждой один цвет.",
+      "author_intended_skills": "зрительное восприятие, мышление",
+      "variants_stated_in_document": 3,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "alarms",
+      "title": "Будильники",
+      "mechanic": "Перетаскивать часы с нужным временем к персонажам по их плану дня.",
+      "author_intended_skills": "ориентация во времени",
+      "variants_stated_in_document": null,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "maze-sort",
+      "title": "Лабиринт с сортировкой",
+      "mechanic": "Проходить лабиринт и распределять найденные объекты по двум категориям.",
+      "author_intended_skills": "внимание, пространственное мышление",
+      "variants_stated_in_document": 5,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "hidden-objects",
+      "title": "Виммельбух / найди лишний предмет",
+      "mechanic": "Находить чужие предметы в локации героя.",
+      "author_intended_skills": "внимание, логическое мышление",
+      "variants_stated_in_document": 6,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "proofreading",
+      "title": "Корректурная проба",
+      "mechanic": "Различать правильные и ошибочные надписи СТОП и отмечать их разными действиями.",
+      "author_intended_skills": "чтение, внимание",
+      "variants_stated_in_document": null,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "math-coloring",
+      "title": "Математическая раскраска",
+      "mechanic": "Решать примеры, чтобы окрашивать соответствующие области изображения.",
+      "author_intended_skills": "мышление, математические навыки",
+      "variants_stated_in_document": 6,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "riddle-wheel",
+      "title": "Колесо фортуны",
+      "mechanic": "После вращения колеса слушать загадку и выбирать ответ среди картинок.",
+      "author_intended_skills": "эрудиция, логика",
+      "variants_stated_in_document": null,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "ciphers",
+      "title": "Шифры",
+      "mechanic": "По ключу сопоставлять символы с буквами и расшифровывать послание.",
+      "author_intended_skills": "письменная речь, символическое мышление, внимание",
+      "variants_stated_in_document": null,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "tangles",
+      "title": "Путаница",
+      "mechanic": "Безотрывно обводить контур одного объекта среди перепутанных линий.",
+      "author_intended_skills": "восприятие, мышление",
+      "variants_stated_in_document": 6,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "rearrangement",
+      "title": "Перестановка предметов",
+      "mechanic": "Запоминать комнату, затем перетаскивать перемещённые предметы на прежние места.",
+      "author_intended_skills": "память, внимание, восприятие",
+      "variants_stated_in_document": 6,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "shadows",
+      "title": "Тени / очертания предметов",
+      "mechanic": "Выбирать предмет, соответствующий показанному силуэту.",
+      "author_intended_skills": "зрительное восприятие, мышление",
+      "variants_stated_in_document": 6,
+      "status": "first-version-implemented",
+      "levels": 8
+    },
+    {
+      "id": "anagrams",
+      "title": "Анаграммы",
+      "mechanic": "Перемещать буквы слова из 3–4 букв, восстанавливая правильный порядок.",
+      "author_intended_skills": "чтение, буквенный анализ, внимание",
+      "variants_stated_in_document": null,
+      "status": "first-version-implemented",
+      "levels": 8
+    }
+  ],
+  "initial_design_principles": [
+    "Понятное действие и мгновенно читаемый результат.",
+    "Обучение на первых простых заданиях с постепенным добавлением правил.",
+    "Объяснимая ошибка и быстрая повторная попытка.",
+    "Узнаваемые герои и локации поддерживают задачу.",
+    "Размер загрузки и удобство касания проверяются для каждой игры."
+  ],
+  "next_production_decision": "Проверка первой коллекции на устройствах пользователя и содержательная оценка заданий.",
+  "implementation": {
+    "stack": {
+      "phaser": "4.2.1",
+      "vite": "8.3.6",
+      "language": "TypeScript"
+    },
+    "games": 14,
+    "levels_per_game": "13 games × 8, Schulte × 30",
+    "distribution": "static PWA",
+    "primary_orientation": "portrait",
+    "total_levels": 134,
+    "schulte_source": "assets/schulte-import.json"
+  },
+  "visual_feedback": {
+    "status": "generally-approved",
+    "user_comment": "Да, в целом всё ок",
+    "date": "2026-11-08"
+  },
+  "interaction_review": {
+    "date": "2026-11-08",
+    "scope": "обучение, рост сложности и управление",
+    "changes": "tests/learning-review.json",
+    "preserves_completed_levels": true,
+    "child_playtest_completed": false
+  },
+  "expansion": {
+    "date": "2026-11-09",
+    "games": [
+      "hidden-objects",
+      "math-coloring",
+      "riddle-wheel"
+    ],
+    "assets": "assets/expansion-manifest.json",
+    "qa": "artifacts/expansion/qa-report.json",
+    "child_playtest_completed": false,
+    "content_scope": "Additional character locations, colouring pages and thematic variations from the source document."
+  },
+  "schulte_integration": {
+    "date": "2026-11-09",
+    "source": "vendor/schulte",
+    "entry": "schulte/index.html",
+    "original_storage_key": "shulte.v3",
+    "source_js_unchanged": true,
+    "qa": "artifacts/schulte/qa-report.json"
+  }
+}

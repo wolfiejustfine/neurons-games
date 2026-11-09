@@ -1,0 +1,318 @@
+{
+  "date": "2026-11-09",
+  "background": {
+    "path": "public/art/newt-lab.webp",
+    "source": "assets/generated/newt-lab-source.png",
+    "tool": "built-in image_gen",
+    "reference": "C:/Users/alexg/OneDrive/Документы/00 Neurons/00_GAMES/TicTacToe/Всячь/Brainville.png",
+    "reference_role": "style and world reference; original preserved",
+    "prompt": "Create one production background illustration for a mobile children's hidden-object 2D browser game set in the Neurons/Brainville universe. The supplied image is STYLE AND WORLD REFERENCE ONLY, not an edit target. Show the interior of Newt's friendly science laboratory. Front-facing slightly elevated orthographic view, portrait 4:5 composition, entire room visible. Match reference's softly rounded 3D animated-family-film materials, turquoise and pale sky blue with lavender, creamy white, warm brass accents, soft daylight, fluffy cloud view through a large round window. A beautiful cozy circular laboratory with curved walls, broad wooden/cream workbench across center, two broad empty wall shelves at the top sides, rounded storage cabinets, a small friendly scientific apparatus, large clear uncluttered surfaces. Reserve many spacious areas on shelves, workbench, cabinet and floor for LARGE interactive objects which will be composited by game code. Scene is a polished game background, no borders or UI. No characters or creatures, no loose books, keys, food, balls, tools, cups or handheld objects (those will be interactive sprites added later). No text, numbers, logos, watermarks, presentation labels. Clear readable shapes at 340px phone width; avoid dense tiny details. Background should feel inviting, whimsical and distinctly part of the provided floating-islands science world. Do not copy the source's text card, map or framing.",
+    "runtime_size": [
+      800,
+      1000
+    ],
+    "bytes": 76760,
+    "sha256": "36493260e9c0278065a3e578c12ae4d33b366eb0eaaf411c9b40235994c8a6d7",
+    "selection": "Selected by agent within the user-approved visual direction",
+    "verification": "Viewed in the game on phone-sized viewport; separate interactive sprites."
+  },
+  "coloring": {
+    "source": "src/games/math-coloring.ts",
+    "type": "code-native vector drawing",
+    "subjects": [
+      "robot helper",
+      "rocket"
+    ],
+    "note": "Simple prototype drawings; series-character colouring pages remain content expansion."
+  },
+  "icons": {
+    "paths": [
+      "public/props/palette.svg",
+      "public/props/wheel.svg"
+    ],
+    "source": "tools/build-props.mjs",
+    "type": "code-native SVG matching existing prop palette"
+  },
+  "audio": {
+    "source": "Windows SAPI, installed Microsoft Irina Desktop - Russian",
+    "script": "assets/riddle-script.json",
+    "builder": "tools/build-riddle-audio.ps1",
+    "encoding": "MP3, mono, 24000 Hz, 48 kbps",
+    "texts": "Written for this project; exact texts also stored in src/expansion.ts",
+    "total_bytes": 1106688,
+    "files": [
+      {
+        "path": "public/audio/riddle-apple.mp3",
+        "bytes": 45596,
+        "duration_seconds": 7.501917,
+        "sha256": "2e0c9ecfdf131d6862b9fedea30a3611b62624d0baf8eab198f5423b0ad11f83",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-ball.mp3",
+        "bytes": 51788,
+        "duration_seconds": 8.531417,
+        "sha256": "2e8ad16c250ffa2f0adc374e993fd26faea9566a9b0dcd28d36cb9085f08e425",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-beetle.mp3",
+        "bytes": 47612,
+        "duration_seconds": 7.832625,
+        "sha256": "eac5d9053213998c4a36c18946bed49f171805cc72a6f6abfd309d581c10e485",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-book.mp3",
+        "bytes": 50060,
+        "duration_seconds": 8.252958,
+        "sha256": "68e534dd826183941e793780e50e5853f10a21e5ed0da4d643a24e799a97aa14",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-box.mp3",
+        "bytes": 50348,
+        "duration_seconds": 8.302667,
+        "sha256": "179561ad8541dbc0707c41e4e76895c61189448ab2b145eb43bfee19664ee4ca",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-cable.mp3",
+        "bytes": 51212,
+        "duration_seconds": 8.430583,
+        "sha256": "848c861d3aa8365a210bca7109ac4e61d704bdc794c93950f1b84b5b5780acff",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-cake.mp3",
+        "bytes": 42284,
+        "duration_seconds": 6.946542,
+        "sha256": "44040167250a5aa4f7355759791be414feaa05980c70066359c644bd25a1cff6",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-cat.mp3",
+        "bytes": 39692,
+        "duration_seconds": 6.505958,
+        "sha256": "6e8c207f9b39a35e01b72045b2c92009c69f252e835092044d4fe7c492f8dc6d",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-cheese.mp3",
+        "bytes": 48908,
+        "duration_seconds": 8.056458,
+        "sha256": "de87be96bc06900131ac90323346f20abbd04da03134df1cabc7d492884c713b",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-clock.mp3",
+        "bytes": 47180,
+        "duration_seconds": 7.758,
+        "sha256": "67e6b32ee5d7f7cc3afc46fe91375dbe8a0a8decfbba93da49c5af745fe9594f",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-compass.mp3",
+        "bytes": 54380,
+        "duration_seconds": 8.97025,
+        "sha256": "f325eecfa3ef9eb5a7f916ccc1fbb961a09e72e1ccee71d5bf05a281d59a713c",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-cup.mp3",
+        "bytes": 38396,
+        "duration_seconds": 6.3,
+        "sha256": "27a4719df30e307b99ef3ba6d96fd78a6f860762e90b8206d96467da72fac2ee",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-fish.mp3",
+        "bytes": 42284,
+        "duration_seconds": 6.942708,
+        "sha256": "c99303b6eafb3d9fff07bdcaab66c7728ee66af186438e309f1810f84b3a6e43",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-flask.mp3",
+        "bytes": 46460,
+        "duration_seconds": 7.646542,
+        "sha256": "375f0f0df266ffd9c1772790d6483e07c5e2b17e36e06c1ff235bff6c1981286",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-hammer.mp3",
+        "bytes": 43436,
+        "duration_seconds": 7.147458,
+        "sha256": "c92552e73f69c16a2dbe58bd544fe743800013ef0eeaca9b13e94d1e4a76223d",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-house.mp3",
+        "bytes": 49628,
+        "duration_seconds": 8.182792,
+        "sha256": "14829004478eae5e87bf19f8b5f5bb32bb8d026a1999595bdebdca5a582135ae",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-key.mp3",
+        "bytes": 47612,
+        "duration_seconds": 7.83,
+        "sha256": "65e7c2afe2e50a32ade742b17bff1258897f5bf7cd5434edb174f3b9364b5a02",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-lamp.mp3",
+        "bytes": 45740,
+        "duration_seconds": 7.525917,
+        "sha256": "536b3afc47a4486c6ef107a609035d1b383583c0e9ff79c2df781866f59375df",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-leaf.mp3",
+        "bytes": 40268,
+        "duration_seconds": 6.6175,
+        "sha256": "2824cb8dead48ad90c384b30e07123e475482d2053718fb8bc6dabafa74c5f43",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-moon.mp3",
+        "bytes": 46172,
+        "duration_seconds": 7.59975,
+        "sha256": "715082afe170e8c250185a375de1b457145137ea22383a3a6aa45fb436d47d1a",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-nail.mp3",
+        "bytes": 42716,
+        "duration_seconds": 7.018458,
+        "sha256": "6e7b21f77bf0d7f6fabbe8c65958d25605ecfdcfc2c6ea2c0ac10de5f570d6dd",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-rocket.mp3",
+        "bytes": 45020,
+        "duration_seconds": 7.400125,
+        "sha256": "d7074930cdbad80aa4b42fda1212b83e2beef335d2a1e7c395596d286c1d38c5",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-screw.mp3",
+        "bytes": 44732,
+        "duration_seconds": 7.357042,
+        "sha256": "adb0ef3c693309d42e5a7b65e5c0c01e866cc349c31abf0ae6bf7b5a6f001e01",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      },
+      {
+        "path": "public/audio/riddle-sign.mp3",
+        "bytes": 45164,
+        "duration_seconds": 7.427542,
+        "sha256": "7ec7131aba159c8237276f276b85d2c30e10b4a782cdd9f9dad6ac4e3d720a85",
+        "stream": {
+          "codec_name": "mp3",
+          "sample_rate": "24000",
+          "channels": 1
+        }
+      }
+    ]
+  },
+  "scope": {
+    "new_games": 3,
+    "new_rounds": 24,
+    "total_collection_games": 13,
+    "total_collection_rounds": 104,
+    "schulte": "Existing separate game",
+    "remaining_content": "Additional character locations, colouring pages and thematic variations from the source document."
+  }
+}

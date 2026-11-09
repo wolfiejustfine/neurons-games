@@ -1,0 +1,135 @@
+{
+  "date": "2026-11-08",
+  "targetAge": 8,
+  "method": "Экспертный педагогический разбор всех десяти игр на мобильном экране 390x844, с первыми заданиями и выборочными усложнёнными заданиями; чтение исходных правил и обратной связи",
+  "childPlaytest": false,
+  "gameCodeChanged": false,
+  "verifiedCases": [
+    {
+      "id": "tube-goal-mismatch",
+      "game": "color-sort",
+      "level": 1,
+      "actions": "Пробирка 1 → 3; пробирка 2 → 1",
+      "observation": "Все три пробирки одноцветные, но победы нет: две оранжевые заполнены наполовину. Надпись на поле говорит только об одном цвете в каждой пробирке.",
+      "evidence": "artifacts/mentor-audit/tubes-monochrome-not-finished.png"
+    },
+    {
+      "id": "missing-letter-feedback",
+      "game": "proofreading",
+      "level": 1,
+      "actions": "Инструмент «Подчеркнуть», затем надпись «СТП»",
+      "observation": "Здесь буквы перепутаны. Выбери «Зачеркнуть».",
+      "problem": "В надписи пропущена О, а не перепутан порядок букв."
+    }
+  ],
+  "games": [
+    {
+      "id": "color-sort",
+      "risk": "high",
+      "question": "Везде один цвет. Почему задание не закончено?",
+      "recommendation": "Показать конечный образец: каждый цвет в одной полной пробирке, остальные пустые. Объяснить или убрать совпадающие обозначения цветов и номеров пробирок."
+    },
+    {
+      "id": "anagrams",
+      "risk": "high",
+      "question": "На картинке божья коровка, почему здесь только три буквы?",
+      "recommendation": "Устранить неоднозначность названия: божья коровка/жук, кошка/кот. Озвучивать ожидаемое название предмета или заменить картинку."
+    },
+    {
+      "id": "alarms",
+      "risk": "high",
+      "question": "Почему стрелка около 1, а встреча в 13:30?",
+      "recommendation": "Визуально разобрать одну пару 1:30 ↔ 13:30, не добавляя сразу термин «половина второго». Дать рассмотреть выбранные часы крупнее."
+    },
+    {
+      "id": "maze-sort",
+      "risk": "high",
+      "question": "Где полки и куда нести винт?",
+      "recommendation": "Показывать узнаваемые места сортировки, не закрывать один приёмник героем, подписать категории и показать одну доставку."
+    },
+    {
+      "id": "ciphers",
+      "risk": "medium",
+      "question": "Какой ключ и что значит значок рядом с буквой?",
+      "recommendation": "Назвать таблицу подсказкой, показать пример ♦ → К и после завершения предложить прочитать слово."
+    },
+    {
+      "id": "proofreading",
+      "risk": "medium",
+      "question": "Надо рисовать линию пальцем или нажать кнопку?",
+      "recommendation": "Показать одну отметку и использовать точную обратную связь: переставлены буквы или пропущена буква."
+    },
+    {
+      "id": "tangles",
+      "risk": "medium",
+      "question": "Какой провод продолжать на пересечении?",
+      "recommendation": "Сделать активный провод непрерывно различимым; ошибку направления объяснять отдельно от неточного движения пальцем."
+    },
+    {
+      "id": "maze-codes",
+      "risk": "medium",
+      "question": "Почему лабиринт внезапно сменился?",
+      "recommendation": "Дать увидеть перенос найденной буквы в пароль и разрешить перейти к следующей дорожке по нажатию."
+    },
+    {
+      "id": "rearrangement",
+      "risk": "medium",
+      "question": "Я всё забыл. Как посмотреть ещё раз?",
+      "recommendation": "Дать повторный просмотр с сохранением правильно расставленных вещей, сначала предложить способ запоминания."
+    },
+    {
+      "id": "shadows",
+      "risk": "low",
+      "question": "Нужно просто выбрать предмет с такой же формой?",
+      "recommendation": "Основное действие понятно. Сохранить простой старт и проверить узнаваемость сложных силуэтов на детях."
+    }
+  ],
+  "sharedFindings": [
+    {
+      "id": "no-demonstrated-example",
+      "recommendation": "Перед самостоятельным действием показать один короткий пример, особенно для шифров, знаков, часов и сортировки."
+    },
+    {
+      "id": "speaker-ambiguity",
+      "observation": "Переключатель звука и чтение задания используют одинаковую иконку без видимой подписи.",
+      "recommendation": "Подписать чтение задания. В окне правил добавить возможность прослушать именно правила."
+    },
+    {
+      "id": "result-before-reading",
+      "observation": "Результат автоматически закрывается поздравлением через 850 мс; лабиринт меняется через 400 мс.",
+      "recommendation": "Оставлять решённое поле и найденное слово до действия ребёнка."
+    },
+    {
+      "id": "answer-versus-strategy",
+      "observation": "Многие подсказки сразу выделяют ответ.",
+      "recommendation": "Предусмотреть последовательность: напомнить правило → обратить внимание на признак → показать ответ."
+    }
+  ],
+  "priorities": [
+    "Явное условие победы в пробирках",
+    "Однозначные названия изображений",
+    "Визуальное объяснение часов",
+    "Видимые и понятные места сортировки",
+    "Показ первого действия и темп обратной связи"
+  ],
+  "runtimeErrors": [],
+  "followUp": {
+    "date": "2026-11-08",
+    "implemented": true,
+    "report": "artifacts/mentor-fixes/qa-report.json",
+    "childPlaytest": false,
+    "changes": [
+      "Visual examples and spoken rules in all ten games",
+      "Explicit full-tube goal and symbols instead of duplicate colour numbers",
+      "Optional picture-name assistance",
+      "Clock example and zoom",
+      "Named bins with uncovered initial destination",
+      "Cipher terminology and completed-word reading",
+      "Precise missing-letter feedback and tap instruction",
+      "Active wire above crossings and distinct error messages",
+      "Explicit next-letter and next-task transitions",
+      "Memory re-peek retains placements",
+      "Progressive hints"
+    ]
+  }
+}

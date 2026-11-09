@@ -1,0 +1,273 @@
+{
+  "date": "2026-11-09",
+  "archive": "C:\\Users\\alexg\\Downloads\\shulte-tables-main.zip",
+  "archive_sha256": "f7953fd7a330343326043ba92d7618b0ecfab6afa01ac4a0c0bbcfe1ba60d185",
+  "source": "vendor/schulte",
+  "entry": "schulte/index.html",
+  "runtime_assets": "public/schulte",
+  "source_files_unchanged": true,
+  "files": [
+    {
+      "path": ".github/workflows/pages.yml",
+      "sha256": "22514d779277257b814012e18340016f543028e537d9c83fcd1eeacf78c330c7"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "bfa5f8365a7772ac194672c136ef9187d729bc5008ae858106307be49d390578"
+    },
+    {
+      "path": "README.md",
+      "sha256": "25f6dbce4be892adb63364bbadd591231ebd86ddbf48a873d9dfc16a78a4b66f"
+    },
+    {
+      "path": "index.html",
+      "sha256": "b7fba262dc8129d6dff41c766fbb92b2689e52546d78f09c04e169f4b74a0ee7"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "f7e0c553c3f0a878c99cfae91457ecfb755e82f5cd79bd22eb93f449d257206d"
+    },
+    {
+      "path": "package.json",
+      "sha256": "ebabe8444f596fce18bbfaa04b400468bc28fe9ec6558abc08e20263c18fd223"
+    },
+    {
+      "path": "public/fonts/Neuronus-Regular.ttf",
+      "sha256": "c447275fcc06ba2fc9a56be541161de4afdc16654674299e6c89547db672aa9e"
+    },
+    {
+      "path": "public/fonts/nunito-latin-900-normal.woff2",
+      "sha256": "9ca32f5d8334579387361096944286df451272a557bb09bd906254a623aba99e"
+    },
+    {
+      "path": "public/fonts/rubik-cyrillic-400-normal.woff2",
+      "sha256": "4f4b1a2159b1f9fb224e1718f14a4c8777eb34b46e9f54c5f1a03e462338bb6e"
+    },
+    {
+      "path": "public/fonts/rubik-cyrillic-600-normal.woff2",
+      "sha256": "84604665a094b20dbd48e8987cd028e5cf7d973c9cb65c168a8303e2217c6519"
+    },
+    {
+      "path": "public/fonts/rubik-latin-400-normal.woff2",
+      "sha256": "82ac0e78285c43d0cd203427c57ab30fb07b18f8e6166045f729442eb1abfa26"
+    },
+    {
+      "path": "public/fonts/rubik-latin-600-normal.woff2",
+      "sha256": "6182043a20faf3fe1a8f0e2c7c964009e11de5e09852617fef3517cbf3c35513"
+    },
+    {
+      "path": "public/img/back.webp",
+      "sha256": "95672cd0d993a56b3c881470dc812de8b4d32a6deca1314737865820196516b2"
+    },
+    {
+      "path": "public/img/bg_game.webp",
+      "sha256": "f2fbeb0f2043203ab8825b8521356e41fe376d2d200c20e5111ed9c3e0d54cbe"
+    },
+    {
+      "path": "public/img/bg_menu.webp",
+      "sha256": "08c268dffea66823612d74658a8bfd3d22c7cf36d537250a4fcf1eaa6ce92aba"
+    },
+    {
+      "path": "public/img/btn.webp",
+      "sha256": "ccc5b084abbb7ec1ffcfdc986ce0c4860ecd23addc1fdfd95b39832cd1742397"
+    },
+    {
+      "path": "public/img/bulb.webp",
+      "sha256": "4aaa90e4f79db24bc76566e2060251cbcd9c46c33728fa17e0239dccc19c1cc7"
+    },
+    {
+      "path": "public/img/cloud.webp",
+      "sha256": "cc690009579ae7b71f5ee473304b73f8a92f3eac45f0f529891a3970cbd8dda9"
+    },
+    {
+      "path": "public/img/hero.webp",
+      "sha256": "3e9ac38273673e90c0a7e385ef2b6ed1f3f2288e5aca7c931c253250ad9b1a45"
+    },
+    {
+      "path": "public/img/logo.webp",
+      "sha256": "3bc4aa62f10918bbeb977e051583c3969567b1393474774563d5665d975974ad"
+    },
+    {
+      "path": "public/img/panel.webp",
+      "sha256": "7ab77b74147664ed4c09f65f07045992921b324f9d6c6af21105643e5d8900bb"
+    },
+    {
+      "path": "public/img/pill.webp",
+      "sha256": "7e8ed7c72b8b270ade3af62349c15f84d79b1a4d7bc4f00d0d869835b59b57d0"
+    },
+    {
+      "path": "public/img/pointer.webp",
+      "sha256": "4cec9c5f7c2bc9f6d3ed0edfaa65b4e00f40a4793253806071c42c0e341b4894"
+    },
+    {
+      "path": "public/img/restart.webp",
+      "sha256": "e53f7db1e08ef2f71aef076c3b2962b43fa06b1d02baab83746344825dba12a8"
+    },
+    {
+      "path": "public/img/star.webp",
+      "sha256": "f066e6a6211ae1a2cd0154e958fd41582c85f20052f51ff35813fe75e31ce79f"
+    },
+    {
+      "path": "public/img/star_empty.webp",
+      "sha256": "9ea5083869b4062ed7df4adc48fa99c19676990494600eade577412cab20408c"
+    },
+    {
+      "path": "public/img/stopwatch.webp",
+      "sha256": "787caa8bc539d9a8308e899c040c64857e4fe98fcf04cd6847ecd59e41f7cff4"
+    },
+    {
+      "path": "public/img/tile.webp",
+      "sha256": "a01e5a687f97cecc79fd11c5315af45195e14ef63a13ee462d6348183de47fce"
+    },
+    {
+      "path": "public/img/tile_done.webp",
+      "sha256": "391189c0e3bc8ac277995975d192aafd5b3615fea784a68125f0fe3cb4dac02c"
+    },
+    {
+      "path": "public/img/tile_lock.webp",
+      "sha256": "44572c8d51f895ead8068d9072a06e6145141487958fb87b9aaa681c16cf849e"
+    },
+    {
+      "path": "public/sfx/back.mp3",
+      "sha256": "284e07c0bbd94cc54c3259e8dcc66bb4fae2174b9f3ca405066fd4726cb822e3"
+    },
+    {
+      "path": "public/sfx/click.mp3",
+      "sha256": "e01842cae36c3264160a93e5ff2546934820910c771493021f18dba29d10d439"
+    },
+    {
+      "path": "public/sfx/hint.mp3",
+      "sha256": "3a9be85a2e01e0c9f670e6f3556a2d436ba7ad5031b96172e33ba11b1a7d5716"
+    },
+    {
+      "path": "public/sfx/locked.mp3",
+      "sha256": "243f1c26179896e3c2d98dfdfd8eed0ac470132be69a97cfaf6f22f8479c5663"
+    },
+    {
+      "path": "public/sfx/next.mp3",
+      "sha256": "2405863e7d69adb0d0f40b92d7146909a18394b64e8b4e5014471b83f3bd2821"
+    },
+    {
+      "path": "public/sfx/panel.mp3",
+      "sha256": "54c2740ea839c92bc6b0211dfb6b118efe926de0b9662d346afab94fc2984035"
+    },
+    {
+      "path": "public/sfx/pointer.mp3",
+      "sha256": "e10823b4f0f66d09d95fb24a3ffb5f94884ee7023d380f804b3977ee9bca051e"
+    },
+    {
+      "path": "public/sfx/record.mp3",
+      "sha256": "1487566dac802004cb57c2d62c31b42bf584856ac1755929faea0e1a9770284c"
+    },
+    {
+      "path": "public/sfx/restart.mp3",
+      "sha256": "502621e0314584f12ab56478473adc87ca3da336ed910e4153b86773966e1bb3"
+    },
+    {
+      "path": "public/sfx/star.mp3",
+      "sha256": "aa516778e4d3c21c002951db3c04a286a371ba2c16673de7266c3ad3c7b8dc70"
+    },
+    {
+      "path": "public/sfx/star_empty.mp3",
+      "sha256": "ef6de628d4da0ad8db2a4fa199c7f4196c8690f436ca81f99ab98877d35726dd"
+    },
+    {
+      "path": "public/sfx/start.mp3",
+      "sha256": "557d370e939caabdd53f77ce3168454342882a21d301a25ca581e9904585d75c"
+    },
+    {
+      "path": "public/sfx/tap_bad.mp3",
+      "sha256": "356dedf17bc4a87a4701dabaa61804cf51561b0e165c66f05f182a77618058f2"
+    },
+    {
+      "path": "public/sfx/tap_ok.mp3",
+      "sha256": "a899f3d626082e17475cf3e05bf72cc221456f14ee11b30025a7444415dca6a3"
+    },
+    {
+      "path": "public/sfx/three_star.mp3",
+      "sha256": "4c6914266e3b5f387ae73d91a81a0bb4221945a16976b4a91fddc893a5222731"
+    },
+    {
+      "path": "public/sfx/unlock.mp3",
+      "sha256": "4923c5110aafcbb93a91a610c0163fc471f50fe02d14c44e65258108ae3e49f8"
+    },
+    {
+      "path": "public/sfx/whoosh.mp3",
+      "sha256": "5b0236d61fb3fbf940ae3ed064bca80ac1f9664e3abf792953dbfaf8d7a1ceba"
+    },
+    {
+      "path": "src/audio.js",
+      "sha256": "95dc959ae3ce7069a8e3b06193ccc40928f435420d83bf84812645fd28329bc2"
+    },
+    {
+      "path": "src/config.js",
+      "sha256": "a04f3be3379a010764574cc51aded10c479f83a694ce15015d39f7faf3ee4450"
+    },
+    {
+      "path": "src/daily.js",
+      "sha256": "cc7835636319cd917506f6480e48565b3ba1323319d0fe914c2512f81fde8ab1"
+    },
+    {
+      "path": "src/dates.js",
+      "sha256": "a47815e3f42fa272a9eb1bfc975e28b51382a14c6ac444035b1e3c31a8be07ff"
+    },
+    {
+      "path": "src/main.js",
+      "sha256": "5bbfd149a7d4df76e8d86ac5b7454fa6960d3914b90a70267586a8d36767ba37"
+    },
+    {
+      "path": "src/phaser-lite.js",
+      "sha256": "d3f9c158fcbfcf10046b92b93d2d89252fe47e7ef31ff93b7d7d07305cfeae95"
+    },
+    {
+      "path": "src/save.js",
+      "sha256": "5e26528e3922c73687f214500fb7c8260b399e5ee690a1d48ce3a14097daedc8"
+    },
+    {
+      "path": "src/scenes/Boot.js",
+      "sha256": "a3e302c9ec41f3d4c75d5a39c5a94a2543dfa099c922cfd218e977b05edc53b5"
+    },
+    {
+      "path": "src/scenes/Game.js",
+      "sha256": "a1cb1949f45ef43104653a0cb8c84289bdc9ba61c4b2c1a728fbdc8d416f6d48"
+    },
+    {
+      "path": "src/scenes/Levels.js",
+      "sha256": "16e4dff7a46f2d2679ffeb4586231bf4a9f65b20148df8661e91492f9f47a196"
+    },
+    {
+      "path": "src/scenes/Menu.js",
+      "sha256": "97f8c670f34f52a32ff49cbabb89b718f806d8c32f201a6079382fcbbeed1a44"
+    },
+    {
+      "path": "src/scenes/Parents.js",
+      "sha256": "4a14d06a5ce5e2d7ceddbcb41aae584c6210e0eca00792eb43ed577e9829ccc1"
+    },
+    {
+      "path": "src/stats.js",
+      "sha256": "0a97a081ff0ce8b2b0994990a4c921580c4621b9d556295ce29c54e833725aab"
+    },
+    {
+      "path": "src/stubs/empty.js",
+      "sha256": "450f0af4f4c1ecc4c7180f2e364c8a59bfed69dd350fb6b47bce8641c2a37786"
+    },
+    {
+      "path": "src/ui.js",
+      "sha256": "5c523672f1e81a28706b881b48ecf06297864c1313a65de274587efae5965bc6"
+    },
+    {
+      "path": "tools/build-assets.mjs",
+      "sha256": "f8bcaf744fa673767492baa51907d8799cb181e9af895d3924fe105f9bbde8d5"
+    },
+    {
+      "path": "vite.config.js",
+      "sha256": "d280adff1a1c290e4ff6dcc3d27408b45bcceb23d25a9397d11349ca0aa86590"
+    }
+  ],
+  "integration": [
+    "Multi-page entry shares installed Phaser 4.2.1 with collection",
+    "Shared fonts verified byte-for-byte against archive",
+    "Collection return navigation added outside original game canvas",
+    "Original shulte.v3 storage retained"
+  ]
+}
