@@ -1,0 +1,51 @@
+{
+  "inventory": [
+    "Public repository contains full source and a successful clean Linux build",
+    "HTTPS catalog shows all 14 cards on a phone viewport",
+    "Collection game, instructions and return navigation open",
+    "Original Schulte opens and returns under repository subdirectory",
+    "Direct Schulte link works",
+    "Visited catalog and game reopen offline"
+  ],
+  "functional": {
+    "homeStatus": 200,
+    "cards": 14,
+    "secureContext": true,
+    "instructions": true,
+    "collectionRoundPassed": true,
+    "savedProgress": "01\nВосприятие\nТени в лаборатории\n\nУзнай по силуэту\n\n1 из 8 пройдено",
+    "schulteUrl": "https://wolfiejustfine.github.io/neurons-games/schulte/",
+    "returnLink": "../",
+    "initialAudioRetryStatus": 200,
+    "directSchulteReload": true,
+    "repeatLoadFailedResources": [],
+    "schulteReturnCards": 14,
+    "offlineHomeCards": 14,
+    "offlineSchulte": true,
+    "offlineReturnCards": 14
+  },
+  "visual": [
+    "catalog-mobile.png",
+    "shadows-mobile.png",
+    "schulte-mobile.png"
+  ],
+  "errors": [],
+  "failedResponses": [
+    {
+      "status": 503,
+      "url": "https://wolfiejustfine.github.io/neurons-games/schulte/sfx/next.mp3"
+    }
+  ],
+  "date": "2026-11-09",
+  "repository": "https://github.com/wolfiejustfine/neurons-games",
+  "site": "https://wolfiejustfine.github.io/neurons-games/",
+  "build": {
+    "run": "https://github.com/wolfiejustfine/neurons-games/actions/runs/42572495755",
+    "conclusion": "success",
+    "unitTestsPassed": 14
+  },
+  "notes": [
+    "One initial request for Schulte next.mp3 received HTTP 503. Retrying returned 200; the subsequent full reload had no failed resources.",
+    "This check used a 390x844 emulated phone; earlier reports cover all game levels."
+  ]
+}
