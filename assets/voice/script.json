@@ -65,29 +65,31 @@
       ]
     },
     {
-      "id": "hint-shadows-1",
-      "filename": "hint-shadows-1.mp3",
+      "id": "help-shadows-5179a4757d",
+      "filename": "help-shadows-5179a4757d.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Тени в лаборатории",
       "voice": "narrator-ru",
-      "text": "У предмета и его тени одинаковая форма.",
-      "sha256": "526f063bfa2e1ebf7e184fbe24f6c55a1ab1624eb6385da718b71ab485288458",
+      "text": "Новая тень. Сравни детали.",
+      "sha256": "5179a4757df26f1d9bf6c2547fa362748b44537034b6f894d77d566708467618",
       "uses": [
-        "hint-shadows-1"
+        "help-shadows-5179a4757d",
+        "feedback-3"
       ]
     },
     {
-      "id": "hint-shadows-2",
-      "filename": "hint-shadows-2.mp3",
+      "id": "help-shadows-00e76ed5ee",
+      "filename": "help-shadows-00e76ed5ee.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Тени в лаборатории",
       "voice": "narrator-ru",
-      "text": "Сравни выступы, отверстия и края. Цвет предмета здесь не важен.",
-      "sha256": "7ae3fb09628d301c653d30c4a797e0e5ae2cd962c54ec21c55c5251ec3c7b986",
+      "text": "Точно! Рассмотри предмет и нажми «Следующая тень».",
+      "sha256": "00e76ed5ee2c5db01bdfeca3f837f76fa90b9d571bf65cfad4e6a49b07ae19be",
       "uses": [
-        "hint-shadows-2"
+        "help-shadows-00e76ed5ee",
+        "feedback-4"
       ]
     },
     {
@@ -114,6 +116,32 @@
       "sha256": "a800839e97f6dba5a6063b0de2af977394beb997ba47020f9b817aff0fd72668",
       "uses": [
         "task-shadows-1"
+      ]
+    },
+    {
+      "id": "help-shadows-f366e020d0",
+      "filename": "help-shadows-f366e020d0.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Тени в лаборатории",
+      "voice": "narrator-ru",
+      "text": "Ты уже узнал предмет. Нажми «Следующая тень».",
+      "sha256": "f366e020d049da4d19dd5d9be3586270d49088bbe73e816382e8267028802df4",
+      "uses": [
+        "help-shadows-f366e020d0"
+      ]
+    },
+    {
+      "id": "help-shadows-c0a43a976d",
+      "filename": "help-shadows-c0a43a976d.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Тени в лаборатории",
+      "voice": "narrator-ru",
+      "text": "Нужный предмет подсвечен. Сравни его края с тенью.",
+      "sha256": "c0a43a976dcf8eeefb13af19ecca4103e1c59eeca5282fad6c3443ba25e0cecc",
+      "uses": [
+        "help-shadows-c0a43a976d"
       ]
     },
     {
@@ -170,29 +198,42 @@
       ]
     },
     {
-      "id": "hint-anagrams-1",
-      "filename": "hint-anagrams-1.mp3",
+      "id": "help-anagrams-cf5558b3dd",
+      "filename": "help-anagrams-cf5558b3dd.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Буквы на ветру",
       "voice": "narrator-ru",
-      "text": "Произнеси название картинки медленно.",
-      "sha256": "fc71e81441b412f145d0b8d4adfb7dac441003e2beada0551c520318fd5f17db",
+      "text": "Эта клеточка уже занята. Выбери пустую.",
+      "sha256": "cf5558b3dd5052c7702c3698f9c5a0078836193a91fbe6ed3ea2f53892b06528",
       "uses": [
-        "hint-anagrams-1"
+        "help-anagrams-cf5558b3dd"
       ]
     },
     {
-      "id": "hint-anagrams-2",
-      "filename": "hint-anagrams-2.mp3",
+      "id": "help-anagrams-3417b48192",
+      "filename": "help-anagrams-3417b48192.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Буквы на ветру",
       "voice": "narrator-ru",
-      "text": "Прислушайся к следующему звуку и найди его букву внизу.",
-      "sha256": "99d245ef59292793f376afda8d484a1be6556949456e0964f39e20a4adc0cde5",
+      "text": "Верно! Продолжай собирать слово.",
+      "sha256": "3417b48192750bbb4c71c3eab92e624a59d5809dc5c3e1ad80c583586a322f38",
       "uses": [
-        "hint-anagrams-2"
+        "help-anagrams-3417b48192"
+      ]
+    },
+    {
+      "id": "help-anagrams-89a4910345",
+      "filename": "help-anagrams-89a4910345.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Буквы на ветру",
+      "voice": "narrator-ru",
+      "text": "Сначала выбери букву внизу, затем коснись клеточки.",
+      "sha256": "89a4910345cf6f5b9e3742a80913762f1073098bff33d6f898887a1d25bf94fb",
+      "uses": [
+        "help-anagrams-89a4910345"
       ]
     },
     {
@@ -275,29 +316,42 @@
       ]
     },
     {
-      "id": "hint-ciphers-1",
-      "filename": "hint-ciphers-1.mp3",
+      "id": "help-ciphers-430385989a",
+      "filename": "help-ciphers-430385989a.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Секретное послание",
       "voice": "narrator-ru",
-      "text": "У каждого значка в таблице есть своя буква.",
-      "sha256": "89bdc6c29fd7945727f86b984cc449322feb42b5afab9910294ff4a9812dc077",
+      "text": "Буква открылась!",
+      "sha256": "430385989a6861c253f8dc9e15bd2ea98d6dc8fda67a8a0e90336e83c20567ec",
       "uses": [
-        "hint-ciphers-1"
+        "help-ciphers-430385989a"
       ]
     },
     {
-      "id": "hint-ciphers-2",
-      "filename": "hint-ciphers-2.mp3",
+      "id": "help-ciphers-9e16a98613",
+      "filename": "help-ciphers-9e16a98613.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Секретное послание",
       "voice": "narrator-ru",
-      "text": "Найди в таблице такой же значок, как в первой закрытой клетке.",
-      "sha256": "a1a94581bacb142d325f108ce7a50b555ead080729682dc8d69acd83c9994af2",
+      "text": "Теперь коснись такого же значка в секретном слове.",
+      "sha256": "9e16a98613198a87b5a5bc891e288e48734031928e1124daf8b45d25e0a38096",
       "uses": [
-        "hint-ciphers-2"
+        "help-ciphers-9e16a98613"
+      ]
+    },
+    {
+      "id": "help-ciphers-8b41a17517",
+      "filename": "help-ciphers-8b41a17517.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Секретное послание",
+      "voice": "narrator-ru",
+      "text": "Сначала выбери значок с буквой в таблице наверху.",
+      "sha256": "8b41a17517b09cf21677de0c9f3b541e37b53cf9bfa49cbe910f3913deffcd5c",
+      "uses": [
+        "help-ciphers-8b41a17517"
       ]
     },
     {
@@ -535,29 +589,42 @@
       ]
     },
     {
-      "id": "hint-proofreading-1",
-      "filename": "hint-proofreading-1.mp3",
+      "id": "help-proofreading-6ae1b85423",
+      "filename": "help-proofreading-6ae1b85423.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Стоп, ошибка!",
       "voice": "narrator-ru",
-      "text": "Сравни надпись с образцом: С · Т · О · П.",
-      "sha256": "c8149c75d51930ae89eeea8ef77a1fed5553260114e10628f7647e37c400133b",
+      "text": "Все буквы совпали. Выбери «Подчеркнуть» и нажми на эту надпись.",
+      "sha256": "6ae1b854237f69386567cf39179abd9a7a2e44736c4b4c1472e33bd1d3b9e86b",
       "uses": [
-        "hint-proofreading-1"
+        "help-proofreading-6ae1b85423"
       ]
     },
     {
-      "id": "hint-proofreading-2",
-      "filename": "hint-proofreading-2.mp3",
+      "id": "help-proofreading-9ee38890cf",
+      "filename": "help-proofreading-9ee38890cf.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Стоп, ошибка!",
       "voice": "narrator-ru",
-      "text": "Проверь каждую букву по порядку: все ли на месте и хватает ли их?",
-      "sha256": "570fdc4847a6a97062198796e0aad888cf89b8ca5d8dd450000da8ca756e3f9e",
+      "text": "Так и есть!",
+      "sha256": "9ee38890cf5f34e8be98098a578ad471948b9f8a520c580839f609fbc3800bdf",
       "uses": [
-        "hint-proofreading-2"
+        "help-proofreading-9ee38890cf"
+      ]
+    },
+    {
+      "id": "help-proofreading-41e26fbbf1",
+      "filename": "help-proofreading-41e26fbbf1.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Коснись выделенной надписи. Она совпадает с образцом.",
+      "sha256": "41e26fbbf1d577a955ee5505970fca443d51e51571e6865f9ba73c822bf6c400",
+      "uses": [
+        "help-proofreading-41e26fbbf1"
       ]
     },
     {
@@ -638,29 +705,94 @@
       ]
     },
     {
-      "id": "hint-alarms-1",
-      "filename": "hint-alarms-1.mp3",
+      "id": "help-alarms-d2e36e0c30",
+      "filename": "help-alarms-d2e36e0c30.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Всё по часам",
       "voice": "narrator-ru",
-      "text": "Начни с длинной стрелки: на 12 — 00 минут, на 6 — 30 минут.",
-      "sha256": "1b163213d750d44ccfdc605c1e69239e4eb87fe67a9ef715a5278ec43c5ebb59",
+      "text": "Проверь длинную стрелку: на 12 — 00 минут, на 6 — 30 минут.",
+      "sha256": "d2e36e0c30ce78f67c2ab6f2eb5d1c6e9986d24de729a091e9d066b9913d53a5",
       "uses": [
-        "hint-alarms-1"
+        "help-alarms-d2e36e0c30"
       ]
     },
     {
-      "id": "hint-alarms-2",
-      "filename": "hint-alarms-2.mp3",
+      "id": "help-alarms-e743c4d45b",
+      "filename": "help-alarms-e743c4d45b.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Всё по часам",
       "voice": "narrator-ru",
-      "text": "Теперь посмотри на короткую стрелку. Выбранные часы можно увеличить.",
-      "sha256": "dffc8376e16b5f659eabd2edf92b542941da0d47eeb355a1f60d77a8c18839df",
+      "text": "Проверь короткую стрелку. После полудня 1 — это 13 часов, 2 — 14 и так далее.",
+      "sha256": "e743c4d45bca7572929c6c01092418510938eeaabd09c9faf8dd244dc587f31f",
       "uses": [
-        "hint-alarms-2"
+        "help-alarms-e743c4d45b"
+      ]
+    },
+    {
+      "id": "help-alarms-e2d41709db",
+      "filename": "help-alarms-e2d41709db.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Всё по часам",
+      "voice": "narrator-ru",
+      "text": "Проверь короткую стрелку: она показывает час встречи.",
+      "sha256": "e2d41709db9a5feec64e6f7b055b1d927ee2e8987244cadd5325a8ab7bb202ca",
+      "uses": [
+        "help-alarms-e2d41709db"
+      ]
+    },
+    {
+      "id": "help-alarms-99be67d317",
+      "filename": "help-alarms-99be67d317.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Всё по часам",
+      "voice": "narrator-ru",
+      "text": "Встреча запланирована!",
+      "sha256": "99be67d317e1d0d7c4d487878b6d07c6440564ef61b5ac546c26b9d1b6194c49",
+      "uses": [
+        "help-alarms-99be67d317"
+      ]
+    },
+    {
+      "id": "help-alarms-adfd22af9b",
+      "filename": "help-alarms-adfd22af9b.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Всё по часам",
+      "voice": "narrator-ru",
+      "text": "Сначала выбери часы внизу.",
+      "sha256": "adfd22af9b1270e7efb3a2c48945b116176a7f3ec4247df2dd01a6d2eeb09e31",
+      "uses": [
+        "help-alarms-adfd22af9b"
+      ]
+    },
+    {
+      "id": "help-alarms-58264e5614",
+      "filename": "help-alarms-58264e5614.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Всё по часам",
+      "voice": "narrator-ru",
+      "text": "Часы выбраны. Теперь коснись карточки нужного героя.",
+      "sha256": "58264e5614c52207e62338f6997b4dddfd6c5c4cb08ae193061d875f1f235fab",
+      "uses": [
+        "help-alarms-58264e5614"
+      ]
+    },
+    {
+      "id": "help-alarms-f29ba1aa30",
+      "filename": "help-alarms-f29ba1aa30.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Всё по часам",
+      "voice": "narrator-ru",
+      "text": "Сначала коснись часов, которые хочешь рассмотреть.",
+      "sha256": "f29ba1aa309b16758e7b56f508905aa101408de348592f7b24d3df0ad36f6ff6",
+      "uses": [
+        "help-alarms-f29ba1aa30"
       ]
     },
     {
@@ -716,6 +848,19 @@
       ]
     },
     {
+      "id": "help-alarms-88ddfacac4",
+      "filename": "help-alarms-88ddfacac4.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Всё по часам",
+      "voice": "narrator-ru",
+      "text": "Часы уже выбраны. Теперь коснись героя в рамке.",
+      "sha256": "88ddfacac4409291da57f98bbe204bbdd283140c76d08c68b6c80799761a9985",
+      "uses": [
+        "help-alarms-88ddfacac4"
+      ]
+    },
+    {
       "id": "story-rearrangement",
       "filename": "story-rearrangement.mp3",
       "priority": 1,
@@ -745,7 +890,19 @@
         "guide-rearrangement-05",
         "guide-rearrangement-06",
         "guide-rearrangement-07",
-        "guide-rearrangement-08",
+        "guide-rearrangement-08"
+      ]
+    },
+    {
+      "id": "guide-together-rearrangement-01",
+      "filename": "guide-together-rearrangement-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Всё на своих местах",
+      "voice": "narrator-ru",
+      "text": "Посмотрите вместе, где стоит каждая вещь. Нажми «Запомнил», когда будешь готов. Коснись вещи внизу, потом её места на полке.",
+      "sha256": "c1e72f6a4041c3492c48586c3b5a5395d34c8cf2e7259504b2f63dcfa07be500",
+      "uses": [
         "guide-together-rearrangement-01",
         "guide-together-rearrangement-02",
         "guide-together-rearrangement-03",
@@ -757,29 +914,42 @@
       ]
     },
     {
-      "id": "hint-rearrangement-1",
-      "filename": "hint-rearrangement-1.mp3",
+      "id": "help-rearrangement-1a7d459647",
+      "filename": "help-rearrangement-1a7d459647.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Всё на своих местах",
       "voice": "narrator-ru",
-      "text": "Вспоминай по одному месту: слева, в центре, справа.",
-      "sha256": "6797c3121c6d55c3c97ed75e07f3c72ebc47a3977bc5bee92f249988bc50c934",
+      "text": "Вещь всё ещё выбрана. Коснись другого места или нажми «Посмотреть ещё».",
+      "sha256": "1a7d4596477f38b24d724b8f788b39662d73120a1cd94fec04c4b9f53abec546",
       "uses": [
-        "hint-rearrangement-1"
+        "help-rearrangement-1a7d459647"
       ]
     },
     {
-      "id": "hint-rearrangement-2",
-      "filename": "hint-rearrangement-2.mp3",
+      "id": "help-rearrangement-5f6f4d931d",
+      "filename": "help-rearrangement-5f6f4d931d.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Всё на своих местах",
       "voice": "narrator-ru",
-      "text": "Если образец забылся, нажми «Посмотреть ещё». Вещи останутся на местах.",
-      "sha256": "01c9d94a7f6babe6fb830098d83bb2b9cb2a712c011a338696d31313bc6741d5",
+      "text": "Да, здесь его место!",
+      "sha256": "5f6f4d931dbccec389da2a2bb0e7118dcfe1870927ee1847b71941ca11e5cfab",
       "uses": [
-        "hint-rearrangement-2"
+        "help-rearrangement-5f6f4d931d"
+      ]
+    },
+    {
+      "id": "help-rearrangement-e37085c401",
+      "filename": "help-rearrangement-e37085c401.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Всё на своих местах",
+      "voice": "narrator-ru",
+      "text": "Сначала выбери вещь внизу, затем коснись её прежнего места.",
+      "sha256": "e37085c401146505a51afbf07eaec956428f9886193edc026ca7055c579504d9",
+      "uses": [
+        "help-rearrangement-e37085c401"
       ]
     },
     {
@@ -851,7 +1021,19 @@
         "guide-color-sort-05",
         "guide-color-sort-06",
         "guide-color-sort-07",
-        "guide-color-sort-08",
+        "guide-color-sort-08"
+      ]
+    },
+    {
+      "id": "guide-together-color-sort-01",
+      "filename": "guide-together-color-sort-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Цветная лаборатория",
+      "voice": "narrator-ru",
+      "text": "Коснись пробирки с цветной водой. Коснись другой: пустой или с таким же цветом сверху. Собери весь один цвет вместе, до верха.",
+      "sha256": "c127263e5fdd38f08c1899690458aa5cd8523354d6cfd3366357e31064d4d4fe",
+      "uses": [
         "guide-together-color-sort-01",
         "guide-together-color-sort-02",
         "guide-together-color-sort-03",
@@ -863,29 +1045,94 @@
       ]
     },
     {
-      "id": "hint-color-sort-1",
-      "filename": "hint-color-sort-1.mp3",
+      "id": "help-color-sort-715a1b341a",
+      "filename": "help-color-sort-715a1b341a.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Цветная лаборатория",
       "voice": "narrator-ru",
-      "text": "Каждый цвет нужно собрать в одну полную пробирку из 4 слоёв.",
-      "sha256": "ac81b6beeb193ac841734dbecbe9305777aa45f6877264e2375beed66dfc15b0",
+      "text": "Теперь выбери пустую пробирку или такой же верхний цвет.",
+      "sha256": "715a1b341a588b6266a55cfe25b40d55d92843300753c20152fa7e2ffefe767c",
       "uses": [
-        "hint-color-sort-1"
+        "help-color-sort-715a1b341a"
       ]
     },
     {
-      "id": "hint-color-sort-2",
-      "filename": "hint-color-sort-2.mp3",
+      "id": "help-color-sort-c7920d2216",
+      "filename": "help-color-sort-c7920d2216.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Цветная лаборатория",
       "voice": "narrator-ru",
-      "text": "Посмотри на верхние цвета. Переливать можно в такой же цвет или в пустую пробирку.",
-      "sha256": "9b69437e5ec7594958c9570080d915ec4e3c410201bd00c249742bdb100d1d1f",
+      "text": "Сначала выбери пробирку с жидкостью.",
+      "sha256": "c7920d2216633a9636dca639b6834548655af72cb6159641ea6c12b71408458f",
       "uses": [
-        "hint-color-sort-2"
+        "help-color-sort-c7920d2216"
+      ]
+    },
+    {
+      "id": "help-color-sort-6ec72de934",
+      "filename": "help-color-sort-6ec72de934.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Цветная лаборатория",
+      "voice": "narrator-ru",
+      "text": "Эта пробирка заполнена. Выбери другую.",
+      "sha256": "6ec72de9340d25388cdb0631d861deee90ef2aa53175fbd7455c422d3838abb2",
+      "uses": [
+        "help-color-sort-6ec72de934"
+      ]
+    },
+    {
+      "id": "help-color-sort-67f057f23c",
+      "filename": "help-color-sort-67f057f23c.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Цветная лаборатория",
+      "voice": "narrator-ru",
+      "text": "Верхние цвета разные. Выбери такой же цвет или пустую пробирку.",
+      "sha256": "67f057f23cb8fe0e5af7272198a6eea76683a7370f19c1493164362e9da4ed65",
+      "uses": [
+        "help-color-sort-67f057f23c"
+      ]
+    },
+    {
+      "id": "help-color-sort-ad5ef72dff",
+      "filename": "help-color-sort-ad5ef72dff.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Цветная лаборатория",
+      "voice": "narrator-ru",
+      "text": "Попробуй отменить ход или начни задание ещё раз.",
+      "sha256": "ad5ef72dff1e0f71e94adfaad135514a0bdde80ad0fcfca2b5e7cbf796099408",
+      "uses": [
+        "help-color-sort-ad5ef72dff"
+      ]
+    },
+    {
+      "id": "help-color-sort-0d93025053",
+      "filename": "help-color-sort-0d93025053.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Цветная лаборатория",
+      "voice": "narrator-ru",
+      "text": "Цвета разделены! Теперь соедини одинаковые: в полной пробирке должно быть 4 слоя.",
+      "sha256": "0d930250537c4c4eeeb96bf1b9d52284cb81a425cd77d588f31b119a40c45a52",
+      "uses": [
+        "help-color-sort-0d93025053"
+      ]
+    },
+    {
+      "id": "help-color-sort-4091f539cf",
+      "filename": "help-color-sort-4091f539cf.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Цветная лаборатория",
+      "voice": "narrator-ru",
+      "text": "Перелили! Какой цвет соберём дальше?",
+      "sha256": "4091f539cf26c080fd1aed08296066abb50573cad429f50df560ebdf635f9969",
+      "uses": [
+        "help-color-sort-4091f539cf"
       ]
     },
     {
@@ -899,6 +1146,19 @@
       "sha256": "09ef45cbb904b7d47b157d96b708c9fc31ea8c1dd069ae2cdde06cfc4052f913",
       "uses": [
         "task-color-sort-1"
+      ]
+    },
+    {
+      "id": "help-color-sort-52c259aec5",
+      "filename": "help-color-sort-52c259aec5.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Цветная лаборатория",
+      "voice": "narrator-ru",
+      "text": "Отмени несколько ходов или начни задание заново.",
+      "sha256": "52c259aec5fa5f659ff6880d04348439e2efe70de1d509e56747020bf8c15f58",
+      "uses": [
+        "help-color-sort-52c259aec5"
       ]
     },
     {
@@ -955,29 +1215,42 @@
       ]
     },
     {
-      "id": "hint-maze-codes-1",
-      "filename": "hint-maze-codes-1.mp3",
+      "id": "help-maze-codes-ee61d7c701",
+      "filename": "help-maze-codes-ee61d7c701.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Дорожки к паролю",
       "voice": "narrator-ru",
-      "text": "Начни у белой точки и двигайся по светлой дорожке.",
-      "sha256": "b26d3b9d923f78fd4682659927817a41a76c563d14c703bd15550e5ee58a0a91",
+      "text": "Найди следующую букву пароля.",
+      "sha256": "ee61d7c701acbcb4674822ddca3c7e31ab973f6fda02cb4b8fb7c075acdab596",
       "uses": [
-        "hint-maze-codes-1"
+        "help-maze-codes-ee61d7c701"
       ]
     },
     {
-      "id": "hint-maze-codes-2",
-      "filename": "hint-maze-codes-2.mp3",
+      "id": "help-maze-codes-30a06f54d7",
+      "filename": "help-maze-codes-30a06f54d7.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Дорожки к паролю",
       "voice": "narrator-ru",
-      "text": "Ищи соседнюю светлую клетку. В тупике можно вернуться по своему пути.",
-      "sha256": "d9f0390f3aea8e6347b57f917346a3df91c926a4eb1fb6060a301e7cbd6e6baf",
+      "text": "Начни у белой точки и двигайся по соседним клеткам дорожки.",
+      "sha256": "30a06f54d7e15c3ba04bb8e47e5da693d0b27478a8e0308a2ea8403c4a33601e",
       "uses": [
-        "hint-maze-codes-2"
+        "help-maze-codes-30a06f54d7"
+      ]
+    },
+    {
+      "id": "task-together-maze-codes-1",
+      "filename": "task-together-maze-codes-1.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Дорожки к паролю",
+      "voice": "narrator-ru",
+      "text": "Дойди от точки до буквы. Нажимай на соседние клетки или веди пальцем.",
+      "sha256": "bc960d339d707154fa9cb8d610e10a7ff81fb0087264ec3c3dd64d8a8d964506",
+      "uses": [
+        "task-together-maze-codes-1"
       ]
     },
     {
@@ -991,6 +1264,32 @@
       "sha256": "7e29619a71a3a5f241b1f1aa5fb0e0fa2a35cbd0e05a9ac7ccdeb696691b5015",
       "uses": [
         "task-maze-codes-1"
+      ]
+    },
+    {
+      "id": "help-maze-codes-de7b0456af",
+      "filename": "help-maze-codes-de7b0456af.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Дорожки к паролю",
+      "voice": "narrator-ru",
+      "text": "Буква найдена. Нажми «Дальше» под лабиринтом.",
+      "sha256": "de7b0456afa6b10d9cd75bcd5bce99b948af73968c52edca49ea95095e1b96e1",
+      "uses": [
+        "help-maze-codes-de7b0456af"
+      ]
+    },
+    {
+      "id": "help-maze-codes-795a8e9b3b",
+      "filename": "help-maze-codes-795a8e9b3b.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Дорожки к паролю",
+      "voice": "narrator-ru",
+      "text": "Маленькие точки показывают путь к букве.",
+      "sha256": "795a8e9b3b4ad0684e18c3a30741117146220454614ab5a873078b389c045633",
+      "uses": [
+        "help-maze-codes-795a8e9b3b"
       ]
     },
     {
@@ -1023,7 +1322,19 @@
         "guide-maze-sort-05",
         "guide-maze-sort-06",
         "guide-maze-sort-07",
-        "guide-maze-sort-08",
+        "guide-maze-sort-08"
+      ]
+    },
+    {
+      "id": "guide-together-maze-sort-01",
+      "filename": "guide-together-maze-sort-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Порядок на острове",
+      "voice": "narrator-ru",
+      "text": "Проведи Винча к винту или гвоздю. Посмотри, что он несёт. Иди к ящику с такой же картинкой. Можно нажимать на соседние клетки.",
+      "sha256": "c2aaf178e166613ebe8771c423b18a468870b307855d9bb0b5a7c354296af77c",
+      "uses": [
         "guide-together-maze-sort-01",
         "guide-together-maze-sort-02",
         "guide-together-maze-sort-03",
@@ -1035,29 +1346,68 @@
       ]
     },
     {
-      "id": "hint-maze-sort-1",
-      "filename": "hint-maze-sort-1.mp3",
+      "id": "help-maze-sort-07a4e11bf2",
+      "filename": "help-maze-sort-07a4e11bf2.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Порядок на острове",
       "voice": "narrator-ru",
-      "text": "Винч несёт по одному предмету: сначала подбери, затем отнеси.",
-      "sha256": "cea17e48ab316f2b403e08b2627e41328df2a8c8d58dd501e165eb8e240885b6",
+      "text": "Это гвоздь. Отнеси его в фиолетовый ящик «Гвозди».",
+      "sha256": "07a4e11bf2f01765828154b3ae65f1ffa3e2554b31c46f5a3d3455987c6b8ac6",
       "uses": [
-        "hint-maze-sort-1"
+        "help-maze-sort-07a4e11bf2"
       ]
     },
     {
-      "id": "hint-maze-sort-2",
-      "filename": "hint-maze-sort-2.mp3",
+      "id": "help-maze-sort-f5ccc16d2a",
+      "filename": "help-maze-sort-f5ccc16d2a.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Порядок на острове",
       "voice": "narrator-ru",
-      "text": "Сравни предмет со значками ящиков: винты в жёлтый, гвозди в фиолетовый.",
-      "sha256": "19a7a928c023a97b917e94508be8f85a7081aedc2326863ffad9d863d7a8df5c",
+      "text": "Это винт. Отнеси его в жёлтый ящик «Винты».",
+      "sha256": "f5ccc16d2a1d23c72b90f57e3200c361456b005f5b3eee46a5a05bef19224478",
       "uses": [
-        "hint-maze-sort-2"
+        "help-maze-sort-f5ccc16d2a"
+      ]
+    },
+    {
+      "id": "help-maze-sort-8c1f4b56b0",
+      "filename": "help-maze-sort-8c1f4b56b0.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Порядок на острове",
+      "voice": "narrator-ru",
+      "text": "Предмет в своём ящике!",
+      "sha256": "8c1f4b56b08bba03e6cd376fa531293d92e8e7b683cd5234de5c4ce2b87260e3",
+      "uses": [
+        "help-maze-sort-8c1f4b56b0"
+      ]
+    },
+    {
+      "id": "help-maze-sort-f33040fbd9",
+      "filename": "help-maze-sort-f33040fbd9.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Порядок на острове",
+      "voice": "narrator-ru",
+      "text": "Этот ящик для другого предмета. Сравни значки.",
+      "sha256": "f33040fbd9defed658c7d1ba5aa8b36e4547772c0aea46e142dae2e9fd79adcf",
+      "uses": [
+        "help-maze-sort-f33040fbd9"
+      ]
+    },
+    {
+      "id": "help-maze-sort-b830ff0b4a",
+      "filename": "help-maze-sort-b830ff0b4a.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Порядок на острове",
+      "voice": "narrator-ru",
+      "text": "Двигай Винча по соседним клеткам или веди пальцем по дорожке.",
+      "sha256": "b830ff0b4ab9daf4200f50b4d5a41deb72511142a8e098a8954229d4d50dc17e",
+      "uses": [
+        "help-maze-sort-b830ff0b4a"
       ]
     },
     {
@@ -1103,7 +1453,19 @@
         "guide-tangles-05",
         "guide-tangles-06",
         "guide-tangles-07",
-        "guide-tangles-08",
+        "guide-tangles-08"
+      ]
+    },
+    {
+      "id": "guide-together-tangles-01",
+      "filename": "guide-together-tangles-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Распутай провода",
+      "voice": "narrator-ru",
+      "text": "Найди белую точку на проводе. Веди её к разъёму. Можно нажимать на кружки по одному. Если палец соскочил, продолжай с белой точки.",
+      "sha256": "ccaaab967b700db31ff3dafeb0023bb8607b06084da963eae4822e11358b9268",
+      "uses": [
         "guide-together-tangles-01",
         "guide-together-tangles-02",
         "guide-together-tangles-03",
@@ -1115,29 +1477,81 @@
       ]
     },
     {
-      "id": "hint-tangles-1",
-      "filename": "hint-tangles-1.mp3",
+      "id": "help-tangles-6c82bbdecf",
+      "filename": "help-tangles-6c82bbdecf.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Распутай провода",
       "voice": "narrator-ru",
-      "text": "Начни у белой точки на ярком проводе.",
-      "sha256": "10772fb0a7f2aec1b8b5cddc05c166f3e4e9064f51183370ee80b4d3c7180d03",
+      "text": "Ты перешёл на другой провод. Вернись к белой точке и продолжай по яркому.",
+      "sha256": "6c82bbdecf9aeafecf44a6b13077c5202d0332a76dcdc6bc009c77822481e139",
       "uses": [
-        "hint-tangles-1"
+        "help-tangles-6c82bbdecf"
       ]
     },
     {
-      "id": "hint-tangles-2",
-      "filename": "hint-tangles-2.mp3",
+      "id": "help-tangles-4c934e5022",
+      "filename": "help-tangles-4c934e5022.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Распутай провода",
       "voice": "narrator-ru",
-      "text": "На пересечении оставайся на этом же проводе. Пройденная часть отмечена светлой линией.",
-      "sha256": "5a6a76d08605604423907a81678fbfb4d8b36e6a11f0d8d48a23520bc4cfcf62",
+      "text": "Палец вышел за край провода. Продолжи от белой точки — пройденный путь сохранён.",
+      "sha256": "4c934e50221eb1b66b96dbac24fe7120b99230822a2f5c3cc1da4ec3f6764ac9",
       "uses": [
-        "hint-tangles-2"
+        "help-tangles-4c934e5022"
+      ]
+    },
+    {
+      "id": "help-tangles-a43a0c8136",
+      "filename": "help-tangles-a43a0c8136.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Распутай провода",
+      "voice": "narrator-ru",
+      "text": "Провод распутан!",
+      "sha256": "a43a0c813661bd4f0a82b039e4f41090cd864512e77189a75b9d398f8a4e549e",
+      "uses": [
+        "help-tangles-a43a0c8136"
+      ]
+    },
+    {
+      "id": "help-tangles-5d043bd672",
+      "filename": "help-tangles-5d043bd672.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Распутай провода",
+      "voice": "narrator-ru",
+      "text": "Коснись кружка на ярком проводе.",
+      "sha256": "5d043bd672ff3ec97a3dc453341dd9c306f0432c7f8f3d8da4f392be51e668e9",
+      "uses": [
+        "help-tangles-5d043bd672"
+      ]
+    },
+    {
+      "id": "help-tangles-5d70cc704d",
+      "filename": "help-tangles-5d70cc704d.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Распутай провода",
+      "voice": "narrator-ru",
+      "text": "Коснись белой точки на выделенном проводе.",
+      "sha256": "5d70cc704d32a148e7ea4963b6fd67c692317d4f187b05105c5219544c136a48",
+      "uses": [
+        "help-tangles-5d70cc704d"
+      ]
+    },
+    {
+      "id": "task-together-tangles-1",
+      "filename": "task-together-tangles-1.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Распутай провода",
+      "voice": "narrator-ru",
+      "text": "Нажимай на кружки вдоль яркого провода. Можно и вести пальцем.",
+      "sha256": "08a0d692e1d1c81ee7dde1780a330867c29274861ec85c6f7472227bf301d9b4",
+      "uses": [
+        "task-together-tangles-1"
       ]
     },
     {
@@ -1151,6 +1565,19 @@
       "sha256": "7d24f63df425161410d5b17573774869b48d8d97fb087ec39e8439b2de06fc88",
       "uses": [
         "task-tangles-1"
+      ]
+    },
+    {
+      "id": "help-tangles-89313082e1",
+      "filename": "help-tangles-89313082e1.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Распутай провода",
+      "voice": "narrator-ru",
+      "text": "Нажми на обведённый кружок. Следующий появится дальше по тому же проводу.",
+      "sha256": "89313082e10ffdeeb376bbf858435384b43b90e58c3427e93ffbaf97003af926",
+      "uses": [
+        "help-tangles-89313082e1"
       ]
     },
     {
@@ -1183,7 +1610,19 @@
         "guide-hidden-objects-05",
         "guide-hidden-objects-06",
         "guide-hidden-objects-07",
-        "guide-hidden-objects-08",
+        "guide-hidden-objects-08"
+      ]
+    },
+    {
+      "id": "guide-together-hidden-objects-01",
+      "filename": "guide-together-hidden-objects-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Забытые вещи",
+      "voice": "narrator-ru",
+      "text": "Посмотри на одну картинку внизу. Найди такую же вещь в комнате. Коснись вещи. Когда появится галочка, ищи следующую.",
+      "sha256": "2c1e4eaca9e19dea2dfa52788c82cdedbb49975f39f56aaf84881061090f5f0c",
+      "uses": [
         "guide-together-hidden-objects-01",
         "guide-together-hidden-objects-02",
         "guide-together-hidden-objects-03",
@@ -1195,29 +1634,16 @@
       ]
     },
     {
-      "id": "hint-hidden-objects-1",
-      "filename": "hint-hidden-objects-1.mp3",
+      "id": "help-hidden-objects-2b68741083",
+      "filename": "help-hidden-objects-2b68741083.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Забытые вещи",
       "voice": "narrator-ru",
-      "text": "Внизу показаны вещи, которые забыли гости.",
-      "sha256": "8aca2cfed568056acc3f2c57edc605fe4696687085d6e12412adececcb5ad4e4",
+      "text": "Этого предмета нет среди картинок внизу. Сравни картинки.",
+      "sha256": "2b687410835ee1c7dc0350c2b36519f661d0f9e3106add597b51f94c20468637",
       "uses": [
-        "hint-hidden-objects-1"
-      ]
-    },
-    {
-      "id": "hint-hidden-objects-2",
-      "filename": "hint-hidden-objects-2.mp3",
-      "priority": 2,
-      "kind": "Подсказка",
-      "game": "Забытые вещи",
-      "voice": "narrator-ru",
-      "text": "Ищи один предмет за другим: сначала осмотри полки, затем стол и пол.",
-      "sha256": "5ec3ff4e3472bd6b967db9a6e5e9b99c96ae8f34c053f9988867e05bba7033af",
-      "uses": [
-        "hint-hidden-objects-2"
+        "help-hidden-objects-2b68741083"
       ]
     },
     {
@@ -1244,6 +1670,19 @@
       "sha256": "406e9ab61cb780da23a599d31d46dd58c69718854ba52289f0cb2af9072089df",
       "uses": [
         "story-math-coloring"
+      ]
+    },
+    {
+      "id": "story-together-math-coloring",
+      "filename": "story-together-math-coloring.mp3",
+      "priority": 1,
+      "kind": "История 4–5 лет",
+      "game": "Цветные открытия",
+      "voice": "narrator-ru",
+      "text": "Джейс нарисовала робота. Помоги посчитать точки, и рисунок станет цветным!",
+      "sha256": "259a41e0ac79a2c0674cfa64846e1a09a1d6c87005a349f7b2ec5fe5894a6a50",
+      "uses": [
+        "story-together-math-coloring"
       ]
     },
     {
@@ -1287,29 +1726,29 @@
       ]
     },
     {
-      "id": "hint-math-coloring-1",
-      "filename": "hint-math-coloring-1.mp3",
+      "id": "help-math-coloring-6892eaed01",
+      "filename": "help-math-coloring-6892eaed01.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Цветные открытия",
       "voice": "narrator-ru",
-      "text": "Коснись белой области с примером.",
-      "sha256": "a68091e3c03590e9ffda0f0898da99615da6badc869a4bf4a58e5f31d450b8cd",
+      "text": "Посчитай точки ещё раз. Касайся пальцем каждой по очереди.",
+      "sha256": "6892eaed01ccb3ea87901b9e3363f9eb8906b29334496009f3b4f9f01fa441f3",
       "uses": [
-        "hint-math-coloring-1"
+        "help-math-coloring-6892eaed01"
       ]
     },
     {
-      "id": "hint-math-coloring-2",
-      "filename": "hint-math-coloring-2.mp3",
+      "id": "help-math-coloring-783b5144db",
+      "filename": "help-math-coloring-783b5144db.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Цветные открытия",
       "voice": "narrator-ru",
-      "text": "При сложении прибавляй, при вычитании убирай. Ответ набирается кнопками в окошке.",
-      "sha256": "bbaf38c972f177a63c2028a8c8d19f8cd15f5b9b73374f76354cee3284206b0d",
+      "text": "Верно! Эта часть раскрасилась.",
+      "sha256": "783b5144dbf34396de099483986c748c98eacce7772abc1281d77453ac6eebd3",
       "uses": [
-        "hint-math-coloring-2"
+        "help-math-coloring-783b5144db"
       ]
     },
     {
@@ -1336,6 +1775,32 @@
       "sha256": "d40ee7bd841e413cb490f9aa73337e6b40317a8cfa78b1cd3fb4eaec10144a8d",
       "uses": [
         "task-math-coloring-1"
+      ]
+    },
+    {
+      "id": "help-math-coloring-fceef7cc09",
+      "filename": "help-math-coloring-fceef7cc09.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Цветные открытия",
+      "voice": "narrator-ru",
+      "text": "Открой выделенную часть. Посчитай точки вместе со взрослым.",
+      "sha256": "fceef7cc09c65d989ddbd614e93db928f94581b6f1da298124a158a658b5914b",
+      "uses": [
+        "help-math-coloring-fceef7cc09"
+      ]
+    },
+    {
+      "id": "help-math-coloring-2cb351463d",
+      "filename": "help-math-coloring-2cb351463d.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Цветные открытия",
+      "voice": "narrator-ru",
+      "text": "Коснись выделенной части. Если трудно считать в уме, нажми «Показать на точках».",
+      "sha256": "2cb351463dbd8f431460483e42703e8c562be7aec65743470c37051a5d593506",
+      "uses": [
+        "help-math-coloring-2cb351463d"
       ]
     },
     {
@@ -1392,29 +1857,16 @@
       ]
     },
     {
-      "id": "hint-riddle-wheel-1",
-      "filename": "hint-riddle-wheel-1.mp3",
+      "id": "help-riddle-wheel-d8fa98fba0",
+      "filename": "help-riddle-wheel-d8fa98fba0.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Колесо загадок",
       "voice": "narrator-ru",
-      "text": "Послушай или прочитай загадку до конца.",
-      "sha256": "d712ea79d8f1e6fcaefee190c93403011a1a768d4b570d78d86b994a4d806c38",
+      "text": "Загадка открыта. Можно послушать её или прочитать.",
+      "sha256": "d8fa98fba04a7dfe9a82145ef0ff30891e9a30dae29505444604b02a92f41ae0",
       "uses": [
-        "hint-riddle-wheel-1"
-      ]
-    },
-    {
-      "id": "hint-riddle-wheel-2",
-      "filename": "hint-riddle-wheel-2.mp3",
-      "priority": 2,
-      "kind": "Подсказка",
-      "game": "Колесо загадок",
-      "voice": "narrator-ru",
-      "text": "Сравни каждую картинку со всеми словами загадки. Кнопка «Послушать» повторит её.",
-      "sha256": "ede9d04805c703d9c0061ef886492fc83a8693f08774e2f82afacb363414e1fb",
-      "uses": [
-        "hint-riddle-wheel-2"
+        "help-riddle-wheel-d8fa98fba0"
       ]
     },
     {
@@ -1428,6 +1880,45 @@
       "sha256": "e875dd5ccebe16b8ec3229c396bb523d328686de2e9daaee4d40649c3512cb83",
       "uses": [
         "task-riddle-wheel-1"
+      ]
+    },
+    {
+      "id": "help-riddle-wheel-89f5e6a8ad",
+      "filename": "help-riddle-wheel-89f5e6a8ad.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Колесо загадок",
+      "voice": "narrator-ru",
+      "text": "Колесо крутится. Дождись загадки.",
+      "sha256": "89f5e6a8ad704f424f390f5789d815efb5314180118aef08676ebd26786d9cc3",
+      "uses": [
+        "help-riddle-wheel-89f5e6a8ad"
+      ]
+    },
+    {
+      "id": "help-riddle-wheel-22ca8bfed3",
+      "filename": "help-riddle-wheel-22ca8bfed3.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Колесо загадок",
+      "voice": "narrator-ru",
+      "text": "Нажми «Крутить колесо», чтобы открыть загадку.",
+      "sha256": "22ca8bfed385c79145ff2fd0c90b682dfc37a8ebf51c6024c4c29593e0257bf4",
+      "uses": [
+        "help-riddle-wheel-22ca8bfed3"
+      ]
+    },
+    {
+      "id": "help-riddle-wheel-722669a15c",
+      "filename": "help-riddle-wheel-722669a15c.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Колесо загадок",
+      "voice": "narrator-ru",
+      "text": "Ты уже нашёл ответ. Нажми «Следующая загадка».",
+      "sha256": "722669a15c3ddc0c66009c73f5bbfbbe3adec924d52967899311c902da7dbcb1",
+      "uses": [
+        "help-riddle-wheel-722669a15c"
       ]
     },
     {
@@ -1464,29 +1955,29 @@
       ]
     },
     {
-      "id": "hint-schulte-1",
-      "filename": "hint-schulte-1.mp3",
+      "id": "help-schulte-cf04e35568",
+      "filename": "help-schulte-cf04e35568.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Таблицы Шульте",
       "voice": "narrator-ru",
-      "text": "Посмотри на число вверху.",
-      "sha256": "c9b9775eeac476c42a70e2008fd1e496ca270bee581a6f59fd8a227bcc4b0ac7",
+      "text": "Посмотри на число вверху. Найди такое же.",
+      "sha256": "cf04e3556813dcd36ab3fe92cb74580a954a7d8201a8f048181dbd2e0eaf00eb",
       "uses": [
-        "hint-schulte-1"
+        "help-schulte-cf04e35568"
       ]
     },
     {
-      "id": "hint-schulte-2",
-      "filename": "hint-schulte-2.mp3",
+      "id": "help-schulte-a1023c9e53",
+      "filename": "help-schulte-a1023c9e53.mp3",
       "priority": 2,
       "kind": "Подсказка",
       "game": "Таблицы Шульте",
       "voice": "narrator-ru",
-      "text": "Найди карточку с таким же числом.",
-      "sha256": "6c06d650bab6da2ac361543dc33f78d8505e152d9951ce9f78b4d5edec46a2f5",
+      "text": "Есть! Найди следующее число.",
+      "sha256": "a1023c9e5393d5bb3cf25fbd67d48025fa8df37f3a6d0459eaba0efdb94cc4b7",
       "uses": [
-        "hint-schulte-2"
+        "help-schulte-a1023c9e53"
       ]
     },
     {
@@ -1500,6 +1991,19 @@
       "sha256": "24b31ef5c7b2f5e42d49a9fd8834bf91af258ace4c9219422ee0c6544994e603",
       "uses": [
         "task-schulte-1"
+      ]
+    },
+    {
+      "id": "help-schulte-d9d76e8e07",
+      "filename": "help-schulte-d9d76e8e07.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Таблицы Шульте",
+      "voice": "narrator-ru",
+      "text": "Нужное число обведено синей рамкой.",
+      "sha256": "d9d76e8e07e5e5626e4fd68c82fe91381b99447977465b757bfb2b6aa229fe33",
+      "uses": [
+        "help-schulte-d9d76e8e07"
       ]
     },
     {
@@ -2768,32 +3272,6 @@
       "sha256": "afeeac720fb7a33af8312f0b609cb76bddb42a6eced9737c6c831b4f8d8548a9",
       "uses": [
         "feedback-2"
-      ]
-    },
-    {
-      "id": "feedback-3",
-      "filename": "feedback-3.mp3",
-      "priority": 2,
-      "kind": "Обратная связь",
-      "game": "Общее",
-      "voice": "narrator-ru",
-      "text": "Новая тень. Сравни детали.",
-      "sha256": "5179a4757df26f1d9bf6c2547fa362748b44537034b6f894d77d566708467618",
-      "uses": [
-        "feedback-3"
-      ]
-    },
-    {
-      "id": "feedback-4",
-      "filename": "feedback-4.mp3",
-      "priority": 2,
-      "kind": "Обратная связь",
-      "game": "Общее",
-      "voice": "narrator-ru",
-      "text": "Точно! Рассмотри предмет и нажми «Следующая тень».",
-      "sha256": "00e76ed5ee2c5db01bdfeca3f837f76fa90b9d571bf65cfad4e6a49b07ae19be",
-      "uses": [
-        "feedback-4"
       ]
     }
   ]

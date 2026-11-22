@@ -12,7 +12,10 @@ const create:RoundFactory=(c)=>{
     if(solved||slots.includes(source)){render();return;}
     if(dest<0){render();return;}
     if(slots[dest]!==null){c.hooks.feedback('Эта клеточка уже занята. Выбери пустую.');render();return;}
-    if(letters[source]!==word[dest]){selected=null;render();c.hooks.feedback('Здесь нужна другая буква. Посмотри на картинку.','try');return;}
+    if(letters[source]!==word[dest]){
+      selected=source;render();
+      c.hooks.feedback(c.mode==='together'?'Ты держишь букву «'+letters[source]+'». Найди такую же в клеточках.':'Буква «'+letters[source]+'» выбрана. Произнеси слово «'+word+'». Где слышишь эту букву?','try');return;
+    }
     slots[dest]=source;selected=null;hinted=-1;hintStep=0;render();
     if(slots.every((s)=>s!==null)){solved=true;render();c.hooks.win('Получилось слово «'+word+'»!');}
     else c.hooks.feedback('Верно! Продолжай собирать слово.','good');
@@ -34,10 +37,10 @@ const create:RoundFactory=(c)=>{
       const x=360-(letters.length-1)*118/2+i*118,y=h*.86;
       token(c,'letter-'+i,letter,x,y,100,110,(dx,dy)=>{
         const dest=coords().findIndex((p)=>Math.abs(dx-p.x)<58&&Math.abs(dy-p.y)<76);place(i,dest);
-      },()=>{selected=i;render();c.hooks.feedback('Буква «'+letter+'» выбрана. Теперь коснись пустой клеточки.');},selected===i);
+      },()=>{selected=i;render();c.hooks.feedback('Буква «'+letter+'» выбрана. '+(c.mode==='together'?'Коснись такой же буквы под картинкой.':'Теперь коснись пустой клеточки.'));},selected===i);
     });
   }
   c.hooks.instruction(c.mode==='together'?'Положи каждую букву на такую же букву в клеточке.':'Собери слово: переставь буквы под картинкой.');
-  return {render,hasProgress:()=>slots.some(s=>s!==null),hint(){const i=slots.findIndex((s)=>s===null);if(i>=0){if(hintStep++===0){c.hooks.listen('На картинке '+word.toLowerCase()+'. Произнеси слово медленно и прислушайся к звукам.');return;}hinted=i;render();c.hooks.feedback('В выделенной клеточке нужна буква «'+word[i]+'».');}},inspect:()=>({word,letters,slots,solved})};
+  return {render,hasProgress:()=>slots.some(s=>s!==null),hint(){const i=slots.findIndex((s)=>s===null);if(i>=0){if(c.mode==='solo'&&hintStep++===0){c.hooks.listen('На картинке '+word.toLowerCase()+'. Произнеси слово медленно и прислушайся к звукам.');return;}hinted=i;selected=null;render();c.hooks.feedback('Выбери внизу букву «'+word[i]+'», затем коснись выделенной клеточки.');}},inspect:()=>({word,letters,slots,solved})};
 };
 export default create;

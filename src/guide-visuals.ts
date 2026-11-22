@@ -17,6 +17,9 @@ const arrow='<span class="example-arrow" aria-hidden="true">→</span>';
 export function guideVisual(id:SceneGameId,level:number,mode:AgeMode='solo'):string {
   if(id==='schulte')return example('<span class="example-tile">2</span>'+arrow+'<span class="example-slot">2 ✓</span>','Посмотри на образец и найди такое же число среди карточек.');
   if(mode==='together'){
+    if(id==='anagrams')return example('<span class="example-tile">А</span>'+arrow+'<span class="example-slot">А</span>','Сначала коснись карточки А внизу. Потом коснись клеточки с такой же буквой.');
+    if(id==='maze-codes'&&level<4)return example('<span class="example-tile">1</span>'+arrow+'<span class="example-slot">А</span>','Дойди до буквы по дорожке. Можно нажимать на соседние клетки.');
+    if(id==='tangles')return example('<span class="example-tile">●</span>'+arrow+'<span class="example-slot">◯</span>','Нажми на кружок на проводе. Каждый следующий кружок ведёт ближе к разъёму.');
     if(id==='alarms')return example(clockFace(180)+arrow+clockFace(180),'У этих часов обе стрелки смотрят одинаково.');
     if(id==='math-coloring')return example('<span class="example-tile">● ● ●</span>'+arrow+'<span class="example-slot">3</span>','Три точки. Нажми число 3.');
     if(id==='proofreading'){

@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 const server=await createServer({configFile:false,cacheDir:'node_modules/.vite-voice-script',appType:'custom',server:{middlewareMode:true}});
 try{
   const {GAMES,gameById}=await server.ssrLoadModule('/src/catalog.ts');
-  const {guideForLevel,HINTS}=await server.ssrLoadModule('/src/learning.ts');
+  const {guideForLevel}=await server.ssrLoadModule('/src/learning.ts');
   const {RIDDLES,paintLesson}=await server.ssrLoadModule('/src/expansion.ts');
   const {PROOFREAD_WORDS,proofreadingLesson}=await server.ssrLoadModule('/src/challenges.ts');
   const lines=[],byText=new Map();
@@ -15,12 +15,17 @@ try{
     const line={id,filename:id+'.mp3',priority,kind,game,voice:'narrator-ru',text,sha256:createHash('sha256').update(text).digest('hex'),uses:[id]};
     lines.push(line);byText.set(text,line);
   }
+  function addFeedback(id,title,text){
+    const hash=createHash('sha256').update(text).digest('hex').slice(0,10);
+    add('help-'+id+'-'+hash,'Подсказка',title,text,2);
+  }
   for(const entry of GAMES){
     const game=entry.standalone?gameById(entry.id,'together'):entry;
     add('story-'+game.id,'История',game.title,game.story,1);
+    const younger=gameById(game.id,'together');
+    if(younger.story!==game.story)add('story-together-'+game.id,'История 4–5 лет',game.title,younger.story,1);
     if(!entry.standalone)for(let n=0;n<game.levels;n++)add('guide-'+game.id+'-'+String(n+1).padStart(2,'0'),'Правила',game.title,guideForLevel(game.id,n).join(' '),1);
     for(let n=0;n<game.levels;n++)add('guide-together-'+game.id+'-'+String(n+1).padStart(2,'0'),'Правила 4–5 лет',game.title,guideForLevel(game.id,n,'together').join(' '),1);
-    HINTS[game.id].forEach((text,i)=>add('hint-'+game.id+'-'+(i+1),'Подсказка',game.title,text,2));
     const file=ts.createSourceFile(game.id+'.ts',readFileSync('src/games/'+game.id+'.ts','utf8'),ts.ScriptTarget.Latest,true);
     let counter=0,juniorCounter=0;
     const collect=(expr,junior=false)=>{
@@ -28,7 +33,12 @@ try{
       else if(ts.isConditionalExpression(expr)){const condition=expr.condition.getText(file);
         collect(expr.whenTrue,junior||condition.includes('together')||condition==='counting');collect(expr.whenFalse,junior);}
     };
+    function collectFeedback(expr){
+      if(ts.isStringLiteralLike(expr))addFeedback(game.id,game.title,expr.text);
+      else if(ts.isConditionalExpression(expr)){collectFeedback(expr.whenTrue);collectFeedback(expr.whenFalse);}
+    }
     const visit=node=>{
+      if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.name.text==='feedback'&&node.arguments[0])collectFeedback(node.arguments[0]);
       if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.name.text==='instruction'&&node.arguments[0])collect(node.arguments[0]);
       ts.forEachChild(node,visit);
     };visit(file);

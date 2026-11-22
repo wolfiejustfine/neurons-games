@@ -8,12 +8,13 @@ const create:RoundFactory=(c)=>{
   const sources=shuffled(times,random(805+c.level)),matched=Array<boolean>(count).fill(false);
   let selected:number|null=null,highlight=-1,solved=false;
   const cardPositions=()=>Array.from({length:count},(_,i)=>count===4?{x:195+(i%2)*330,y:c.height*(.22+Math.floor(i/2)*.25),w:300,h:c.height*.215}:{x:360-(count-1)*220/2+i*220,y:c.height*.32,w:count===2?250:200,h:c.height*.37});
+  const direction=(minutes:number)=>({3:'вправо',6:'вниз',9:'влево',12:'вверх'}[Math.floor(minutes/60)]);
   function place(value:number,index:number){
     if(solved||index<0){render();return;}
     if(matched[index]){selected=null;render();return;}
     if(times[index]!==value){
-      selected=null;render();
-      c.hooks.feedback(times[index]%60!==value%60?'Проверь длинную стрелку: на 12 — 00 минут, на 6 — 30 минут.':afternoon?'Проверь короткую стрелку. После полудня 1 — это 13 часов, 2 — 14 и так далее.':'Проверь короткую стрелку: она показывает час встречи.','try');return;
+      selected=value;render();
+      c.hooks.feedback(c.mode==='together'?'На выбранных часах короткая стрелка смотрит '+direction(value)+'. Найди героя с такой же стрелкой.':times[index]%60!==value%60?'Проверь длинную стрелку: на 12 — 00 минут, на 6 — 30 минут.':afternoon?'Проверь короткую стрелку. После полудня 1 — это 13 часов, 2 — 14 и так далее.':'Проверь короткую стрелку: она показывает час встречи.','try');return;
     }
     matched[index]=true;selected=null;highlight=-1;render();
     if(matched.every(Boolean)){solved=true;render();c.hooks.win('Все встречи запланированы!');}else c.hooks.feedback('Встреча запланирована!','good');
@@ -31,11 +32,11 @@ const create:RoundFactory=(c)=>{
         face.lineStyle(7,0x7660ac).lineBetween(cx,cy,cx+Math.cos(hands.hour)*r*.56,cy+Math.sin(hands.hour)*r*.56);
       }
       const hero=c.scene.add.image(p.x-(c.mode==='together'?p.w*.2:0),p.y-p.h*.08,'hero-'+HEROES[i][0]);hero.setScale(Math.min(p.w*.52/hero.width,p.h*.60/hero.height));c.root.add(hero);
-      label(c,p.x,p.y+p.h*.28,HEROES[i][1]+' · '+formatClock(times[i]),count===4?27:28,{fontStyle:'bold'});
+      label(c,p.x,p.y+p.h*.28,c.mode==='together'?HEROES[i][1]:HEROES[i][1]+' · '+formatClock(times[i]),count===4?27:28,{fontStyle:'bold'});
       if(matched[i])label(c,p.x+p.w/2-25,p.y-p.h/2+24,'✓',27,{color:'#68a98a'});
-      if(!solved)target(c,'meeting-'+i,p.x,p.y,p.w,p.h,()=>{if(selected!==null)place(selected,i);else c.hooks.feedback('Сначала выбери часы внизу.');});
+      if(!solved&&!matched[i])target(c,'meeting-'+i,p.x,p.y,p.w,p.h,()=>{if(selected!==null)place(selected,i);else c.hooks.feedback('Сначала выбери часы внизу.');});
     });
-    label(c,360,h*.64,solved?'ВСЕ ВСТРЕЧИ ЗАПЛАНИРОВАНЫ':halfHours?'ДЛИННАЯ НА 12 → :00, НА 6 → :30':afternoon?'ПОСЛЕ ПОЛУДНЯ: 1 → 13, 2 → 14, 3 → 15':'РОВНЫЙ ЧАС: ДЛИННАЯ СТРЕЛКА НА 12',23,{color:'#8b9aae',letterSpacing:1});
+    label(c,360,h*.64,solved?'ВСЕ ВСТРЕЧИ ЗАПЛАНИРОВАНЫ':c.mode==='together'?'СРАВНИ КОРОТКИЕ СТРЕЛКИ':halfHours?'ДЛИННАЯ НА 12 → :00, НА 6 → :30':afternoon?'ПОСЛЕ ПОЛУДНЯ: 1 → 13, 2 → 14, 3 → 15':'РОВНЫЙ ЧАС: ДЛИННАЯ СТРЕЛКА НА 12',23,{color:'#8b9aae',letterSpacing:1});
     sources.forEach((value,i)=>{
       if(times.some((t,j)=>t===value&&matched[j]))return;
       const x=360-(count-1)*168/2+i*168,y=h*.79,r=Math.min(count===4?68:76,h*.11);
@@ -66,6 +67,6 @@ const create:RoundFactory=(c)=>{
     });
   }
   c.hooks.instruction(c.mode==='together'?'Посмотри на стрелки. Найди герою часы с такими же стрелками.':halfHours?'Длинная стрелка на 6 — 30 минут. Короткая — между часами. Подбери будильники.':afternoon?'Теперь встречи после полудня: например, 13:00 — час дня. Раздай будильники.':'Короткая стрелка показывает часы. Подбери будильник для каждой встречи.');
-  return {render,hasProgress:()=>matched.some(Boolean),hint(){highlight=matched.findIndex((v)=>!v);if(highlight>=0){selected=times[highlight];render();c.hooks.feedback('Подходящие часы и встреча выделены. Время: '+formatClock(selected)+'.');}},inspect:()=>({times,sources,matched,selected,solved})};
+  return {render,hasProgress:()=>matched.some(Boolean),hint(){highlight=matched.findIndex((v)=>!v);if(highlight>=0){selected=times[highlight];render();c.hooks.feedback(c.mode==='together'?'Часы уже выбраны. Теперь коснись героя в рамке.':'На выбранных часах '+formatClock(selected)+'. Коснись выделенной встречи.');}},inspect:()=>({times,sources,matched,selected,solved})};
 };
 export default create;

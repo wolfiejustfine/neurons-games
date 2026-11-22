@@ -1,3 +1,4 @@
+import type { PaintProblem } from '../expansion';
 import type Phaser from 'phaser';
 import type { AgeMode,SceneGameInfo } from '../catalog';
 export interface Control { id:string; x:number; y:number; width:number; height:number; }
@@ -7,8 +8,8 @@ export interface Hooks {
   win(message?:string):void;
   listen(text:string):void;
   clockPreview(minutes:number):void;
-  numberQuestion(expression:string,accept:(answer:number)=>boolean):void;
-  narrate(text:string,id:string):void;
+  numberQuestion(problem:PaintProblem,accept:(answer:number)=>boolean):void;
+  narrate(text:string,id:string,requested?:boolean):void;
 }
 export interface PlayContext {
   scene:Phaser.Scene;

@@ -40,7 +40,7 @@ const create:RoundFactory=(c)=>{
     path.push(index);render();
     if(index===maze.end){
       busy=true;
-      if(part+1===word.length){part++;solved=true;render();c.hooks.win('Пароль «'+word+'» собран. Прочитай его!');return;}
+      if(part+1===word.length){part++;solved=true;render();c.hooks.win(c.mode==='together'?(word.length===1?'Ты нашёл букву «'+word+'»!':'Вы нашли пароль «'+word+'»! Прочитайте его вместе.'):'Пароль «'+word+'» собран. Прочитай его!');return;}
       render();c.hooks.feedback('Буква «'+word[part]+'» открыта! Рассмотри её и нажми «Дальше».','good');
     }
   }
@@ -58,7 +58,7 @@ const create:RoundFactory=(c)=>{
   const up=()=>{last=null;};
   const key=(e:KeyboardEvent)=>{const at=path.at(-1)!,diff:Record<string,number>={ArrowLeft:-1,ArrowRight:1,ArrowUp:-maze.width,ArrowDown:maze.width};if(e.key in diff){e.preventDefault();step(at+diff[e.key]);}};
   c.scene.input.on('pointerdown',down);c.scene.input.on('pointermove',move);c.scene.input.on('pointerup',up);c.scene.input.keyboard?.on('keydown',key);
-  c.hooks.instruction('Проведи дорожку от числа к букве и собери пароль.');
-  return {render,hasProgress:()=>part>0||path.length>1,hint(){hinted=route(maze,path.at(-1)!,maze.end);render();c.hooks.feedback('Маленькие точки показывают путь к букве.');},dispose(){c.scene.input.off('pointerdown',down);c.scene.input.off('pointermove',move);c.scene.input.off('pointerup',up);c.scene.input.keyboard?.off('keydown',key);},inspect:()=>({word,part,maze,path,busy,solved,solution:route(maze,path.at(-1)!,maze.end)})};
+  c.hooks.instruction(c.mode==='together'?'Дойди от точки до буквы. Нажимай на соседние клетки или веди пальцем.':'Проведи дорожку от числа к букве и собери пароль.');
+  return {render,hasProgress:()=>part>0||path.length>1,hint(){if(busy){c.hooks.feedback('Буква найдена. Нажми «Дальше» под лабиринтом.');return;}hinted=route(maze,path.at(-1)!,maze.end);render();c.hooks.feedback('Маленькие точки показывают путь к букве.');},dispose(){c.scene.input.off('pointerdown',down);c.scene.input.off('pointermove',move);c.scene.input.off('pointerup',up);c.scene.input.keyboard?.off('keydown',key);},inspect:()=>({word,part,maze,path,busy,solved,solution:route(maze,path.at(-1)!,maze.end)})};
 };
 export default create;

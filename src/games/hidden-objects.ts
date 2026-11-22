@@ -16,7 +16,7 @@ const create:RoundFactory=c=>{
       if(highlighted===key)panel(c,x,y,size+24,size+24,'#fff8df','#e2bb60',25);
       picture(c,key,x,y,size);
       if(!solved)target(c,'object-'+key,x,y,Math.max(96,size+12),Math.max(96,size+12),()=>{
-        if(!targets.includes(key)){c.hooks.feedback('Этого предмета нет в списке гостей внизу. Сравни картинки.','try');return;}
+        if(!targets.includes(key)){c.hooks.feedback('Этого предмета нет среди картинок внизу. Сравни картинки.','try');return;}
         found.add(key);highlighted=null;
         if(found.size===targets.length){solved=true;render();c.hooks.win('Все забытые вещи найдены. Спасибо за помощь Ньюту!');}
         else{render();c.hooks.feedback('Нашли: '+PROP_NAMES[key]+'! Осталось '+(targets.length-found.size)+'.','good');}

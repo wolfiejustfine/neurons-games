@@ -38,7 +38,7 @@ const create:RoundFactory=(c)=>{
   }
   function step(at:number){
     if(solved||at===position||!neighbors(maze,position).includes(at))return;
-    position=at;hintPath=[];
+    position=at;hintPath=hintPath[1]===at?hintPath.slice(1):[];
     if(carried===null){
       const found=items.findIndex((i)=>i.at===at&&!i.done&&!i.picked);
       if(found>=0){items[found].picked=true;carried=found;c.hooks.feedback(items[found].kind?'Это гвоздь. Отнеси его в фиолетовый ящик «Гвозди».':'Это винт. Отнеси его в жёлтый ящик «Винты».','good');}

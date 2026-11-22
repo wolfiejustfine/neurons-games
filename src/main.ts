@@ -2,9 +2,9 @@ import './style.css';
 import { GAMES, GAME_GROUPS, gameById, HERO_NAMES, type AgeMode, type GameInfo, type SceneGameInfo } from './catalog';
 import { ageMode, selectMode, save, persist, complete, nextLevel, finishedCount, isLevelUnlocked } from './save';
 import { tone, say, silence, narrate } from './audio';
-import { GUIDES, HINTS, ADULT_PROMPT, guideForLevel } from './learning';
+import { GUIDES, ADULT_PROMPT, guideForLevel } from './learning';
 import { clockFace,guideVisual } from './guide-visuals';
-import { proofreadingLesson } from './challenges';
+import type { PaintProblem } from './expansion';
 import type { Engine } from './play/engine';
 
 const base=import.meta.env.BASE_URL;
@@ -39,7 +39,7 @@ app.innerHTML=[
   '<section class="world-note"><img loading="lazy" src="'+base+'art/world.webp" alt="Парящие острова Мозгополиса"><div><span class="eyebrow">ДОБРО ПОЖАЛОВАТЬ ДОМОЙ</span><h2>Здесь живёт любопытство</h2><p>На каждом острове тебя ждёт новое открытие.</p></div></section>',
   '<footer class="site-footer"><span>Нейроны · Учимся играя</span><button id="about-open" class="text-button">Для родителей</button></footer>',
   '</main>',
-  '<main id="play" class="play hidden"><header class="play-header"><button id="back-home" class="icon-button" aria-label="К выбору игр">'+svg('back')+'</button><div class="play-heading"><span id="hero-name" class="eyebrow"></span><h1 id="play-title"></h1></div><button class="icon-button sound-toggle" aria-label="Выключить звук">'+svg('sound')+'</button></header><div class="round-heading"><button id="round-count" class="round-select" aria-label="Выбрать задание"></button><div id="round-dots"></div><button id="read-aloud" class="read-aloud" aria-label="Прочитать задание вслух">'+svg('sound')+'<span>Послушать</span></button></div><p id="stage-caption" class="stage-caption"></p><p id="instruction" class="instruction"></p><div id="stage" class="stage" role="application" aria-label="Игровое поле"><div id="loading" class="loading hidden"><span class="spinner"></span>Открываем приключение…</div></div><div id="feedback" class="feedback" role="status" aria-live="polite"></div><footer id="play-tools" class="play-tools"><button id="how-to" class="tool-button">'+svg('help')+'Как играть</button><button id="hint" class="tool-button">'+svg('bulb')+'Подсказка</button><button id="restart" class="tool-button">'+svg('reset')+'Ещё раз</button></footer><div id="completion" class="completion hidden"><button id="replay-round" class="secondary">Ещё раз</button><button id="next-round" class="primary">Дальше</button></div></main>',
+  '<main id="play" class="play hidden"><header class="play-header"><button id="back-home" class="icon-button" aria-label="К выбору игр">'+svg('back')+'</button><div class="play-heading"><span id="hero-name" class="eyebrow"></span><h1 id="play-title"></h1></div><button class="icon-button sound-toggle" aria-label="Выключить звук">'+svg('sound')+'</button></header><div class="round-heading"><button id="round-count" class="round-select" aria-label="Выбрать задание"></button><div id="round-dots"></div><button id="read-aloud" class="read-aloud" aria-label="Послушать подсказку или текущее задание">'+svg('sound')+'<span>Послушать</span></button></div><p id="stage-caption" class="stage-caption"></p><p id="instruction" class="instruction"></p><div id="stage" class="stage" role="application" aria-label="Игровое поле"><div id="loading" class="loading hidden"><span class="spinner"></span>Открываем приключение…</div></div><div id="feedback" class="feedback" role="status" aria-live="polite"></div><footer id="play-tools" class="play-tools"><button id="how-to" class="tool-button">'+svg('help')+'Как играть</button><button id="hint" class="tool-button">'+svg('bulb')+'Подсказка</button><button id="restart" class="tool-button">'+svg('reset')+'Ещё раз</button></footer><div id="completion" class="completion hidden"><button id="replay-round" class="secondary">Ещё раз</button><button id="next-round" class="primary">Дальше</button></div></main>',
   '<div id="rotate-notice" class="rotate-notice"><div><span class="rotate-symbol">↻</span><h2>Поверни экран</h2><p>Приключения удобнее проходить вертикально.<br>Мы подождём тебя здесь.</p><button id="rotate-home" class="secondary">К приключениям</button></div></div>',
   '<div id="modal" class="modal hidden"><section id="dialog" class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" tabindex="-1"></section></div>',
   '<div id="update-notice" class="update-notice hidden">Готово обновление игр.<button id="update-button">Обновить</button></div>'
@@ -47,11 +47,13 @@ app.innerHTML=[
 const el=<T extends HTMLElement=HTMLElement>(id:string)=>document.getElementById(id) as T;
 let engine:Engine|undefined, enginePromise:Promise<Engine>|undefined, current:SceneGameInfo|undefined, level=0, runToken=0, won=false, modalClose:(()=>void)|undefined;
 let focusBeforeModal:HTMLElement|null=null;
-let hintStep=0;
 let modalCleanup:(()=>void)|undefined;
 
 function updateSound(){
   document.querySelectorAll<HTMLButtonElement>('.sound-toggle').forEach((button)=>{button.innerHTML=svg(save.sound?'sound':'mute');button.setAttribute('aria-label',save.sound?'Выключить звук':'Включить звук');button.setAttribute('aria-pressed',String(save.sound));});
+}
+function enableSound(){
+  if(!save.sound){save.sound=true;persist();updateSound();}
 }
 function home(){
   runToken++;silence();engine?.stop();current=undefined;won=false;
@@ -85,45 +87,60 @@ function hideModal(){
   if(focusBeforeModal?.isConnected)focusBeforeModal.focus();focusBeforeModal=null;
 }
 function guideSteps(info:SceneGameInfo,n=level){
-  return '<ol class="guide-steps">'+guideForLevel(info.id,n,ageMode).map((text,i)=>'<li><span class="guide-number">'+(i+1)+'</span><span>'+text+'</span></li>').join('')+'</ol>'+guideVisual(info.id,n,ageMode);
+  const adult=ageMode==='together'?'<details class="adult-cue"><summary>Взрослому · когда помочь</summary><p>'+ADULT_PROMPT[info.id]+'</p></details>':'';
+  return adult+'<ol class="guide-steps">'+guideForLevel(info.id,n,ageMode).map((text,i)=>'<li><span class="guide-number">'+(i+1)+'</span><span>'+text+'</span></li>').join('')+'</ol>'+guideVisual(info.id,n,ageMode);
 }
 const guideReadButton=()=>'<button id="guide-read" class="guide-read">'+svg('sound')+'Послушать правила</button>';
-function numberQuestion(expression:string,accept:(answer:number)=>boolean){
+function numberQuestion(problem:PaintProblem,accept:(answer:number)=>boolean){
+  const {expression}=problem;
   if(ageMode==='together'){
     const max=level<3?3:5;
-    showModal('<button id="number-close" class="dialog-close icon-button" aria-label="Вернуться к рисунку">'+svg('close')+'</button><h2 id="dialog-title">Сколько точек?</h2><div class="counting-dots" id="number-value">'+expression.split('').join(' ')+'</div><p id="number-note" role="status">Посчитай и нажми число.</p><div class="counting-choices">'+Array.from({length:max},(_,i)=>'<button class="secondary" data-number="'+(i+1)+'">'+(i+1)+'</button>').join('')+'</div>',hideModal);
+    showModal('<button id="number-close" class="dialog-close icon-button" aria-label="Вернуться к рисунку">'+svg('close')+'</button><h2 id="dialog-title">Сколько точек?</h2><div class="counting-dots" id="number-value">'+Array.from({length:problem.answer},(_,i)=>'<button type="button" class="count-dot" aria-label="Отметить точку '+(i+1)+'"></button>').join('')+'</div><p id="number-note" role="status">Коснись точек по одной. Затем нажми число.</p><div class="counting-choices">'+Array.from({length:max},(_,i)=>'<button class="secondary" data-number="'+(i+1)+'">'+(i+1)+'</button>').join('')+'</div>',hideModal);
     el('number-close').onclick=hideModal;
+    let counted=0;
+    el('dialog').querySelectorAll<HTMLButtonElement>('.count-dot').forEach(dot=>dot.onclick=()=>{
+      if(dot.disabled)return;
+      counted++;
+      dot.textContent=String(counted);dot.disabled=true;
+      dot.setAttribute('aria-label','Сосчитано: '+counted);
+      el('number-note').textContent=counted===problem.answer?'Все точки отмечены. Теперь нажми число.':'Отмечено: '+counted+'. Найди ещё точку.';
+    });
     el('dialog').querySelectorAll<HTMLButtonElement>('[data-number]').forEach(button=>button.onclick=()=>{
       if(accept(Number(button.dataset.number)))hideModal();
-      else el('number-note').textContent=el('feedback').textContent;
+      else el('number-note').textContent=counted===problem.answer?'Найди на точках самый большой номер. Нажми такую же цифру внизу.':counted?'Посчитай оставшиеся синие точки.':'Коснись каждой синей точки один раз.';
     });
     return;
   }
-  showModal('<button id="number-close" class="dialog-close icon-button" aria-label="Вернуться к рисунку">'+svg('close')+'</button><span class="eyebrow">ЦВЕТНЫЕ ОТКРЫТИЯ</span><h2 id="dialog-title">Реши пример</h2><div class="number-expression">'+expression+' = <output id="number-value" aria-live="polite">?</output></div><p id="number-note" class="number-note" role="status">Набери ответ и нажми зелёную галочку.</p><div class="number-pad">'+['1','2','3','4','5','6','7','8','9','⌫','0','✓'].map(key=>'<button data-number="'+key+'" class="'+(key==='✓'?'number-check':'')+'" aria-label="'+(key==='⌫'?'Стереть цифру':key==='✓'?'Проверить ответ':key)+'">'+key+'</button>').join('')+'</div><button id="number-read" class="guide-read">'+svg('sound')+'Послушать пример</button>',hideModal);
+  showModal('<button id="number-close" class="dialog-close icon-button" aria-label="Вернуться к рисунку">'+svg('close')+'</button><span class="eyebrow">ЦВЕТНЫЕ ОТКРЫТИЯ</span><h2 id="dialog-title">Реши пример</h2><div class="number-expression">'+expression+' = <output id="number-value" aria-live="polite">?</output></div><p id="number-note" class="number-note" role="status">Набери ответ и нажми зелёную галочку.</p><details class="math-help" id="number-help"><summary>Показать на точках</summary><div id="dot-model"></div></details><div class="number-pad">'+['1','2','3','4','5','6','7','8','9','⌫','0','✓'].map(key=>'<button data-number="'+key+'" class="'+(key==='✓'?'number-check':'')+'" aria-label="'+(key==='⌫'?'Стереть цифру':key==='✓'?'Проверить ответ':key)+'">'+key+'</button>').join('')+'</div><button id="number-read" class="guide-read">'+svg('sound')+'Послушать пример</button>',hideModal);
+  const addition=problem.operation==='+';
+  const dots=(n:number,style:string)=>Array.from({length:n},()=>'<i class="'+style+'" aria-hidden="true"></i>').join('');
+  const model=addition?dots(problem.a,'')+'<b aria-hidden="true">+</b>'+dots(problem.b,'extra'):dots(problem.a-problem.b,'')+dots(problem.b,'removed');
+  const strategy=addition?'Сосчитай точки в обеих группах.':'Сосчитай точки без крестика.';
+  el('dot-model').innerHTML='<div class="model-dots" role="img" aria-label="'+problem.a+(addition?' точек и ещё ':' точек, зачёркнуто ')+problem.b+'">'+model+'</div><span>'+strategy+'</span>';
   let value='';
   const press=(key:string)=>{
     if(key==='✓'){
       if(!value){el('number-note').textContent='Сначала набери ответ.';return;}
       if(accept(Number(value))){hideModal();return;}
-      el('number-note').textContent=el('feedback').textContent;value='';
+      el<HTMLDetailsElement>('number-help').open=true;el('number-note').textContent='Попробуй ещё раз. Введи число и нажми галочку.';value='';
     }else if(key==='⌫')value=value.slice(0,-1);
     else if(value.length<2)value=(value==='0'?'':value)+key;
     el('number-value').textContent=value||'?';
   };
   el('dialog').querySelectorAll<HTMLButtonElement>('[data-number]').forEach(button=>button.onclick=()=>press(button.dataset.number!));
   el('number-close').onclick=hideModal;
-  el('number-read').onclick=()=>{if(!say(expression.replace('−','минус').replace('+','плюс')))el('number-note').textContent=save.sound?'Пример можно прочитать на экране.':'Звук выключен. Пример написан выше.';};
+  el('number-read').onclick=()=>{enableSound();if(!say(expression.replace('−','минус').replace('+','плюс')))el('number-note').textContent=save.sound?'Пример можно прочитать на экране.':'Звук выключен. Пример написан выше.';};
   const keydown=(event:KeyboardEvent)=>{
     if(event.ctrlKey||event.altKey||event.metaKey)return;
     if(/^\d$/.test(event.key)){event.preventDefault();press(event.key);}
     else if(event.key==='Backspace'){event.preventDefault();press('⌫');}
-    else if(event.key==='Enter'){event.preventDefault();press('✓');}
+    else if(event.key==='Enter'&&!(event.target instanceof Element&&event.target.closest('button,summary'))){event.preventDefault();press('✓');}
   };
   document.addEventListener('keydown',keydown);modalCleanup=()=>document.removeEventListener('keydown',keydown);
 }
 function bindGuideRead(info:SceneGameInfo,n:number){
   el('guide-read').onclick=()=>{
-    if(!save.sound){save.sound=true;persist();updateSound();}
+    enableSound();
     const text=guideForLevel(info.id,n,ageMode).join(' ');
     if(!say(text))el('guide-read').textContent=save.sound?'Голос недоступен · правила выше':'Включи звук кнопкой вверху';
   };
@@ -133,7 +150,7 @@ function intro(info:GameInfo){
   const n=nextLevel(info.id);
   showModal('<button class="dialog-close icon-button" id="intro-close" aria-label="Вернуться к выбору игр">'+svg('close')+'</button><span class="intro-step">История <span aria-hidden="true">● ○</span></span><h2 id="dialog-title">'+info.title+'</h2><div class="intro-content"><div class="story-hero"><img src="'+base+'art/'+info.hero+'.webp" alt="'+HERO_NAMES[info.hero]+'"><span>'+HERO_NAMES[info.hero]+'</span></div><blockquote class="story-bubble" id="story-text">'+info.story+'</blockquote></div><div class="intro-actions"><button id="story-read" class="guide-read">'+svg('sound')+'Послушать историю</button><button id="story-next" class="primary">Далее '+svg('arrow')+'</button></div>',hideModal,'story');
   el('intro-close').onclick=hideModal;
-  el('story-read').onclick=()=>{if(!save.sound){save.sound=true;persist();updateSound();}if(!say(info.story))el('story-read').textContent='История написана в окошке выше';};
+  el('story-read').onclick=()=>{enableSound();if(!say(info.story))el('story-read').textContent='История написана в окошке выше';};
   el('story-next').onclick=()=>introGuide(info,n,true);
 }
 function introGuide(info:SceneGameInfo,n:number,fromStory:boolean){
@@ -157,7 +174,7 @@ async function ensureEngine(){
 async function start(info:GameInfo,n:number){
   if(info.standalone){silence();location.href=base+info.standalone;return;}
   if(!isLevelUnlocked(info.id,n))n=nextLevel(info.id);
-  current=info;level=n;won=false;hintStep=0;const token=++runToken;
+  current=info;level=n;won=false;const token=++runToken;
   silence();hideModal();
   el('completion').classList.add('hidden');el('play-tools').classList.remove('hidden');
   el('home').classList.add('hidden');el('play').classList.remove('hidden');
@@ -165,7 +182,7 @@ async function start(info:GameInfo,n:number){
   el('hero-name').textContent='В ГОСТЯХ У '+({Vinch:'ВИНЧА',Newt:'НЬЮТА',Jays:'ДЖЕЙС',Aris:'АРИСА',Ren:'РЭНА'}[info.hero]);
   el('play-title').textContent=info.title;
   el('round-count').textContent='Задание '+(n+1)+' из '+info.levels;
-  el('stage-caption').textContent=ageMode==='together'?'Взрослому · '+ADULT_PROMPT[info.id]:GUIDES[info.id].stages[n];
+  el('stage-caption').textContent=ageMode==='together'?'Играем вместе':GUIDES[info.id].stages[n];
   el('round-dots').innerHTML=Array.from({length:info.levels},(_,i)=>'<span class="'+(i===n?'active':save.completed[info.id]?.includes(i)?'done':'')+'"></span>').join('');
   el('instruction').textContent=info.action;
   el('feedback').textContent='';el('feedback').dataset.kind='info';
@@ -173,11 +190,11 @@ async function start(info:GameInfo,n:number){
   try{
     const e=await ensureEngine();if(token!==runToken)return;
     await e.play(info,n,ageMode,{
-      instruction(text){if(token!==runToken)return;el('instruction').textContent=text;el('loading').classList.add('hidden');},
-      feedback(text,kind='info'){if(token!==runToken)return;el('feedback').textContent=text;el('feedback').dataset.kind=kind;if(kind==='try'||kind==='good')silence();if(kind==='try')tone('try');else if(kind==='good'){tone('good');hintStep=0;}},
-      listen(text){if(token!==runToken)return;say(text);el('feedback').textContent=text;el('feedback').dataset.kind='info';},
-      numberQuestion(expression,accept){if(token===runToken)numberQuestion(expression,accept);},
-      narrate(text,id){if(token===runToken)void narrate(text,id);},
+      instruction(text){if(token!==runToken)return;el('feedback').textContent='';el('instruction').textContent=text;el('loading').classList.add('hidden');},
+      feedback(text,kind='info'){if(token!==runToken)return;el('feedback').textContent=text;el('feedback').dataset.kind=kind;if(kind==='try'||kind==='good')silence();if(kind==='try')tone('try');else if(kind==='good')tone('good');},
+      listen(text){if(token!==runToken)return;enableSound();say(text);el('feedback').textContent=text;el('feedback').dataset.kind='info';},
+      numberQuestion(problem,accept){if(token===runToken)numberQuestion(problem,accept);},
+      narrate(text,id,requested){if(token!==runToken)return;if(requested)enableSound();void narrate(text,id);},
       clockPreview(minutes){
         if(token!==runToken)return;
         showModal('<h2 id="dialog-title">Рассмотри часы</h2>'+clockFace(minutes)+'<p>Фиолетовая короткая стрелка — часы.<br>Голубая длинная — минуты.</p><button id="clock-resume" class="primary">Вернуться к встречам</button>',hideModal);
@@ -218,15 +235,7 @@ el('back-home').onclick=()=>{tone();location.hash='';};
 el('rotate-home').onclick=()=>{location.hash='';};
 function hint(){
   if(won||!current)return;tone();
-  if(ageMode==='together'){
-    engine?.hint();return;
-  }
-  if(hintStep<2){
-    let text=HINTS[current.id][hintStep++];
-    if(current.id==='alarms')text=guideForLevel('alarms',level)[hintStep-1];
-    if(current.id==='proofreading'&&hintStep===1)text='Сравни надпись с образцом: '+proofreadingLesson(level).target+'.';
-    el('feedback').textContent=text;el('feedback').dataset.kind='info';
-  }else engine?.hint();
+  engine?.hint();
 }
 el('hint').onclick=hint;
 el('how-to').onclick=()=>{
@@ -245,9 +254,9 @@ el('restart').onclick=()=>{
   el('keep-playing').onclick=hideModal;el('confirm-restart').onclick=()=>void start(info,n);
 };
 el('read-aloud').onclick=()=>{
-  if(!say((won?el('feedback'):el('instruction')).textContent??'')){
-    el('feedback').textContent=save.sound?'На этом устройстве задание можно прочитать на экране.':'Включи звук кнопкой вверху, чтобы услышать задание.';
-  }
+  enableSound();
+  const text=el('feedback').textContent||el('instruction').textContent;
+  if(text)say(text);
 };
 el('round-count').onclick=()=>{
   if(!current)return;

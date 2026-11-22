@@ -20,11 +20,11 @@ const create:RoundFactory=c=>{
   function choose(i:number){
     if(solved||done[i])return;selected=i;render();
     const problem=lesson.problems[i];
-    c.hooks.numberQuestion(problem.expression,answer=>{
+    c.hooks.numberQuestion(problem,answer=>{
       if(answer!==problem.answer){c.hooks.feedback(counting?'Посчитай точки ещё раз. Касайся пальцем каждой по очереди.':problem.operation==='+'?'Начни с '+problem.a+' и прибавь '+problem.b+'. Попробуй ещё.':'Начни с '+problem.a+' и отними '+problem.b+'. Попробуй ещё.','try');return false;}
       done[i]=true;highlight=-1;selected=-1;
       if(done.every(Boolean)){solved=true;render();c.hooks.win(counting?'Ты посчитал точки и раскрасил робота!':'Рисунок раскрашен! Все примеры решены.');}
-      else{render();c.hooks.feedback('Верно: '+problem.expression+' = '+answer+'. Область раскрасилась!','good');}
+      else{render();c.hooks.feedback(counting?'Верно! Эта часть раскрасилась.':'Верно: '+problem.expression+' = '+answer+'. Область раскрасилась!','good');}
       return true;
     });
   }
@@ -66,6 +66,6 @@ const create:RoundFactory=c=>{
     label(c,360,h*.94,solved?'ЦВЕТНОЕ ОТКРЫТИЕ ГОТОВО!':'Выбери белую область · '+done.filter(Boolean).length+' / '+lesson.count,27,{color:'#7f8da4'});
   }
   c.hooks.instruction(counting?'Коснись белой части робота. Посчитай точки и выбери число.':'Коснись белой области, реши пример и введи ответ — появится цвет.');
-  return {render,hasProgress:()=>done.some(Boolean),hint(){highlight=done.findIndex(v=>!v);if(highlight>=0){render();const p=lesson.problems[highlight];c.hooks.feedback(counting?'Открой выделенную часть. Посчитай точки вместе со взрослым.':'В выделенной области '+p.expression+' = '+p.answer+'. Коснись её и набери ответ.');}},inspect:()=>({...lesson,done,selected,highlight,solved})};
+  return {render,hasProgress:()=>done.some(Boolean),hint(){highlight=done.findIndex(v=>!v);if(highlight>=0){render();c.hooks.feedback(counting?'Открой выделенную часть. Посчитай точки вместе со взрослым.':'Коснись выделенной части. Если трудно считать в уме, нажми «Показать на точках».');}},inspect:()=>({...lesson,done,selected,highlight,solved})};
 };
 export default create;

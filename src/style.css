@@ -69,3 +69,22 @@
   .welcome p {max-width:58%}
   .welcome-hero {width:37%;right:0}
 }
+
+.adult-cue {margin:0 0 12px;padding:0;border-radius:14px;background:#edf3fc;color:#385678;text-align:left;font-size:15px;line-height:1.4}
+.adult-cue summary {cursor:pointer;font-weight:600;padding:10px 12px}
+.dialog .adult-cue p {margin:0;padding:0 12px 12px;font-size:15px;line-height:1.45}
+.feedback {height:auto;min-height:44px;font-size:14px;line-height:1.35;color:#435e79}
+@media(max-height:700px){.feedback{min-height:40px;font-size:13px}}
+
+.counting-dots {display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px}
+.count-dot {width:44px;height:44px;padding:0;border:3px solid #4462a0;background:#526fae;color:white;border-radius:50%;font-size:22px;font-weight:bold;cursor:pointer}
+.count-dot:disabled {background:#e2f3ed;color:#295f4d;border-color:#739c8b;opacity:1}
+.math-help {margin:0 0 12px;border-radius:12px;background:#edf3fb;color:#395776;font-size:15px}
+.math-help summary {padding:12px;cursor:pointer}
+#dot-model {padding:0 12px 10px}
+.model-dots {display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;margin-bottom:6px}
+.model-dots i {display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:#5073ac}
+.model-dots .extra {background:#f5cf81;border:2px solid #96702f}
+.model-dots .removed {background:white;border:1px solid #a08a98;color:#77526a;font:700 14px/1 Arial}
+.model-dots .removed::after {content:"×"}
+@media(max-height:700px){.math-help~.number-pad{gap:6px}.math-help~.number-pad button{min-height:44px}.number-expression{margin:6px 0}.dialog .number-note{min-height:0;margin:6px 0 10px}}

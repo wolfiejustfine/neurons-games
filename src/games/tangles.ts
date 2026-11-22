@@ -6,6 +6,8 @@ const COLORS=['#d4a94e','#74abc6','#b090cf','#84b89b'];
 const create:RoundFactory=(c)=>{
   const count=c.mode==='together'?(c.level<4?1:2):WIRE_COUNTS[c.level];
   let active=0,progress=0,tracing=false,solved=false,busy=false,showHint=false,last:{x:number;y:number}|null=null;
+  const ringsVisible=()=>c.mode==='together'||showHint;
+  const nextIndex=()=>Math.min(100,progress+12);
   function paths(){
     return Array.from({length:count},(_,wire)=>Array.from({length:101},(_,i)=>{
       const t=i/100,start=(wire+.7)/(count+.4),end=(count-wire-.3)/(count+.4);
@@ -34,9 +36,14 @@ const create:RoundFactory=(c)=>{
         g.lineStyle(5,0xffffff).strokeCircle(start.x,start.y,29);label(c,start.x,start.y,String(wire+1),25,{color:'#fff',fontStyle:'bold'});
         const p=points[progress];g.fillStyle(0xffffff).fillCircle(p.x,p.y,12);
         c.controls.push({id:'wire-start',x:p.x,y:p.y,width:66,height:66});
+        if(ringsVisible()&&progress<98){
+          const ring=points[nextIndex()];
+          g.fillStyle(0xfff7db).fillCircle(ring.x,ring.y,21).lineStyle(5,0x8a631f).strokeCircle(ring.x,ring.y,21);
+          c.controls.push({id:'wire-next',x:ring.x,y:ring.y,width:72,height:72});
+        }
       }
     });
-    label(c,360,h*.91,solved?'Каждый провод доведён до своего разъёма!':progress>0?'Продолжай по яркому проводу от белой точки':'Начни у белой точки слева',26,{color:'#8c95ac'});
+    label(c,360,h*.91,solved?'Каждый провод доведён до своего разъёма!':ringsVisible()?'Нажми на кружок или веди от белой точки':progress>0?'Продолжай по яркому проводу от белой точки':'Начни у белой точки слева',26,{color:'#8c95ac'});
   }
   function advance(p:{x:number;y:number}){
     if(!tracing||busy||solved)return;
@@ -57,7 +64,11 @@ const create:RoundFactory=(c)=>{
   }
   const down=(p:Phaser.Input.Pointer)=>{
     if(busy||solved)return;
-    tracing=distance(p,paths()[active][progress])<45;last={x:p.x,y:p.y};if(tracing)advance(p);else c.hooks.feedback('Коснись белой точки на выделенном проводе.');
+    const points=paths()[active],next=points[nextIndex()];
+    if(ringsVisible()&&distance(p,next)<38&&distance(p,next)<distance(p,points[progress])){
+      tracing=true;advance(next);tracing=false;last=null;return;
+    }
+    tracing=distance(p,points[progress])<45;last={x:p.x,y:p.y};if(tracing)advance(p);else c.hooks.feedback(ringsVisible()?'Коснись кружка на ярком проводе.':'Коснись белой точки на выделенном проводе.');
   };
   const move=(p:Phaser.Input.Pointer)=>{
     if(!p.isDown||!tracing)return;
@@ -67,7 +78,7 @@ const create:RoundFactory=(c)=>{
   };
   const up=()=>{tracing=false;last=null;};
   c.scene.input.on('pointerdown',down);c.scene.input.on('pointermove',move);c.scene.input.on('pointerup',up);c.scene.input.on('gameout',up);
-  c.hooks.instruction('Проследи выделенный провод от белой точки до разъёма справа.');
-  return {render,hasProgress:()=>active>0||progress>0,hint(){showHint=true;render();c.hooks.feedback('Белые точки показывают нужный провод. Веди палец медленно.');},dispose(){c.scene.input.off('pointerdown',down);c.scene.input.off('pointermove',move);c.scene.input.off('pointerup',up);c.scene.input.off('gameout',up);},inspect:()=>({count,active,progress,solved,busy,paths:paths()})};
+  c.hooks.instruction(c.mode==='together'?'Нажимай на кружки вдоль яркого провода. Можно и вести пальцем.':'Проследи выделенный провод от белой точки до разъёма справа.');
+  return {render,hasProgress:()=>active>0||progress>0,hint(){showHint=true;render();c.hooks.feedback('Нажми на обведённый кружок. Следующий появится дальше по тому же проводу.');},dispose(){c.scene.input.off('pointerdown',down);c.scene.input.off('pointermove',move);c.scene.input.off('pointerup',up);c.scene.input.off('gameout',up);},inspect:()=>({count,active,progress,solved,busy,paths:paths()})};
 };
 export default create;

@@ -11,8 +11,8 @@ const IDLE_HINT_MS = 9000;
 // What the hero says after a run, by star count.
 const SAY = {
   3: ['Класс! Ты супер-быстрый!', 'Вот это скорость!', 'Отлично! Так держать!'],
-  2: ['Хорошо! Совсем чуть-чуть до трёх звёзд!', 'Неплохо! Попробуем ещё быстрее?'],
-  1: ['Ничего страшного! Давай ещё раз, получится!', 'Смотри внимательно, и всё выйдет!'],
+  2: ['Ты нашёл все клетки!', 'Вся таблица пройдена!'],
+  1: ['Ты нашёл последнюю клетку!', 'Все клетки найдены!'],
 };
 const pick = (a) => a[Math.floor(Math.random() * a.length)];
 
@@ -351,7 +351,7 @@ export default class Game extends Phaser.Scene {
     panel.setDisplaySize(680, 500);
     const ph = 500;
 
-    const title = stars === 3 ? 'Отлично!' : stars === 2 ? 'Хорошо!' : 'Попробуй ещё!';
+    const title = stars === 3 ? 'Отлично!' : stars === 2 ? 'Хорошо!' : 'Таблица пройдена!';
     const tcol = stars === 3 ? '#e8890c' : stars === 2 ? '#3a7be0' : '#7a63d6';
     const t1 = txt(this, 0, -95, title, 54, { color: tcol, sw: 0, shadow: false });
     const t2 = txt(this, 0, -8, fmtTime(time) + ' с', 84, { color: C.ink, sw: 0, shadow: false });
@@ -430,7 +430,7 @@ export default class Game extends Phaser.Scene {
   // The hero peeks in at the bottom and reacts to the result.
   heroReacts({ stars, errors, isRecord, streakUp }) {
     let line = pick(SAY[stars]);
-    if (errors > this.info.size * 2) line = 'Не торопись, смотри внимательно!';
+    if (errors > this.info.size * 2) line = 'Ты нашёл все клетки. Можно идти дальше!';
     else if (streakUp) line = 'Серия продолжается! Жду тебя завтра!';
     else if (errors === 0 && stars === 3) line = 'Ни одной ошибки! Ты мастер!';
     else if (isRecord) line = 'Новый рекорд! Ура!';

@@ -4,7 +4,7 @@ const defs='<defs><linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop st
 const shape=(d,fill='body')=>'<path d="'+d+'" fill="url(#'+fill+')" stroke="#9b865d" stroke-width="5" stroke-linejoin="round"/>';
 const assets={};
 for(let i=0;i<4;i++){
-  const head=i===2?'<rect x="26" y="22" width="68" height="69" rx="11" fill="url(#body)" stroke="#ba8f4c" stroke-width="5"/>':i===3?'<ellipse cx="60" cy="60" rx="25" ry="43" fill="url(#body)" stroke="#ba8f4c" stroke-width="5"/>':'<circle cx="60" cy="60" r="36" fill="url(#body)" stroke="#ba8f4c" stroke-width="5"/>';
+  const head=i===1?shape('M60 12L107 82H17Z'):i===2?'<rect x="26" y="22" width="68" height="69" rx="11" fill="url(#body)" stroke="#ba8f4c" stroke-width="5"/>':i===3?'<ellipse cx="60" cy="60" rx="25" ry="43" fill="url(#body)" stroke="#ba8f4c" stroke-width="5"/>':'<circle cx="60" cy="60" r="36" fill="url(#body)" stroke="#ba8f4c" stroke-width="5"/>';
   const teeth=i===1?'M68 87L148 169L172 145L151 124L139 136L124 120L136 108L118 90L106 102L91 87Z':'M68 87L148 169L172 145L154 127L141 140L116 114L128 102L108 82L95 96Z';
   assets['shadow-key-'+i]=head+shape(teeth);
   const left=i===1,body=i===2?'M53 54H133L125 162H61Z':i===3?'M44 83H139L129 160H54Z':'M44 67H139L129 160H54Z';
@@ -17,8 +17,8 @@ for(let i=0;i<4;i++){
     'M79 24H121V42H113V81L142 103L174 77L184 88L152 126L165 153Q175 177 144 178H56Q25 177 35 153L87 81V42H79Z',
   ][i];
   assets['shadow-flask-'+i]=shape(flask,'glass');
-  const nose=i===1?'M100 19Q69 23 65 57':'M100 18Q77 35 65 57';
-  const rocketBody=nose+'L65 144L80 165H120L135 144V57Q125 35 100 '+(i===1?'19':'18')+'Z';
+  const nose=i===1?'M65 57V38Q65 27 76 27H124Q135 27 135 38V57':'M65 57Q77 35 100 18Q125 35 135 57';
+  const rocketBody=nose+'V144L120 165H80L65 144Z';
   const fins=i===2?'M65 105L32 126L27 165L70 145M135 105L168 126L173 165L130 145':i===3?'M65 105Q24 124 41 171L80 149M135 105Q176 124 159 171L120 149':'M65 105L35 160L70 145M135 105L165 160L130 145';
   assets['shadow-rocket-'+i]=shape(fins,'purple')+shape(rocketBody,'glass')+'<circle cx="100" cy="87" r="19" fill="#fff4c5" stroke="#9b865d" stroke-width="5"/>';
 }

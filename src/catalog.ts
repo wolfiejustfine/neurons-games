@@ -27,6 +27,7 @@ export const GAMES: GameInfo[] = [
 ];
 export function gameById(id:string,mode:AgeMode='solo'):GameInfo|undefined {
   const game=GAMES.find(g=>g.id===id);
+  if(mode==='together'&&game?.id==='math-coloring')return {...game,short:'Считай точки и раскрашивай',story:'Джейс нарисовала робота. Помоги посчитать точки, и рисунок станет цветным!',action:'Коснись части робота, посчитай точки и нажми число.'};
   if(mode==='together' && game?.standalone){
     const {standalone, ...details}=game;
     return {...details, levels:8, short:'Найди числа по образцу', story:'Винч разложил карточки с числами. Помоги ему найти их по порядку!', action:'Посмотри на число вверху. Найди такое же на поле.'};

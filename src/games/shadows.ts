@@ -6,6 +6,15 @@ const create:RoundFactory=(c)=>{
   let part=0,question=shadowLesson(c.level,part,c.mode),solved=false,itemSolved=false,hinted=false,wrong:string[]=[];
   const count=(c.mode==='together'?TOGETHER_SHADOW_ROUNDS:SHADOW_ROUNDS)[c.level];
   const name=(key:string)=>PROP_NAMES[key.startsWith('shadow-')?key.split('-')[1]:key];
+  function compareEdges(){
+    switch(question.family){
+      case 'key': return 'Сравни зубчики ключей и форму верхней части.';
+      case 'cup': return 'Посмотри, с какой стороны ручка и есть ли носик.';
+      case 'rocket': return 'Сравни нос ракеты и форму крыльев.';
+      case 'flask': return 'Сравни дно колб и выступы по бокам.';
+      default: return 'Обведи глазами край тени. Найди картинку с таким же краем.';
+    }
+  }
   function next(){
     part++;question=shadowLesson(c.level,part,c.mode);itemSolved=false;hinted=false;wrong=[];
     render();c.hooks.feedback('Новая тень. Сравни детали.');
@@ -31,11 +40,11 @@ const create:RoundFactory=(c)=>{
           itemSolved=true;solved=part+1===count;render();confetti(c,360,h*.24);
           if(solved)c.hooks.win('Все тени узнаны! Ты внимательно сравнил детали.');
           else c.hooks.feedback('Точно! Рассмотри предмет и нажми «Следующая тень».','good');
-        }else{if(!wrong.includes(key))wrong.push(key);render();c.hooks.feedback('Похоже, но детали другие. Сравни ручку, горлышко и выступы.','try');}
+        }else{if(!wrong.includes(key))wrong.push(key);render();c.hooks.feedback(compareEdges(),'try');}
       });
     });
   }
   c.hooks.instruction(c.mode==='together'?'Посмотри на тень. Покажи предмет такой же формы.':'Найди предмет с точно такой же формой. Тень может быть немного повёрнута.');
-  return {render,hasProgress:()=>part>0||itemSolved||wrong.length>0,hint(){hinted=true;render();c.hooks.feedback('Нужный предмет подсвечен. Сравни его края с тенью.');},inspect:()=>({...question,part,count,itemSolved,solved})};
+  return {render,hasProgress:()=>part>0||itemSolved||wrong.length>0,hint(){if(itemSolved){c.hooks.feedback('Ты уже узнал предмет. Нажми «Следующая тень».');return;}hinted=true;render();c.hooks.feedback('Нужный предмет подсвечен. Сравни его края с тенью.');},inspect:()=>({...question,part,count,itemSolved,solved})};
 };
 export default create;

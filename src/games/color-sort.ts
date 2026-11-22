@@ -6,6 +6,7 @@ const SYMBOLS=['●','▲','■','★'];
 const create:RoundFactory=(c)=>{
   let tubes:Tubes=(c.mode==='together'?TOGETHER_TUBES:TUBE_LEVELS)[c.level].map((t)=>[...t]),selected:number|null=null,moves=0,solved=false;
   const history:Tubes[]=[];
+  let destination:number|null=null;
   function render(){
     c.clear();const h=c.height;
     label(c,360,h*.045,'КАЖДЫЙ ЦВЕТ — В ПОЛНУЮ ПРОБИРКУ',23,{color:'#7987a1'});
@@ -15,7 +16,8 @@ const create:RoundFactory=(c)=>{
     tubes.forEach((tube,i)=>{
       const countThisRow=Math.min(cols,tubes.length-Math.floor(i/cols)*cols);
       const x=360-(countThisRow-1)*stepX/2+(i%cols)*stepX,y=h*(rows===2?.30+Math.floor(i/cols)*.39:.45);
-      if(selected===i)panel(c,x,y,tubeW+30,tubeH+30,'#f0ebfc','#b4a4de',25);
+      if(selected===i||destination===i)panel(c,x,y,tubeW+30,tubeH+30,destination===i?'#fff6d8':'#f0ebfc',destination===i?'#b78322':'#b4a4de',25);
+      if(destination===i)label(c,x,y-tubeH/2-19,'СЮДА ↓',23,{fontStyle:'bold',color:'#88611e'});
       const g=c.scene.add.graphics();c.root.add(g);
       g.fillStyle(0xe4eef8,.65).fillRoundedRect(x-tubeW/2,y-tubeH/2,tubeW,tubeH,{tl:8,tr:8,bl:30,br:30});
       tube.forEach((color,j)=>{
@@ -29,10 +31,10 @@ const create:RoundFactory=(c)=>{
       label(c,x,y+tubeH/2+23,'№ '+(i+1)+(full?' ✓':''),23,{color:full?'#398d6e':'#9aa8bb'});
       if(!solved)target(c,'tube-'+i,x,y,tubeW+30,tubeH+20,()=>{
         if(selected===null){if(tube.length){selected=i;render();c.hooks.feedback('Теперь выбери пустую пробирку или такой же верхний цвет.');}else c.hooks.feedback('Сначала выбери пробирку с жидкостью.');return;}
-        if(selected===i){selected=null;render();return;}
+        if(selected===i){selected=null;destination=null;render();return;}
         const next=pour(tubes,selected,i);
-        if(!next){const full=tubes[i].length>=CAPACITY;selected=null;render();c.hooks.feedback(full?'Эта пробирка заполнена. Выбери другую.':'Верхние цвета разные. Выбери такой же цвет или пустую пробирку.','try');return;}
-        history.push(tubes.map((t)=>[...t]));tubes=next;selected=null;moves++;render();
+        if(!next){const full=tubes[i].length>=CAPACITY;render();c.hooks.feedback(full?'Эта пробирка заполнена. Выбери другую.':'Верхние цвета разные. Выбери такой же цвет или пустую пробирку.','try');return;}
+        history.push(tubes.map((t)=>[...t]));tubes=next;selected=null;destination=null;moves++;render();
         if(sortedTubes(tubes)){solved=true;render();c.hooks.win('Каждый цвет собран в полную пробирку!');}
         else if(!tubes.some((_,a)=>tubes.some((__,b)=>pour(tubes,a,b))))c.hooks.feedback('Попробуй отменить ход или начни задание ещё раз.');
         else if(tubes.every(t=>!t.length||t.every(v=>v===t[0])))c.hooks.feedback('Цвета разделены! Теперь соедини одинаковые: в полной пробирке должно быть 4 слоя.','good');
@@ -41,10 +43,10 @@ const create:RoundFactory=(c)=>{
     });
     label(c,190,h*.93,'Ходов: '+moves,27,{color:'#8d97ad'});
     if(!solved)button(c,'undo',510,h*.93,240,76,'Отменить ход',()=>{
-      const prev=history.pop();if(prev&&!solved){tubes=prev;moves=Math.max(0,moves-1);selected=null;render();}
+      const prev=history.pop();if(prev&&!solved){tubes=prev;moves=Math.max(0,moves-1);selected=null;destination=null;render();}
     });
   }
   c.hooks.instruction('Собери весь цвет в одну полную пробирку. Выбери, откуда и куда перелить.');
-  return {render,hasProgress:()=>moves>0,hint(){const path=tubeSolution(tubes);if(path?.length){selected=path[0][0];render();c.hooks.feedback('Перелей из пробирки '+(path[0][0]+1)+' в пробирку '+(path[0][1]+1)+'.');}else if(!solved)c.hooks.feedback('Отмени несколько ходов или начни задание заново.');},inspect:()=>({tubes,selected,moves,solution:tubeSolution(tubes),solved})};
+  return {render,hasProgress:()=>moves>0,hint(){const path=tubeSolution(tubes);if(path?.length){[selected,destination]=path[0];render();c.hooks.feedback('Пробирка '+(selected+1)+' уже выбрана. Коснись пробирки '+(destination+1)+' со стрелкой.');}else if(!solved)c.hooks.feedback('Отмени несколько ходов или начни задание заново.');},inspect:()=>({tubes,selected,moves,solution:tubeSolution(tubes),solved})};
 };
 export default create;

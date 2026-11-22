@@ -11,7 +11,7 @@ const create:RoundFactory=(c)=>{
   function place(prop:string,index:number){
     if(preview||solved||index<0){render();return;}
     if(placed[index]){render();return;}
-    if(order[index]!==prop){selected=null;render();c.hooks.feedback('Кажется, этот предмет стоял на другом месте. Попробуй ещё.','try');return;}
+    if(order[index]!==prop){selected=prop;render();c.hooks.feedback('Вещь всё ещё выбрана. Коснись другого места или нажми «Посмотреть ещё».','try');return;}
     placed[index]=true;selected=null;hintIndex=-1;render();
     if(placed.every(Boolean)){solved=true;render();c.hooks.win('Все вещи на своих местах!');}else c.hooks.feedback('Да, здесь его место!','good');
   }
@@ -48,6 +48,6 @@ const create:RoundFactory=(c)=>{
     }
   }
   c.hooks.instruction('Запомни, где стоят предметы. Когда будешь готов, нажми «Запомнил».');
-  return {render,hasProgress:()=>started,hint(){if(preview){c.hooks.feedback('Можно запоминать по одному: что лежит слева, в центре и справа?');return;}hintIndex=placed.findIndex((v)=>!v);if(hintIndex>=0){render();c.hooks.feedback('На выделенном месте стоял предмет: '+PROP_NAMES[order[hintIndex]]+'.');}},inspect:()=>({order,tray,preview,placed,selected,solved})};
+  return {render,hasProgress:()=>started,hint(){if(preview){c.hooks.feedback('Назови вещи слева направо. Готов? Нажми «'+(started?'Продолжить':'Запомнил!')+'».');return;}hintIndex=placed.findIndex((v)=>!v);if(hintIndex>=0){render();c.hooks.feedback('На выделенном месте стоял предмет: '+PROP_NAMES[order[hintIndex]]+'.');}},inspect:()=>({order,tray,preview,placed,selected,solved})};
 };
 export default create;

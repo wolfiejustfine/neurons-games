@@ -29,7 +29,7 @@ const create:RoundFactory=c=>{
     if(key!==riddles[active].answer){wrong.push(key);c.hooks.feedback('Эта картинка не подходит. '+riddles[active].hint,'try');render();return;}
     done[active]=true;wrong=[];highlight=null;
     if(done.every(Boolean)){solved=true;render();c.hooks.win('Все загадки разгаданы!');}
-    else{render();c.hooks.feedback('Это '+PROP_NAMES[key]+'! Крути колесо для следующей загадки.','good');}
+    else{render();c.hooks.feedback('Это '+PROP_NAMES[key]+'! Нажми «Следующая загадка».','good');}
   }
   function render(){
     c.clear();wheelLabels=[];const h=c.height,r=Math.min(150,h*.15),cy=h*.24;
@@ -46,7 +46,7 @@ const create:RoundFactory=c=>{
     const pointer=c.scene.add.graphics();c.root.add(pointer);pointer.fillStyle(0xe0ab4a).fillTriangle(343,cy-r-15,377,cy-r-15,360,cy-r+13);
     if(active===null||done[active]){
       if(!solved)button(c,'spin',360,h*.45,390,Math.min(78,h*.10),spinning?'Колесо крутится…':done.some(Boolean)?'Следующая загадка':'Крутить колесо',spin);
-    }else button(c,'listen-riddle',360,h*.45,390,Math.min(78,h*.10),'Послушать загадку',()=>c.hooks.narrate(riddles[active!].text,riddles[active!].id));
+    }else button(c,'listen-riddle',360,h*.45,390,Math.min(78,h*.10),'Послушать загадку',()=>c.hooks.narrate(riddles[active!].text,riddles[active!].id,true));
     const question=active===null?(spinning?'Скоро откроется загадка!':'Нажми «Крутить колесо». Тебя ждут загадки!'):riddles[active].text;
     panel(c,360,h*.585,658,h*.16,'#fffdf8','#e8e1d6',23);
     label(c,360,h*.585,question,26,{wordWrap:{width:604},lineSpacing:7,color:'#627993'});
@@ -65,6 +65,6 @@ const create:RoundFactory=c=>{
     label(c,360,h*.975,solved?'ПОЛУЧИЛОСЬ!':active!==null&&done[active]?'Ответ найден · можно крутить дальше':'Звук можно повторить. Загадка также написана на экране.',21,{color:'#97a1b3'});
   }
   c.hooks.instruction('Крути колесо, слушай загадку и выбирай картинку-ответ.');
-  return {render,hasProgress:()=>active!==null||spinning||done.some(Boolean),hint(){if(active===null){c.hooks.feedback('Нажми «Крутить колесо», чтобы открыть загадку.');return;}if(done[active]){c.hooks.feedback('Эта загадка уже разгадана. Крути колесо дальше.');return;}highlight=riddles[active].answer;render();c.hooks.feedback(riddles[active].hint+' Подходящая картинка выделена.');},inspect:()=>({riddles,order,done,active,spinning,solved,angle,choices:active===null?[]:riddleChoices(riddles[active].answer,c.level,active,choiceCount)})};
+  return {render,hasProgress:()=>active!==null||spinning||done.some(Boolean),hint(){if(spinning){c.hooks.feedback('Колесо крутится. Дождись загадки.');return;}if(active===null){c.hooks.feedback('Нажми «Крутить колесо», чтобы открыть загадку.');return;}if(done[active]){c.hooks.feedback('Ты уже нашёл ответ. Нажми «Следующая загадка».');return;}highlight=riddles[active].answer;render();c.hooks.feedback(riddles[active].hint+' Подходящая картинка выделена.');},inspect:()=>({riddles,order,done,active,spinning,solved,angle,choices:active===null?[]:riddleChoices(riddles[active].answer,c.level,active,choiceCount)})};
 };
 export default create;
