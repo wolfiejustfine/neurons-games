@@ -5,7 +5,7 @@ import { gridLayout,drawMaze } from '../play/maze-board';
 import type { RoundFactory } from '../play/types';
 import type Phaser from 'phaser';
 const create:RoundFactory=(c)=>{
-  const maze=makeMaze(c.level,23),count=SORT_COUNTS[c.level];
+  const maze=makeMaze(c.level,23,c.mode==='together'?5:7),count=c.mode==='together'?(c.level<2?1:2):SORT_COUNTS[c.level];
   const heroStart=neighbors(maze,maze.start)[0];
   const available=shuffled(maze.cells.map((v,i)=>v?i:-1).filter((i)=>i>=0&&i!==maze.start&&i!==maze.end&&i!==heroStart),random(389+c.level));
   const items=available.slice(0,count).map((at,i)=>({at,kind:i%2,done:false,picked:false}));

@@ -4,12 +4,12 @@ import type { RoundFactory } from '../play/types';
 import type Phaser from 'phaser';
 const COLORS=['#d4a94e','#74abc6','#b090cf','#84b89b'];
 const create:RoundFactory=(c)=>{
-  const count=WIRE_COUNTS[c.level];
+  const count=c.mode==='together'?(c.level<4?1:2):WIRE_COUNTS[c.level];
   let active=0,progress=0,tracing=false,solved=false,busy=false,showHint=false,last:{x:number;y:number}|null=null;
   function paths(){
     return Array.from({length:count},(_,wire)=>Array.from({length:101},(_,i)=>{
       const t=i/100,start=(wire+.7)/(count+.4),end=(count-wire-.3)/(count+.4);
-      const middle=Math.sin(t*Math.PI*2+(wire%2?Math.PI:0))*(.10+c.level*.005);
+      const middle=Math.sin(t*Math.PI*2+(wire%2?Math.PI:0))*(c.mode==='together'?.025+c.level*.008:.10+c.level*.005);
       return {x:85+550*t,y:c.height*(.16+.63*(start*(1-t)+end*t+middle*Math.sin(t*Math.PI)))};
     }));
   }
@@ -44,7 +44,7 @@ const create:RoundFactory=(c)=>{
     for(let i=Math.max(0,progress-2);i<=Math.min(100,progress+12);i++){
       const d=distance(p,points[i]);if(d<bestD){bestD=d;best=i;}
     }
-    if(bestD>34){
+    if(bestD>(c.mode==='together'?49:34)){
       tracing=false;
       const otherWire=paths().some((line,wire)=>wire>active&&line.some(point=>distance(p,point)<28));
       c.hooks.feedback(otherWire?'Ты перешёл на другой провод. Вернись к белой точке и продолжай по яркому.':'Палец вышел за край провода. Продолжи от белой точки — пройденный путь сохранён.');return;

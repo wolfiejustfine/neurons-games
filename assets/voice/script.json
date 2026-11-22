@@ -45,6 +45,26 @@
       ]
     },
     {
+      "id": "guide-together-shadows-01",
+      "filename": "guide-together-shadows-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Тени в лаборатории",
+      "voice": "narrator-ru",
+      "text": "Рассмотрите тень вместе. Покажи картинку такой же формы. Если появится кнопка «Следующая тень», нажми её.",
+      "sha256": "8ccb13182e02e55ff6105a0942db67f4cb0f9f88f44c3a505cd9d55fe26d4acd",
+      "uses": [
+        "guide-together-shadows-01",
+        "guide-together-shadows-02",
+        "guide-together-shadows-03",
+        "guide-together-shadows-04",
+        "guide-together-shadows-05",
+        "guide-together-shadows-06",
+        "guide-together-shadows-07",
+        "guide-together-shadows-08"
+      ]
+    },
+    {
       "id": "hint-shadows-1",
       "filename": "hint-shadows-1.mp3",
       "priority": 2,
@@ -68,6 +88,19 @@
       "sha256": "7ae3fb09628d301c653d30c4a797e0e5ae2cd962c54ec21c55c5251ec3c7b986",
       "uses": [
         "hint-shadows-2"
+      ]
+    },
+    {
+      "id": "task-together-shadows-1",
+      "filename": "task-together-shadows-1.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Тени в лаборатории",
+      "voice": "narrator-ru",
+      "text": "Посмотри на тень. Покажи предмет такой же формы.",
+      "sha256": "11080e9ab5d7f47ae0899c000c5b2dfd8bab4299e559869e05cb059d3c0daed1",
+      "uses": [
+        "task-together-shadows-1"
       ]
     },
     {
@@ -117,6 +150,26 @@
       ]
     },
     {
+      "id": "guide-together-anagrams-01",
+      "filename": "guide-together-anagrams-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Буквы на ветру",
+      "voice": "narrator-ru",
+      "text": "Попроси взрослого назвать картинку. Выбери букву внизу. Положи её на такую же букву в клеточке.",
+      "sha256": "09eae8b93912303eac7c2a0415b8c6c67e85a23ea79031c00d43ac73d700d845",
+      "uses": [
+        "guide-together-anagrams-01",
+        "guide-together-anagrams-02",
+        "guide-together-anagrams-03",
+        "guide-together-anagrams-04",
+        "guide-together-anagrams-05",
+        "guide-together-anagrams-06",
+        "guide-together-anagrams-07",
+        "guide-together-anagrams-08"
+      ]
+    },
+    {
       "id": "hint-anagrams-1",
       "filename": "hint-anagrams-1.mp3",
       "priority": 2,
@@ -140,6 +193,19 @@
       "sha256": "99d245ef59292793f376afda8d484a1be6556949456e0964f39e20a4adc0cde5",
       "uses": [
         "hint-anagrams-2"
+      ]
+    },
+    {
+      "id": "task-together-anagrams-1",
+      "filename": "task-together-anagrams-1.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Буквы на ветру",
+      "voice": "narrator-ru",
+      "text": "Положи каждую букву на такую же букву в клеточке.",
+      "sha256": "46d5a89e89d214f922fb80d1cbd3abd63be2ac9e836255506e4161936d2bd088",
+      "uses": [
+        "task-together-anagrams-1"
       ]
     },
     {
@@ -186,6 +252,26 @@
         "guide-ciphers-06",
         "guide-ciphers-07",
         "guide-ciphers-08"
+      ]
+    },
+    {
+      "id": "guide-together-ciphers-01",
+      "filename": "guide-together-ciphers-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Секретное послание",
+      "voice": "narrator-ru",
+      "text": "Выбери значок в таблице. Найди такой же значок в записке и коснись его. Когда откроются буквы, попроси взрослого прочесть слово.",
+      "sha256": "405e1a89e8e013d73d59ebf1809e32fb78155d6861f90558bcc86db07a6eb2f2",
+      "uses": [
+        "guide-together-ciphers-01",
+        "guide-together-ciphers-02",
+        "guide-together-ciphers-03",
+        "guide-together-ciphers-04",
+        "guide-together-ciphers-05",
+        "guide-together-ciphers-06",
+        "guide-together-ciphers-07",
+        "guide-together-ciphers-08"
       ]
     },
     {
@@ -250,14 +336,202 @@
       "text": "Сравни каждую надпись с образцом: СТОП. Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть». Коснись надписи — линия появится сама. Проверь все знаки.",
       "sha256": "75685768d1cf4c8a3c485fed868f8c3d081ce97ab17f0be42195a429ddb383e7",
       "uses": [
-        "guide-proofreading-01",
-        "guide-proofreading-02",
-        "guide-proofreading-03",
-        "guide-proofreading-04",
-        "guide-proofreading-05",
-        "guide-proofreading-06",
-        "guide-proofreading-07",
+        "guide-proofreading-01"
+      ]
+    },
+    {
+      "id": "guide-proofreading-02",
+      "filename": "guide-proofreading-02.mp3",
+      "priority": 1,
+      "kind": "Правила",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Сравни каждую надпись с образцом: МОСТ. Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть». Коснись надписи — линия появится сама. Проверь все знаки.",
+      "sha256": "5708e8f238f843fa561fb546e4c1fcd9ccf397bf2b6397b54e7d068cbcef5087",
+      "uses": [
+        "guide-proofreading-02"
+      ]
+    },
+    {
+      "id": "guide-proofreading-03",
+      "filename": "guide-proofreading-03.mp3",
+      "priority": 1,
+      "kind": "Правила",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Сравни каждую надпись с образцом: ПАРК. Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть». Коснись надписи — линия появится сама. Проверь все знаки.",
+      "sha256": "25da28783f6d0f630e8650803f6bf6c191b2d1d2b0331bbff07dff65f0d4c80d",
+      "uses": [
+        "guide-proofreading-03"
+      ]
+    },
+    {
+      "id": "guide-proofreading-04",
+      "filename": "guide-proofreading-04.mp3",
+      "priority": 1,
+      "kind": "Правила",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Сравни каждую надпись с образцом: ШКОЛА. Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть». Коснись надписи — линия появится сама. Проверь все знаки.",
+      "sha256": "deab8d31aa09bd290284cca96af6537581cf65f9bb5a01067ff62111d697554d",
+      "uses": [
+        "guide-proofreading-04"
+      ]
+    },
+    {
+      "id": "guide-proofreading-05",
+      "filename": "guide-proofreading-05.mp3",
+      "priority": 1,
+      "kind": "Правила",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Сравни каждую надпись с образцом: ЛИМОН. Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть». Коснись надписи — линия появится сама. Проверь все знаки.",
+      "sha256": "0c658f19c95c9d97141ecdf7e97d30517722c1889a17ba0764ff0b9365f0d5bd",
+      "uses": [
+        "guide-proofreading-05"
+      ]
+    },
+    {
+      "id": "guide-proofreading-06",
+      "filename": "guide-proofreading-06.mp3",
+      "priority": 1,
+      "kind": "Правила",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Сравни каждую надпись с образцом: РАКЕТА. Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть». Коснись надписи — линия появится сама. Проверь все знаки.",
+      "sha256": "a62b93f99c3ea39dd40a83d92aa6ca3d2d33dd9b8ad380180d291500de955287",
+      "uses": [
+        "guide-proofreading-06"
+      ]
+    },
+    {
+      "id": "guide-proofreading-07",
+      "filename": "guide-proofreading-07.mp3",
+      "priority": 1,
+      "kind": "Правила",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Сравни каждую надпись с образцом: МОЛОКО. Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть». Коснись надписи — линия появится сама. Проверь все знаки.",
+      "sha256": "86746919d11084229971d587b8c49194f5b4d1fb686e7471e7600f258f77dbb6",
+      "uses": [
+        "guide-proofreading-07"
+      ]
+    },
+    {
+      "id": "guide-proofreading-08",
+      "filename": "guide-proofreading-08.mp3",
+      "priority": 1,
+      "kind": "Правила",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Сравни каждую надпись с образцом: СВЕТОФОР. Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть». Коснись надписи — линия появится сама. Проверь все знаки.",
+      "sha256": "40f186272e1d55b378100407032d403b942a47865cd69eb219f9b39167f970d2",
+      "uses": [
         "guide-proofreading-08"
+      ]
+    },
+    {
+      "id": "guide-together-proofreading-01",
+      "filename": "guide-together-proofreading-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Посмотрите на слово «ДОМ». Взрослый может назвать буквы. Найди точно такую же надпись и коснись её. Отметь все одинаковые с образцом надписи.",
+      "sha256": "16f8ec07f805f5d842b9ec82f3028dd31b59c6447d8c09ab9551bfccfa134149",
+      "uses": [
+        "guide-together-proofreading-01"
+      ]
+    },
+    {
+      "id": "guide-together-proofreading-02",
+      "filename": "guide-together-proofreading-02.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Посмотрите на слово «КОТ». Взрослый может назвать буквы. Найди точно такую же надпись и коснись её. Отметь все одинаковые с образцом надписи.",
+      "sha256": "54888052c2911962b307de712ae5566d085be88bf2714bc0fc45235c6dcc38d4",
+      "uses": [
+        "guide-together-proofreading-02"
+      ]
+    },
+    {
+      "id": "guide-together-proofreading-03",
+      "filename": "guide-together-proofreading-03.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Посмотрите на слово «СЫР». Взрослый может назвать буквы. Найди точно такую же надпись и коснись её. Отметь все одинаковые с образцом надписи.",
+      "sha256": "eb76e0ec6a15d4b6565b104c3193631d657db96706de1ad62992588eb3c9f5ca",
+      "uses": [
+        "guide-together-proofreading-03"
+      ]
+    },
+    {
+      "id": "guide-together-proofreading-04",
+      "filename": "guide-together-proofreading-04.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Посмотрите на слово «МЯЧ». Взрослый может назвать буквы. Найди точно такую же надпись и коснись её. Отметь все одинаковые с образцом надписи.",
+      "sha256": "0815f6e1d7b407cf048779ec2e06dff92257c287d8714be74c3ccb067b00fedb",
+      "uses": [
+        "guide-together-proofreading-04"
+      ]
+    },
+    {
+      "id": "guide-together-proofreading-05",
+      "filename": "guide-together-proofreading-05.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Посмотрите на слово «ЛИСА». Взрослый может назвать буквы. Найди точно такую же надпись и коснись её. Отметь все одинаковые с образцом надписи.",
+      "sha256": "45dfee37abf6f0c9907852018cb24dd1fefc58c4e88f2164b5a2cde2d24ca5a1",
+      "uses": [
+        "guide-together-proofreading-05"
+      ]
+    },
+    {
+      "id": "guide-together-proofreading-06",
+      "filename": "guide-together-proofreading-06.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Посмотрите на слово «ЛУНА». Взрослый может назвать буквы. Найди точно такую же надпись и коснись её. Отметь все одинаковые с образцом надписи.",
+      "sha256": "57940e1a1d2d0b765211dbc5ea2b0b64490b9e14a9c9f620fcd6f652bafb80a6",
+      "uses": [
+        "guide-together-proofreading-06"
+      ]
+    },
+    {
+      "id": "guide-together-proofreading-07",
+      "filename": "guide-together-proofreading-07.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Посмотрите на слово «РЫБА». Взрослый может назвать буквы. Найди точно такую же надпись и коснись её. Отметь все одинаковые с образцом надписи.",
+      "sha256": "1d40463f8e82f7f38f6fdfa345eada958662aaaf13ac5ee10d19cb4429e83f53",
+      "uses": [
+        "guide-together-proofreading-07"
+      ]
+    },
+    {
+      "id": "guide-together-proofreading-08",
+      "filename": "guide-together-proofreading-08.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Посмотрите на слово «СТОП». Взрослый может назвать буквы. Найди точно такую же надпись и коснись её. Отметь все одинаковые с образцом надписи.",
+      "sha256": "5e03394f66a866b865e79e1527c5317f1325b98e211a233a19869721b68acf40",
+      "uses": [
+        "guide-together-proofreading-08"
       ]
     },
     {
@@ -344,6 +618,26 @@
       ]
     },
     {
+      "id": "guide-together-alarms-01",
+      "filename": "guide-together-alarms-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Всё по часам",
+      "voice": "narrator-ru",
+      "text": "Рассмотрите маленькие часы рядом с героями. Выбери часы внизу. Коснись героя, у которого стрелки смотрят так же.",
+      "sha256": "be4db3e2dad1d89333d33b1edf096c1e114e6e924eb8008abd97709ecf844129",
+      "uses": [
+        "guide-together-alarms-01",
+        "guide-together-alarms-02",
+        "guide-together-alarms-03",
+        "guide-together-alarms-04",
+        "guide-together-alarms-05",
+        "guide-together-alarms-06",
+        "guide-together-alarms-07",
+        "guide-together-alarms-08"
+      ]
+    },
+    {
       "id": "hint-alarms-1",
       "filename": "hint-alarms-1.mp3",
       "priority": 2,
@@ -367,6 +661,19 @@
       "sha256": "dffc8376e16b5f659eabd2edf92b542941da0d47eeb355a1f60d77a8c18839df",
       "uses": [
         "hint-alarms-2"
+      ]
+    },
+    {
+      "id": "task-together-alarms-1",
+      "filename": "task-together-alarms-1.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Всё по часам",
+      "voice": "narrator-ru",
+      "text": "Посмотри на стрелки. Найди герою часы с такими же стрелками.",
+      "sha256": "010d9163ba8d21e350e7418eb5833a38b2ba38222b9aee0e0c72381770ddc822",
+      "uses": [
+        "task-together-alarms-1"
       ]
     },
     {
@@ -438,7 +745,15 @@
         "guide-rearrangement-05",
         "guide-rearrangement-06",
         "guide-rearrangement-07",
-        "guide-rearrangement-08"
+        "guide-rearrangement-08",
+        "guide-together-rearrangement-01",
+        "guide-together-rearrangement-02",
+        "guide-together-rearrangement-03",
+        "guide-together-rearrangement-04",
+        "guide-together-rearrangement-05",
+        "guide-together-rearrangement-06",
+        "guide-together-rearrangement-07",
+        "guide-together-rearrangement-08"
       ]
     },
     {
@@ -536,7 +851,15 @@
         "guide-color-sort-05",
         "guide-color-sort-06",
         "guide-color-sort-07",
-        "guide-color-sort-08"
+        "guide-color-sort-08",
+        "guide-together-color-sort-01",
+        "guide-together-color-sort-02",
+        "guide-together-color-sort-03",
+        "guide-together-color-sort-04",
+        "guide-together-color-sort-05",
+        "guide-together-color-sort-06",
+        "guide-together-color-sort-07",
+        "guide-together-color-sort-08"
       ]
     },
     {
@@ -612,6 +935,26 @@
       ]
     },
     {
+      "id": "guide-together-maze-codes-01",
+      "filename": "guide-together-maze-codes-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Дорожки к паролю",
+      "voice": "narrator-ru",
+      "text": "Поставь палец на белую точку. Веди её по дорожке к букве. Можно нажимать соседние клетки. Пусть взрослый назовёт найденную букву.",
+      "sha256": "cf0d671f4fab6b23785144aa323b5ef61c9e0bb4c7137e7f9c6ecfe60c92cdd2",
+      "uses": [
+        "guide-together-maze-codes-01",
+        "guide-together-maze-codes-02",
+        "guide-together-maze-codes-03",
+        "guide-together-maze-codes-04",
+        "guide-together-maze-codes-05",
+        "guide-together-maze-codes-06",
+        "guide-together-maze-codes-07",
+        "guide-together-maze-codes-08"
+      ]
+    },
+    {
       "id": "hint-maze-codes-1",
       "filename": "hint-maze-codes-1.mp3",
       "priority": 2,
@@ -680,7 +1023,15 @@
         "guide-maze-sort-05",
         "guide-maze-sort-06",
         "guide-maze-sort-07",
-        "guide-maze-sort-08"
+        "guide-maze-sort-08",
+        "guide-together-maze-sort-01",
+        "guide-together-maze-sort-02",
+        "guide-together-maze-sort-03",
+        "guide-together-maze-sort-04",
+        "guide-together-maze-sort-05",
+        "guide-together-maze-sort-06",
+        "guide-together-maze-sort-07",
+        "guide-together-maze-sort-08"
       ]
     },
     {
@@ -752,7 +1103,15 @@
         "guide-tangles-05",
         "guide-tangles-06",
         "guide-tangles-07",
-        "guide-tangles-08"
+        "guide-tangles-08",
+        "guide-together-tangles-01",
+        "guide-together-tangles-02",
+        "guide-together-tangles-03",
+        "guide-together-tangles-04",
+        "guide-together-tangles-05",
+        "guide-together-tangles-06",
+        "guide-together-tangles-07",
+        "guide-together-tangles-08"
       ]
     },
     {
@@ -824,7 +1183,15 @@
         "guide-hidden-objects-05",
         "guide-hidden-objects-06",
         "guide-hidden-objects-07",
-        "guide-hidden-objects-08"
+        "guide-hidden-objects-08",
+        "guide-together-hidden-objects-01",
+        "guide-together-hidden-objects-02",
+        "guide-together-hidden-objects-03",
+        "guide-together-hidden-objects-04",
+        "guide-together-hidden-objects-05",
+        "guide-together-hidden-objects-06",
+        "guide-together-hidden-objects-07",
+        "guide-together-hidden-objects-08"
       ]
     },
     {
@@ -900,6 +1267,26 @@
       ]
     },
     {
+      "id": "guide-together-math-coloring-01",
+      "filename": "guide-together-math-coloring-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Цветные открытия",
+      "voice": "narrator-ru",
+      "text": "Коснись белой части робота. Посчитайте точки вместе. Нажми на число, чтобы раскрасить эту часть.",
+      "sha256": "61ede66a9ca8fe7b4620120d93eb0b0b0df2bea7a7faef2f4bcc1556116e1889",
+      "uses": [
+        "guide-together-math-coloring-01",
+        "guide-together-math-coloring-02",
+        "guide-together-math-coloring-03",
+        "guide-together-math-coloring-04",
+        "guide-together-math-coloring-05",
+        "guide-together-math-coloring-06",
+        "guide-together-math-coloring-07",
+        "guide-together-math-coloring-08"
+      ]
+    },
+    {
       "id": "hint-math-coloring-1",
       "filename": "hint-math-coloring-1.mp3",
       "priority": 2,
@@ -923,6 +1310,19 @@
       "sha256": "bbaf38c972f177a63c2028a8c8d19f8cd15f5b9b73374f76354cee3284206b0d",
       "uses": [
         "hint-math-coloring-2"
+      ]
+    },
+    {
+      "id": "task-together-math-coloring-1",
+      "filename": "task-together-math-coloring-1.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Цветные открытия",
+      "voice": "narrator-ru",
+      "text": "Коснись белой части робота. Посчитай точки и выбери число.",
+      "sha256": "05060f0865390b08a4bff621cce58b09cf66a5395cd692d6da37e1220fa0213d",
+      "uses": [
+        "task-together-math-coloring-1"
       ]
     },
     {
@@ -972,6 +1372,26 @@
       ]
     },
     {
+      "id": "guide-together-riddle-wheel-01",
+      "filename": "guide-together-riddle-wheel-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Колесо загадок",
+      "voice": "narrator-ru",
+      "text": "Нажми кнопку «Крутить колесо». Послушай загадку. Взрослый может прочитать её вслух. Покажи ответ на картинке.",
+      "sha256": "46022c84cb53c76822ab60133a95fef55d6738690d444e1686597518582d8370",
+      "uses": [
+        "guide-together-riddle-wheel-01",
+        "guide-together-riddle-wheel-02",
+        "guide-together-riddle-wheel-03",
+        "guide-together-riddle-wheel-04",
+        "guide-together-riddle-wheel-05",
+        "guide-together-riddle-wheel-06",
+        "guide-together-riddle-wheel-07",
+        "guide-together-riddle-wheel-08"
+      ]
+    },
+    {
       "id": "hint-riddle-wheel-1",
       "filename": "hint-riddle-wheel-1.mp3",
       "priority": 2,
@@ -1011,6 +1431,78 @@
       ]
     },
     {
+      "id": "story-schulte",
+      "filename": "story-schulte.mp3",
+      "priority": 1,
+      "kind": "История",
+      "game": "Таблицы Шульте",
+      "voice": "narrator-ru",
+      "text": "Винч разложил карточки с числами. Помоги ему найти их по порядку!",
+      "sha256": "4db575b321581cbeebdcbb573ebcbebb9fd1ea7aed4a292cbe8d24d8224f120a",
+      "uses": [
+        "story-schulte"
+      ]
+    },
+    {
+      "id": "guide-together-schulte-01",
+      "filename": "guide-together-schulte-01.mp3",
+      "priority": 1,
+      "kind": "Правила 4–5 лет",
+      "game": "Таблицы Шульте",
+      "voice": "narrator-ru",
+      "text": "Посмотрите вместе на число вверху. Коснись такого же числа на поле. Когда образец сменится, найди следующее число.",
+      "sha256": "d6d9f2fbcb0c8bcd61b649283ce27492343bb792ea15811b1238e4e5c87e5553",
+      "uses": [
+        "guide-together-schulte-01",
+        "guide-together-schulte-02",
+        "guide-together-schulte-03",
+        "guide-together-schulte-04",
+        "guide-together-schulte-05",
+        "guide-together-schulte-06",
+        "guide-together-schulte-07",
+        "guide-together-schulte-08"
+      ]
+    },
+    {
+      "id": "hint-schulte-1",
+      "filename": "hint-schulte-1.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Таблицы Шульте",
+      "voice": "narrator-ru",
+      "text": "Посмотри на число вверху.",
+      "sha256": "c9b9775eeac476c42a70e2008fd1e496ca270bee581a6f59fd8a227bcc4b0ac7",
+      "uses": [
+        "hint-schulte-1"
+      ]
+    },
+    {
+      "id": "hint-schulte-2",
+      "filename": "hint-schulte-2.mp3",
+      "priority": 2,
+      "kind": "Подсказка",
+      "game": "Таблицы Шульте",
+      "voice": "narrator-ru",
+      "text": "Найди карточку с таким же числом.",
+      "sha256": "6c06d650bab6da2ac361543dc33f78d8505e152d9951ce9f78b4d5edec46a2f5",
+      "uses": [
+        "hint-schulte-2"
+      ]
+    },
+    {
+      "id": "task-schulte-1",
+      "filename": "task-schulte-1.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Таблицы Шульте",
+      "voice": "narrator-ru",
+      "text": "Найди на поле число, которое показано вверху.",
+      "sha256": "24b31ef5c7b2f5e42d49a9fd8834bf91af258ace4c9219422ee0c6544994e603",
+      "uses": [
+        "task-schulte-1"
+      ]
+    },
+    {
       "id": "task-proofreading-word-1",
       "filename": "task-proofreading-word-1.mp3",
       "priority": 1,
@@ -1021,6 +1513,201 @@
       "sha256": "dfc1f28e84b32c792756921573771b719fd59a6e9daffbddfefdeeec959361c3",
       "uses": [
         "task-proofreading-word-1"
+      ]
+    },
+    {
+      "id": "task-proofreading-word-2",
+      "filename": "task-proofreading-word-2.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Образец: МОСТ. Выбери кнопку и коснись надписи — линия появится сама.",
+      "sha256": "0e6b86ee27c676fdad93e7a773243a5a722ca1ae4b507fb5a30d87893243bb5d",
+      "uses": [
+        "task-proofreading-word-2"
+      ]
+    },
+    {
+      "id": "task-proofreading-word-3",
+      "filename": "task-proofreading-word-3.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Образец: ПАРК. Выбери кнопку и коснись надписи — линия появится сама.",
+      "sha256": "a2708f2fdb2c1258981d06f4a914cf81d361684cf8b4f4dec0bcfcb408ae587e",
+      "uses": [
+        "task-proofreading-word-3"
+      ]
+    },
+    {
+      "id": "task-proofreading-word-4",
+      "filename": "task-proofreading-word-4.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Образец: ШКОЛА. Выбери кнопку и коснись надписи — линия появится сама.",
+      "sha256": "e9144b069b5d2df2c253f5276558499a3c49511b4a81675bf698a08b585b5bf5",
+      "uses": [
+        "task-proofreading-word-4"
+      ]
+    },
+    {
+      "id": "task-proofreading-word-5",
+      "filename": "task-proofreading-word-5.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Образец: ЛИМОН. Выбери кнопку и коснись надписи — линия появится сама.",
+      "sha256": "d2a173c5e6c1a040663f789e2bb29d66ea372dca05b9063074a6ddf356f5182d",
+      "uses": [
+        "task-proofreading-word-5"
+      ]
+    },
+    {
+      "id": "task-proofreading-word-6",
+      "filename": "task-proofreading-word-6.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Образец: РАКЕТА. Выбери кнопку и коснись надписи — линия появится сама.",
+      "sha256": "519e8f00e98c110f69028291fb34bc9473d7dd72ea50e89a8ddc04f3f944d4fc",
+      "uses": [
+        "task-proofreading-word-6"
+      ]
+    },
+    {
+      "id": "task-proofreading-word-7",
+      "filename": "task-proofreading-word-7.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Образец: МОЛОКО. Выбери кнопку и коснись надписи — линия появится сама.",
+      "sha256": "cd3520151e2c0e85fe7415981516cdc6d3159f6ff1c7d87b36106dfeb9650e27",
+      "uses": [
+        "task-proofreading-word-7"
+      ]
+    },
+    {
+      "id": "task-proofreading-word-8",
+      "filename": "task-proofreading-word-8.mp3",
+      "priority": 1,
+      "kind": "Задание",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Образец: СВЕТОФОР. Выбери кнопку и коснись надписи — линия появится сама.",
+      "sha256": "e6b80fd7fc1a23ecdb787e654ab2ff8c1209b2cf94e8ef346d2143fd57dddf3e",
+      "uses": [
+        "task-proofreading-word-8"
+      ]
+    },
+    {
+      "id": "task-together-proofreading-word-1",
+      "filename": "task-together-proofreading-word-1.mp3",
+      "priority": 1,
+      "kind": "Задание 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Найди все надписи как на образце: ДОМ.",
+      "sha256": "62b6dd40b1376e2910bf0a2398a3daa9e54ead69af5c17eb2399190460ba78d7",
+      "uses": [
+        "task-together-proofreading-word-1"
+      ]
+    },
+    {
+      "id": "task-together-proofreading-word-2",
+      "filename": "task-together-proofreading-word-2.mp3",
+      "priority": 1,
+      "kind": "Задание 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Найди все надписи как на образце: КОТ.",
+      "sha256": "4c106180c4ea6726b2695775d7c9b3970c1a27bc9868ed4bb66e887ada13ebcf",
+      "uses": [
+        "task-together-proofreading-word-2"
+      ]
+    },
+    {
+      "id": "task-together-proofreading-word-3",
+      "filename": "task-together-proofreading-word-3.mp3",
+      "priority": 1,
+      "kind": "Задание 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Найди все надписи как на образце: СЫР.",
+      "sha256": "71746d3212f1efb4618d4562b1930287791380c9329df06fb82e3a53379114d1",
+      "uses": [
+        "task-together-proofreading-word-3"
+      ]
+    },
+    {
+      "id": "task-together-proofreading-word-4",
+      "filename": "task-together-proofreading-word-4.mp3",
+      "priority": 1,
+      "kind": "Задание 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Найди все надписи как на образце: МЯЧ.",
+      "sha256": "fbc83ad0cdd4ddf07cfe20463e2022be4d5067e9a4fb16fc7ddd5238b459c8b8",
+      "uses": [
+        "task-together-proofreading-word-4"
+      ]
+    },
+    {
+      "id": "task-together-proofreading-word-5",
+      "filename": "task-together-proofreading-word-5.mp3",
+      "priority": 1,
+      "kind": "Задание 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Найди все надписи как на образце: ЛИСА.",
+      "sha256": "ea2e4fde815a522cc5a1edb73c26ceee3c7d364af39bdc41b99e07442b62d3b3",
+      "uses": [
+        "task-together-proofreading-word-5"
+      ]
+    },
+    {
+      "id": "task-together-proofreading-word-6",
+      "filename": "task-together-proofreading-word-6.mp3",
+      "priority": 1,
+      "kind": "Задание 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Найди все надписи как на образце: ЛУНА.",
+      "sha256": "fdf1c174c96dafc3cf967fe344502f9a3382977c89f84dce9d7410436ae9b942",
+      "uses": [
+        "task-together-proofreading-word-6"
+      ]
+    },
+    {
+      "id": "task-together-proofreading-word-7",
+      "filename": "task-together-proofreading-word-7.mp3",
+      "priority": 1,
+      "kind": "Задание 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Найди все надписи как на образце: РЫБА.",
+      "sha256": "d7cbe389fb0dae95e532f805b8bf600d6862aa1834930eb6b23b802e0472b0a7",
+      "uses": [
+        "task-together-proofreading-word-7"
+      ]
+    },
+    {
+      "id": "task-together-proofreading-word-8",
+      "filename": "task-together-proofreading-word-8.mp3",
+      "priority": 1,
+      "kind": "Задание 4–5 лет",
+      "game": "Стоп, ошибка!",
+      "voice": "narrator-ru",
+      "text": "Найди все надписи как на образце: СТОП.",
+      "sha256": "c10002c82da2526039f522c6a33f59f145c08223a061176b94aa0448b1063be9",
+      "uses": [
+        "task-together-proofreading-word-8"
       ]
     },
     {

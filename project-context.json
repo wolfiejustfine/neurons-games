@@ -261,10 +261,13 @@
       "language": "TypeScript"
     },
     "games": 14,
-    "levels_per_game": "13 games × 8, Schulte × 30",
+    "levels_per_game": "Together: 14 × 8. Solo: 13 × 8 and original Schulte × 30.",
     "distribution": "static PWA",
     "primary_orientation": "portrait",
-    "total_levels": 134,
+    "total_levels": {
+      "together": 112,
+      "solo": 134
+    },
     "schulte_source": "assets/schulte-import.json"
   },
   "visual_feedback": {
@@ -306,9 +309,9 @@
     "word_pack": "assets/proofreading-content.json",
     "pending": [
       "New recordings from the user",
-      "New words and difficulty variants from Nastya",
       "Child playtests"
     ],
-    "account_access": "Do not access ElevenLabs; user creates recordings"
+    "account_access": "Do not access ElevenLabs; user creates recordings",
+    "age_content": "Two age modes and editorial word lists authorized by the user."
   }
 }

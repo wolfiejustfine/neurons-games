@@ -1,4 +1,4 @@
-import type { SceneGameId } from './catalog';
+import type { SceneGameId,AgeMode } from './catalog';
 import { clockLesson } from './learning';
 import { clockHands,formatClock } from './rules';
 import { proofreadingLesson } from './challenges';
@@ -14,7 +14,16 @@ export function clockFace(minutes:number) {
 const prop=(name:string)=>'<img src="'+import.meta.env.BASE_URL+'props/'+name+'.svg" alt="">';
 const example=(content:string,caption:string)=>'<figure class="guide-example"><div class="example-row">'+content+'</div><figcaption>'+caption+'</figcaption></figure>';
 const arrow='<span class="example-arrow" aria-hidden="true">→</span>';
-export function guideVisual(id:SceneGameId,level:number):string {
+export function guideVisual(id:SceneGameId,level:number,mode:AgeMode='solo'):string {
+  if(id==='schulte')return example('<span class="example-tile">2</span>'+arrow+'<span class="example-slot">2 ✓</span>','Посмотри на образец и найди такое же число среди карточек.');
+  if(mode==='together'){
+    if(id==='alarms')return example(clockFace(180)+arrow+clockFace(180),'У этих часов обе стрелки смотрят одинаково.');
+    if(id==='math-coloring')return example('<span class="example-tile">● ● ●</span>'+arrow+'<span class="example-slot">3</span>','Три точки. Нажми число 3.');
+    if(id==='proofreading'){
+      const sample=proofreadingLesson(level,mode).target;
+      return example('<span class="example-tile">'+sample+'</span>'+arrow+'<span class="example-slot">'+sample+' ✓</span>','У этих слов все буквы стоят на тех же местах.');
+    }
+  }
   if(id==='hidden-objects')return example(prop('book')+arrow+'<span class="example-slot">'+prop('book')+' ✓</span>','Пример: в списке есть книга. Найди такую же в комнате и коснись её. Остальные вещи трогать не нужно.');
   if(id==='math-coloring')return example('<span class="example-tile">2 + 3</span>'+arrow+'<span class="example-tile" style="background:#a7d5ee">5 ✓</span>','Пример: 2 + 3 = 5. Набери 5 и нажми зелёную галочку. Цвет с числом 5 появится на рисунке сам.');
   if(id==='riddle-wheel')return example('<span class="example-tile">Мяу?</span>'+arrow+prop('cat'),'Пример: «Кто говорит мяу?» — кот. Выбери его картинку. Загадку можно читать и слушать несколько раз.');

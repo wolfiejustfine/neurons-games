@@ -1,13 +1,19 @@
 import './style.css';
-import { GAMES, GAME_GROUPS, gameById, HERO_NAMES, type GameInfo, type SceneGameInfo } from './catalog';
-import { save, persist, complete, nextLevel, finishedCount, isLevelUnlocked } from './save';
+import { GAMES, GAME_GROUPS, gameById, HERO_NAMES, type AgeMode, type GameInfo, type SceneGameInfo } from './catalog';
+import { ageMode, selectMode, save, persist, complete, nextLevel, finishedCount, isLevelUnlocked } from './save';
 import { tone, say, silence, narrate } from './audio';
-import { GUIDES, HINTS, guideForLevel } from './learning';
+import { GUIDES, HINTS, ADULT_PROMPT, guideForLevel } from './learning';
 import { clockFace,guideVisual } from './guide-visuals';
 import { proofreadingLesson } from './challenges';
 import type { Engine } from './play/engine';
 
 const base=import.meta.env.BASE_URL;
+function modeFromUrl(){
+  const requested=new URL(location.href).searchParams.get('mode');
+  if(requested==='together'||requested==='solo')selectMode(requested);
+}
+modeFromUrl();
+const catalogGame=(id:string)=>gameById(id,ageMode);
 const app=document.querySelector<HTMLDivElement>('#app')!;
 const svg=(name:string)=>{
   const paths:Record<string,string>={
@@ -27,6 +33,7 @@ const svg=(name:string)=>{
 app.innerHTML=[
   '<main id="home" class="home">',
   '<header class="site-header"><a class="brand" href="#" aria-label="Нейроны — главная"><span class="brand-mark">н</span><span>нейроны<small>ИГРЫ МОЗГОПОЛИСА</small></span></a><button class="icon-button sound-toggle" aria-label="Выключить звук">'+svg('sound')+'</button></header>',
+  '<div class="age-switch" role="group" aria-label="Возраст и формат игры"><button data-mode="together"><strong>4–5 лет</strong><span>Со взрослым</span></button><button data-mode="solo"><strong>6–8 лет</strong><span>Самостоятельно</span></button></div>',
   '<section class="welcome"><div class="welcome-copy"><span class="eyebrow">МИР МАЛЕНЬКИХ ОТКРЫТИЙ</span><h1>Навстречу<br>открытиям!</h1><p>Помоги героям Мозгополиса.<br>Наблюдай, пробуй и находи решения.</p><button id="continue" class="primary">Начать приключение '+svg('arrow')+'</button></div><img class="welcome-hero" src="'+base+'art/Vinch.webp" alt="Винч рад встрече" fetchpriority="high"><img class="hero-cloud" src="'+base+'art/cloud.webp" alt=""><span class="floating-spark one">✦</span><span class="floating-spark two">✧</span></section>',
   '<section class="adventures"><div class="section-heading"><div><span class="eyebrow">ТВОИ ПРИКЛЮЧЕНИЯ</span><h2>Что откроем сегодня?</h2></div><span id="collection-progress" class="collection-progress"></span></div><nav class="category-nav" aria-label="Направления развития">'+GAME_GROUPS.map(g=>'<a href="#group-'+g.id+'" data-category="'+g.id+'">'+g.title+'</a>').join('')+'</nav><div id="game-grid" class="catalog-groups"></div></section>',
   '<section class="world-note"><img loading="lazy" src="'+base+'art/world.webp" alt="Парящие острова Мозгополиса"><div><span class="eyebrow">ДОБРО ПОЖАЛОВАТЬ ДОМОЙ</span><h2>Здесь живёт любопытство</h2><p>На каждом острове тебя ждёт новое открытие.</p></div></section>',
@@ -49,14 +56,17 @@ function updateSound(){
 function home(){
   runToken++;silence();engine?.stop();current=undefined;won=false;
   hideModal();el('home').classList.remove('hidden');el('play').classList.add('hidden');
-  const completeGames=GAMES.filter((g)=>finishedCount(g.id)===g.levels).length;
+  document.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mode===ageMode)));
+  updateSound();
+  const catalog=GAMES.map(g=>catalogGame(g.id)!);
+  const completeGames=catalog.filter((g)=>finishedCount(g.id)===g.levels).length;
   el('collection-progress').innerHTML=svg('star')+completeGames+' / '+GAMES.length;
   const card=(g:GameInfo)=>{
-    const i=GAMES.indexOf(g);
+    const i=GAMES.findIndex(item=>item.id===g.id);
     const count=finishedCount(g.id);
-    return '<button class="game-card" data-game="'+g.id+'" style="--accent:'+g.accent+';--delay:'+(i*30)+'ms"><div class="card-art"><img src="'+base+'props/'+g.icon+'.svg" alt="" loading="lazy"><span class="card-number">'+String(i+1).padStart(2,'0')+'</span></div><div class="card-copy"><span class="card-skill">'+g.skill+'</span><h3>'+g.title+'</h3><p>'+g.short+'</p><div class="card-bottom"><span>'+(count?count+' из '+g.levels+' пройдено':g.age)+'</span>'+svg(count===g.levels?'star':'arrow')+'</div></div></button>';
+    return '<button class="game-card" data-game="'+g.id+'" style="--accent:'+g.accent+';--delay:'+(i*30)+'ms"><div class="card-art"><img src="'+base+'props/'+g.icon+'.svg" alt="" loading="lazy"><span class="card-number">'+String(i+1).padStart(2,'0')+'</span></div><div class="card-copy"><span class="card-skill">'+g.skill+'</span><h3>'+g.title+'</h3><p>'+g.short+'</p><div class="card-bottom"><span>'+(count?count+' из '+g.levels+' пройдено':(g.levels+' заданий'))+'</span>'+svg(count===g.levels?'star':'arrow')+'</div></div></button>';
   };
-  el('game-grid').innerHTML=GAME_GROUPS.map(group=>'<section class="game-group" id="group-'+group.id+'" aria-labelledby="group-title-'+group.id+'"><header class="group-heading"><h3 id="group-title-'+group.id+'">'+group.title+'</h3><p>'+group.description+'</p></header><div class="game-grid">'+group.games.map(id=>card(gameById(id)!)).join('')+'</div></section>').join('');
+  el('game-grid').innerHTML=GAME_GROUPS.map(group=>'<section class="game-group" id="group-'+group.id+'" aria-labelledby="group-title-'+group.id+'"><header class="group-heading"><h3 id="group-title-'+group.id+'">'+group.title+'</h3><p>'+group.description+'</p></header><div class="game-grid">'+group.games.map(id=>card(catalogGame(id)!)).join('')+'</div></section>').join('');
   el('continue').innerHTML=(GAMES.some((g)=>finishedCount(g.id))?'Продолжить открытия':'Начать приключение')+svg('arrow');
 }
 function showModal(html:string,onClose:()=>void,kind='default'){
@@ -75,10 +85,20 @@ function hideModal(){
   if(focusBeforeModal?.isConnected)focusBeforeModal.focus();focusBeforeModal=null;
 }
 function guideSteps(info:SceneGameInfo,n=level){
-  return '<ol class="guide-steps">'+guideForLevel(info.id,n).map((text,i)=>'<li><span class="guide-number">'+(i+1)+'</span><span>'+text+'</span></li>').join('')+'</ol>'+guideVisual(info.id,n);
+  return '<ol class="guide-steps">'+guideForLevel(info.id,n,ageMode).map((text,i)=>'<li><span class="guide-number">'+(i+1)+'</span><span>'+text+'</span></li>').join('')+'</ol>'+guideVisual(info.id,n,ageMode);
 }
 const guideReadButton=()=>'<button id="guide-read" class="guide-read">'+svg('sound')+'Послушать правила</button>';
 function numberQuestion(expression:string,accept:(answer:number)=>boolean){
+  if(ageMode==='together'){
+    const max=level<3?3:5;
+    showModal('<button id="number-close" class="dialog-close icon-button" aria-label="Вернуться к рисунку">'+svg('close')+'</button><h2 id="dialog-title">Сколько точек?</h2><div class="counting-dots" id="number-value">'+expression.split('').join(' ')+'</div><p id="number-note" role="status">Посчитай и нажми число.</p><div class="counting-choices">'+Array.from({length:max},(_,i)=>'<button class="secondary" data-number="'+(i+1)+'">'+(i+1)+'</button>').join('')+'</div>',hideModal);
+    el('number-close').onclick=hideModal;
+    el('dialog').querySelectorAll<HTMLButtonElement>('[data-number]').forEach(button=>button.onclick=()=>{
+      if(accept(Number(button.dataset.number)))hideModal();
+      else el('number-note').textContent=el('feedback').textContent;
+    });
+    return;
+  }
   showModal('<button id="number-close" class="dialog-close icon-button" aria-label="Вернуться к рисунку">'+svg('close')+'</button><span class="eyebrow">ЦВЕТНЫЕ ОТКРЫТИЯ</span><h2 id="dialog-title">Реши пример</h2><div class="number-expression">'+expression+' = <output id="number-value" aria-live="polite">?</output></div><p id="number-note" class="number-note" role="status">Набери ответ и нажми зелёную галочку.</p><div class="number-pad">'+['1','2','3','4','5','6','7','8','9','⌫','0','✓'].map(key=>'<button data-number="'+key+'" class="'+(key==='✓'?'number-check':'')+'" aria-label="'+(key==='⌫'?'Стереть цифру':key==='✓'?'Проверить ответ':key)+'">'+key+'</button>').join('')+'</div><button id="number-read" class="guide-read">'+svg('sound')+'Послушать пример</button>',hideModal);
   let value='';
   const press=(key:string)=>{
@@ -104,12 +124,12 @@ function numberQuestion(expression:string,accept:(answer:number)=>boolean){
 function bindGuideRead(info:SceneGameInfo,n:number){
   el('guide-read').onclick=()=>{
     if(!save.sound){save.sound=true;persist();updateSound();}
-    const text=guideForLevel(info.id,n).join(' ');
+    const text=guideForLevel(info.id,n,ageMode).join(' ');
     if(!say(text))el('guide-read').textContent=save.sound?'Голос недоступен · правила выше':'Включи звук кнопкой вверху';
   };
 }
 function intro(info:GameInfo){
-  if(info.id==='schulte'){silence();location.href=base+info.standalone;return;}
+  if(info.standalone){silence();location.href=base+info.standalone;return;}
   const n=nextLevel(info.id);
   showModal('<button class="dialog-close icon-button" id="intro-close" aria-label="Вернуться к выбору игр">'+svg('close')+'</button><span class="intro-step">История <span aria-hidden="true">● ○</span></span><h2 id="dialog-title">'+info.title+'</h2><div class="intro-content"><div class="story-hero"><img src="'+base+'art/'+info.hero+'.webp" alt="'+HERO_NAMES[info.hero]+'"><span>'+HERO_NAMES[info.hero]+'</span></div><blockquote class="story-bubble" id="story-text">'+info.story+'</blockquote></div><div class="intro-actions"><button id="story-read" class="guide-read">'+svg('sound')+'Послушать историю</button><button id="story-next" class="primary">Далее '+svg('arrow')+'</button></div>',hideModal,'story');
   el('intro-close').onclick=hideModal;
@@ -135,7 +155,7 @@ async function ensureEngine(){
   return engine;
 }
 async function start(info:GameInfo,n:number){
-  if(info.id==='schulte'){silence();location.href=base+info.standalone;return;}
+  if(info.standalone){silence();location.href=base+info.standalone;return;}
   if(!isLevelUnlocked(info.id,n))n=nextLevel(info.id);
   current=info;level=n;won=false;hintStep=0;const token=++runToken;
   silence();hideModal();
@@ -145,14 +165,14 @@ async function start(info:GameInfo,n:number){
   el('hero-name').textContent='В ГОСТЯХ У '+({Vinch:'ВИНЧА',Newt:'НЬЮТА',Jays:'ДЖЕЙС',Aris:'АРИСА',Ren:'РЭНА'}[info.hero]);
   el('play-title').textContent=info.title;
   el('round-count').textContent='Задание '+(n+1)+' из '+info.levels;
-  el('stage-caption').textContent=GUIDES[info.id].stages[n];
+  el('stage-caption').textContent=ageMode==='together'?'Взрослому · '+ADULT_PROMPT[info.id]:GUIDES[info.id].stages[n];
   el('round-dots').innerHTML=Array.from({length:info.levels},(_,i)=>'<span class="'+(i===n?'active':save.completed[info.id]?.includes(i)?'done':'')+'"></span>').join('');
   el('instruction').textContent=info.action;
   el('feedback').textContent='';el('feedback').dataset.kind='info';
   el('loading').classList.remove('hidden');
   try{
     const e=await ensureEngine();if(token!==runToken)return;
-    await e.play(info,n,{
+    await e.play(info,n,ageMode,{
       instruction(text){if(token!==runToken)return;el('instruction').textContent=text;el('loading').classList.add('hidden');},
       feedback(text,kind='info'){if(token!==runToken)return;el('feedback').textContent=text;el('feedback').dataset.kind=kind;if(kind==='try'||kind==='good')silence();if(kind==='try')tone('try');else if(kind==='good'){tone('good');hintStep=0;}},
       listen(text){if(token!==runToken)return;say(text);el('feedback').textContent=text;el('feedback').dataset.kind='info';},
@@ -183,8 +203,14 @@ function result(info:SceneGameInfo,n:number){
   el('next-round').onclick=()=>{if(last)location.hash='';else introGuide(info,n+1,false);};
   el('replay-round').onclick=()=>void start(info,n);
 }
-el('game-grid').onclick=(event)=>{const button=(event.target as HTMLElement).closest<HTMLElement>('[data-game]');if(button){tone();intro(gameById(button.dataset.game!)!);}};
-el('continue').onclick=()=>intro(GAMES.find((g)=>finishedCount(g.id)<g.levels)??GAMES[0]);
+el('game-grid').onclick=(event)=>{const button=(event.target as HTMLElement).closest<HTMLElement>('[data-game]');if(button){tone();intro(catalogGame(button.dataset.game!)!);}};
+el('continue').onclick=()=>intro(GAMES.map(g=>catalogGame(g.id)!).find(g=>finishedCount(g.id)<g.levels)??GAMES[0]);
+document.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach(button=>button.onclick=()=>{
+  const mode=button.dataset.mode as AgeMode;
+  selectMode(mode);
+  const url=new URL(location.href);url.searchParams.set('mode',mode);url.hash='';
+  history.replaceState(null,'',url);home();
+});
 document.querySelectorAll<HTMLAnchorElement>('[data-category]').forEach(link=>link.onclick=event=>{
   event.preventDefault();document.getElementById('group-'+link.dataset.category)?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
 });
@@ -192,6 +218,9 @@ el('back-home').onclick=()=>{tone();location.hash='';};
 el('rotate-home').onclick=()=>{location.hash='';};
 function hint(){
   if(won||!current)return;tone();
+  if(ageMode==='together'){
+    engine?.hint();return;
+  }
   if(hintStep<2){
     let text=HINTS[current.id][hintStep++];
     if(current.id==='alarms')text=guideForLevel('alarms',level)[hintStep-1];
@@ -229,7 +258,7 @@ el('round-count').onclick=()=>{
 };
 document.querySelectorAll<HTMLButtonElement>('.sound-toggle').forEach((button)=>button.onclick=()=>{save.sound=!save.sound;persist();updateSound();if(save.sound)tone();else silence();});
 el('about-open').onclick=()=>{
-  showModal('<span class="eyebrow">ДЛЯ РОДИТЕЛЕЙ</span><h2 id="dialog-title">Открытия в своём темпе</h2><p>Коллекция из '+GAMES.length+' игр по предложениям психолога Анастасии Левшиной. Часть заданий предполагает знакомство с буквами, часами или счётом — ориентируйтесь на интерес и умения ребёнка.</p><p>Игры собраны по направлениям развития. Следующее задание открывается после успешного завершения текущего. Готовые задания можно повторять, пользоваться подсказками и пробовать снова.</p><p>Прогресс сохраняется только в этом браузере на этом устройстве. Регистрации и рекламы нет. Чтение вслух использует готовые записи или доступный голос устройства. Для первого открытия игры требуется интернет; посещённые игры могут работать без сети после сохранения браузером.</p><button id="about-close" class="primary">Понятно</button>',hideModal);
+  showModal('<span class="eyebrow">ДЛЯ РОДИТЕЛЕЙ</span><h2 id="dialog-title">Открытия в своём темпе</h2><p>В коллекции '+GAMES.length+' игр. Идеи предложила психолог Анастасия Левшина. Возрастные варианты и подборку слов подготовила команда игр. Часть заданий предполагает знакомство с буквами, часами или счётом — ориентируйтесь на интерес и умения ребёнка.</p><p>В режиме 4–5 лет взрослый читает и показывает пример, ребёнок отвечает касанием. В режиме 6–8 лет ребёнок проходит задания самостоятельно. У каждого режима свой прогресс. Следующее задание открывается после успешного завершения текущего. Готовые задания можно повторять, пользоваться подсказками и пробовать снова.</p><p>Прогресс сохраняется только в этом браузере на этом устройстве. Регистрации и рекламы нет. Чтение вслух использует готовые записи или доступный голос устройства. Для первого открытия игры требуется интернет; посещённые игры могут работать без сети после сохранения браузером.</p><button id="about-close" class="primary">Понятно</button>',hideModal);
   el('about-close').onclick=hideModal;
 };
 document.addEventListener('keydown',(event)=>{
@@ -243,10 +272,10 @@ document.addEventListener('keydown',(event)=>{
   }
 });
 document.addEventListener('visibilitychange',()=>{if(document.hidden)silence();});
-window.addEventListener('hashchange',()=>{const info=gameById(location.hash.slice(1));if(info)intro(info);else home();});
-window.addEventListener('pageshow',event=>{if(event.persisted&&!current)home();});
+window.addEventListener('hashchange',()=>{modeFromUrl();const info=catalogGame(location.hash.slice(1));if(info)intro(info);else home();});
+window.addEventListener('pageshow',event=>{if(event.persisted&&!current){modeFromUrl();home();}});
 updateSound();home();
-const initial=gameById(location.hash.slice(1));if(initial)intro(initial);
+const initial=catalogGame(location.hash.slice(1));if(initial)intro(initial);
 if(import.meta.env.PROD&&'serviceWorker' in navigator){
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register(base+'sw.js',{scope:base}).then((registration)=>{

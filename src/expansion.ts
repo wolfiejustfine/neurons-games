@@ -1,15 +1,25 @@
+import type { AgeMode } from './catalog';
 import { random,shuffled } from './rules.ts';
 
 export const SEARCH_COUNTS=[3,3,4,4,5,5,6,6] as const;
 const SEARCH_PROPS=['key','book','apple','cup','ball','fish','hammer','leaf','clock','rocket','cake','cheese'];
-export function searchLesson(level:number){
-  const rng=random(7900+level),visible=shuffled(SEARCH_PROPS,rng).slice(0,Math.min(12,6+level));
-  return {visible,targets:shuffled(visible,rng).slice(0,SEARCH_COUNTS[level])};
+export function searchLesson(level:number,mode:AgeMode='solo'){
+  const rng=random(7900+level),visible=shuffled(SEARCH_PROPS,rng).slice(0,mode==='together'?3+Math.floor(level/2):Math.min(12,6+level));
+  return {visible,targets:shuffled(visible,rng).slice(0,mode==='together'?1+Math.floor(level/3):SEARCH_COUNTS[level])};
 }
 
 export const PAINT_COLORS=['#6fb7df','#f0b766','#a98bd0','#7fbea4','#ee9e9e','#d3bde7'];
 export interface PaintProblem {expression:string;answer:number;a:number;b:number;operation:'+'|'−';}
-export function paintLesson(level:number){
+export function paintLesson(level:number,mode:AgeMode='solo'){
+  if(mode==='together'){
+    const max=level<3?3:5,count=4;
+    const quantities=shuffled(Array.from({length:max},(_,i)=>i+1),random(901+level));
+    const problems=Array.from({length:count},(_,i)=>{
+      const answer=quantities[i%max];
+      return {a:answer,b:0,operation:'+' as const,answer,expression:'●'.repeat(answer)};
+    });
+    return {max,count,problems,theme:'robot'};
+  }
   const rng=random(8600+level),max=level>=4?20:10,count=level===0?4:6;
   const answers=shuffled(Array.from({length:max-1},(_,i)=>i+2),rng).slice(0,count);
   const problems:PaintProblem[]=answers.map((answer,i)=>{
@@ -51,7 +61,12 @@ export const RIDDLES:Riddle[]=[
   {id:'cable',text:'От прибора к розетке тянется длинная гибкая линия. По ней идёт электрический ток.',answer:'cable',hint:'На конце бывает вилка для розетки.'},
 ];
 export const RIDDLE_COUNTS=[2,2,3,3,3,3,4,4] as const;
-export function riddleLesson(level:number){
+export function riddleLesson(level:number,mode:AgeMode='solo'){
+  if(mode==='together'){
+    const count=level<4?1:2,start=level<4?level:4+(level-4)*2;
+    const riddles=RIDDLES.slice(start,start+count);
+    return {riddles,order:shuffled(riddles.map((_,i)=>i),random(600+level)),choiceCount:level<4?2:3};
+  }
   const offset=RIDDLE_COUNTS.slice(0,level).reduce((sum,n)=>sum+n,0),riddles=RIDDLES.slice(offset,offset+RIDDLE_COUNTS[level]);
   const order=shuffled(riddles.map((_,i)=>i),random(8900+level));
   return {riddles,order,choiceCount:level<2?3:4};

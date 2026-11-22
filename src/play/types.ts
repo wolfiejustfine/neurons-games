@@ -1,5 +1,5 @@
 import type Phaser from 'phaser';
-import type { SceneGameInfo } from '../catalog';
+import type { AgeMode,SceneGameInfo } from '../catalog';
 export interface Control { id:string; x:number; y:number; width:number; height:number; }
 export interface Hooks {
   instruction(text:string):void;
@@ -13,7 +13,7 @@ export interface Hooks {
 export interface PlayContext {
   scene:Phaser.Scene;
   root:Phaser.GameObjects.Container;
-  width:number; height:number; level:number; info:SceneGameInfo;
+  width:number; height:number; level:number; mode:AgeMode; info:SceneGameInfo;
   controls:Control[];
   clear():void;
   hooks:Hooks;

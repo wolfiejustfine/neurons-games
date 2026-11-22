@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
-import { PROPS, type SceneGameId, type SceneGameInfo } from '../catalog';
+import { PROPS, type AgeMode, type SceneGameId, type SceneGameInfo } from '../catalog';
 import type { Hooks, PlayContext, Round, RoundFactory } from './types';
 import { SHADOW_TEXTURES } from '../challenges';
 
 const factories:Record<SceneGameId,()=>Promise<{default:RoundFactory}>> = {
+  schulte:()=>import('../games/schulte'),
   shadows:()=>import('../games/shadows'), anagrams:()=>import('../games/anagrams'),
   ciphers:()=>import('../games/ciphers'), proofreading:()=>import('../games/proofreading'),
   alarms:()=>import('../games/alarms'), rearrangement:()=>import('../games/rearrangement'),
@@ -14,7 +15,7 @@ const factories:Record<SceneGameId,()=>Promise<{default:RoundFactory}>> = {
   'riddle-wheel':()=>import('../games/riddle-wheel'),
 };
 const ALL_PROPS=[...new Set([...PROPS,'sign','box','compass','cable','house','cheese','cake','moon','cat','beetle','screw','nail'])];
-interface RunData { info:SceneGameInfo; level:number; hooks:Hooks; factory:RoundFactory; }
+interface RunData { mode:AgeMode; info:SceneGameInfo; level:number; hooks:Hooks; factory:RoundFactory; }
 class PlayScene extends Phaser.Scene {
   context!:PlayContext;
   round?:Round;
@@ -40,7 +41,7 @@ class PlayScene extends Phaser.Scene {
     this.input.dragDistanceThreshold=12;
     const root=this.add.container(0,0);
     this.context={
-      scene:this,root,width:this.scale.width,height:this.scale.height,level:data.level,info:data.info,
+      scene:this,root,width:this.scale.width,height:this.scale.height,level:data.level,mode:data.mode,info:data.info,
       hooks:data.hooks,controls:[],clear:()=>{
         this.tweens.killAll();
         root.removeAll(true);this.context.controls=[];
@@ -59,7 +60,7 @@ class PlayScene extends Phaser.Scene {
   }
 }
 export interface Engine {
-  play(info:SceneGameInfo,level:number,hooks:Hooks):Promise<void>;
+  play(info:SceneGameInfo,level:number,mode:AgeMode,hooks:Hooks):Promise<void>;
   hint():void;
   hasProgress():boolean;
   setInputEnabled(enabled:boolean):void;
@@ -84,12 +85,12 @@ export function createEngine(host:HTMLElement):Engine {
   const observer=new ResizeObserver(()=>{if(host.clientWidth&&host.clientHeight){const s=size();game.scale.setGameSize(s.width,s.height);}});
   observer.observe(host);
   return {
-    async play(info,level,hooks){
+    async play(info,level,mode,hooks){
       const token=++request;
       const [module]=await Promise.all([factories[info.id](),ready]);
       if(token!==request)return;
       const s=size();game.scale.setGameSize(s.width,s.height);
-      game.scene.start('play',{info,level,hooks,factory:module.default});
+      game.scene.start('play',{info,level,mode,hooks,factory:module.default});
     },
     hint(){scene.round?.hint();},
     hasProgress(){return scene.round?.hasProgress()??false;},

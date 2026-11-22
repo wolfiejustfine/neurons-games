@@ -6,7 +6,7 @@ import type Phaser from 'phaser';
 import { narrationSource } from '../audio';
 const TINTS=['#9dcee4','#b7a4dd','#efc77e','#9dd1bd'];
 const create:RoundFactory=c=>{
-  const {riddles,order,choiceCount}=riddleLesson(c.level),done=Array<boolean>(riddles.length).fill(false);
+  const {riddles,order,choiceCount}=riddleLesson(c.level,c.mode),done=Array<boolean>(riddles.length).fill(false);
   let active:number|null=null,spinning=false,solved=false,angle=0,wrong:string[]=[],highlight:string|null=null;
   let wheel:Phaser.GameObjects.Container|undefined;
   let wheelLabels:Phaser.GameObjects.Text[]=[];
@@ -53,7 +53,8 @@ const create:RoundFactory=c=>{
     if(active!==null){
       const choices=riddleChoices(riddles[active].answer,c.level,active,choiceCount);
       choices.forEach((key,i)=>{
-        const x=choiceCount===3?160+i*200:130+i*153,y=h*.815,w=choiceCount===3?178:140;
+        const step=choiceCount===2?280:choiceCount===3?200:153;
+        const x=360-(choiceCount-1)*step/2+i*step,y=h*.815,w=step-16;
         const correct=done[active!]&&key===riddles[active!].answer;
         panel(c,x,y,w,Math.min(182,h*.24),correct?'#edf8ef':wrong.includes(key)?'#fff1ed':'#fff',highlight===key||correct?'#82b69b':'#dbe6ef',22);
         picture(c,key,x,y-10,Math.min(w-25,h*.145));

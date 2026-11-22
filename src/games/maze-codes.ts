@@ -5,7 +5,7 @@ import type { RoundFactory } from '../play/types';
 import type Phaser from 'phaser';
 const WORDS=['КОТ','ДОМ','СЫР','МЯЧ','РЫБА','ЛУНА','ЖУК','ТОРТ'];
 const create:RoundFactory=(c)=>{
-  const word=WORDS[c.level];let part=0,maze=makeMaze(c.level,part),path=[maze.start],busy=false,solved=false,hinted:number[]=[];
+  const word=c.mode==='together'?['А','О','У','И','АУ','ОЙ','МЫ','ДА'][c.level]:WORDS[c.level];let part=0,maze=makeMaze(c.level,part,c.mode==='together'?5:7),path=[maze.start],busy=false,solved=false,hinted:number[]=[];
   let last:{x:number;y:number}|null=null;
   const layout=()=>gridLayout(c,maze);
   function render(){
@@ -27,7 +27,7 @@ const create:RoundFactory=(c)=>{
     g.fillStyle(color(c.info.accent)).fillCircle(now.x,now.y,l.cell*.21);
     g.fillStyle(0xffffff).fillCircle(now.x,now.y,l.cell*.08);
     if(busy&&!solved)button(c,'next-letter',360,h*.95,450,Math.min(80,h*.095),'Буква '+word[part]+' найдена · Дальше',()=>{
-      part++;maze=makeMaze(c.level,part);path=[maze.start];busy=false;hinted=[];render();
+      part++;maze=makeMaze(c.level,part,c.mode==='together'?5:7);path=[maze.start];busy=false;hinted=[];render();
       c.hooks.feedback('Найди следующую букву пароля.');
     });
     else label(c,360,h*.95,solved?'ПРОЧИТАЙ ПАРОЛЬ':'Дорожка '+Math.min(part+1,word.length)+' из '+word.length,26,{color:'#8c9bb0'});

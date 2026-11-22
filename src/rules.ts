@@ -10,8 +10,8 @@ export function deranged<T>(items:readonly T[],rng:()=>number):T[] {
   return items.map((_,i)=>items[(i+offset)%items.length]);
 }
 export interface Maze { width:number; height:number; cells:boolean[]; start:number; end:number; }
-export function makeMaze(level:number,variant=0):Maze {
-  const n=7, cells=Array<boolean>(n*n).fill(false), rng=random(786+level*123+variant*47), seen=new Set<number>();
+export function makeMaze(level:number,variant=0,n=7):Maze {
+  const cells=Array<boolean>(n*n).fill(false), rng=random(786+level*123+variant*47), seen=new Set<number>();
   const carve=(x:number,y:number)=>{
     cells[y*n+x]=true;seen.add(y*n+x);
     for(const [dx,dy] of shuffled([[2,0],[-2,0],[0,2],[0,-2]],rng)){
@@ -68,6 +68,13 @@ export const TUBE_LEVELS:Tubes[]=[
   [[0,1,2,3],[1,2,3,0],[2,3,0,1],[3,0,1,2],[],[]],
   [[0,3,1,2],[1,0,2,3],[2,1,3,0],[3,2,0,1],[],[]],
   [[0,1,3,2],[3,2,1,0],[2,0,3,1],[1,3,0,2],[],[]],
+];
+// Split colours first, then add a single mixed tube before introducing two mixed tubes.
+export const TOGETHER_TUBES:Tubes[]=[
+  [[0,0],[0,0],[]], [[1],[1,1,1],[]],
+  [[0,0,0,1],[1,1,1],[0]], [[1,1,1,0],[0,0,0],[1]],
+  [[0,0,1,1],[1,1],[0,0]], [[1,1,0,0],[0,0],[1,1]],
+  [[0,0,0,1],[1,1,1,0],[]], [[0,0,1,1],[1,1,0,0],[]],
 ];
 export function clockHands(minutes:number) {
   return {hour:((minutes%720)/720)*Math.PI*2-Math.PI/2,minute:((minutes%60)/60)*Math.PI*2-Math.PI/2};

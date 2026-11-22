@@ -1,10 +1,10 @@
-import { TUBE_LEVELS,CAPACITY,pour,sortedTubes,tubeSolution,type Tubes } from '../rules';
+import { TUBE_LEVELS,TOGETHER_TUBES,CAPACITY,pour,sortedTubes,tubeSolution,type Tubes } from '../rules';
 import { label,panel,target,button } from '../play/draw';
 import type { RoundFactory } from '../play/types';
 const COLORS=[0x75afdf,0xeaae65,0xac8bce,0x80baa0];
 const SYMBOLS=['●','▲','■','★'];
 const create:RoundFactory=(c)=>{
-  let tubes:Tubes=TUBE_LEVELS[c.level].map((t)=>[...t]),selected:number|null=null,moves=0,solved=false;
+  let tubes:Tubes=(c.mode==='together'?TOGETHER_TUBES:TUBE_LEVELS)[c.level].map((t)=>[...t]),selected:number|null=null,moves=0,solved=false;
   const history:Tubes[]=[];
   function render(){
     c.clear();const h=c.height;

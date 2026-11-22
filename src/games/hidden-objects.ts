@@ -5,7 +5,7 @@ import type { RoundFactory } from '../play/types';
 
 const SPOTS=[{x:.12,y:.24},{x:.36,y:.24},{x:.64,y:.24},{x:.88,y:.24},{x:.16,y:.53},{x:.39,y:.53},{x:.63,y:.53},{x:.86,y:.53},{x:.14,y:.84},{x:.37,y:.84},{x:.62,y:.84},{x:.84,y:.84}];
 const create:RoundFactory=c=>{
-  const {visible,targets}=searchLesson(c.level),found=new Set<string>();let highlighted:string|null=null,solved=false;
+  const {visible,targets}=searchLesson(c.level,c.mode),found=new Set<string>();let highlighted:string|null=null,solved=false;
   function render(){
     c.clear();const h=c.height,roomH=h*.72,roomY=roomH/2+12;
     const bg=c.scene.add.image(360,roomY,'newt-lab').setDisplaySize(660,roomH);c.root.add(bg);

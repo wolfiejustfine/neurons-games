@@ -1,4 +1,4 @@
-import type { SceneGameId } from './catalog';
+import type { SceneGameId, AgeMode } from './catalog';
 import { random, shuffled } from './rules.ts';
 import { SHADOW_ROUNDS, proofreadingLesson, PROOFREAD_COUNTS } from './challenges.ts';
 export { SHADOW_OPTIONS, PROOFREAD_COUNTS } from './challenges.ts';
@@ -9,7 +9,11 @@ export const WIRE_COUNTS = [1,2,2,3,3,3,4,4] as const;
 export const CIPHER_WORDS = ['КОТ','ДОМ','ЛУНА','ДРУГ','КНИГА','НАУКА','ПРИВЕТ','ПОБЕДА'] as const;
 const MEETING_COUNTS = [2,2,3,3,3,3,4,4] as const;
 
-export function clockLesson(level:number) {
+export function clockLesson(level:number,mode:AgeMode='solo') {
+  if(mode==='together'){
+    const times=shuffled([3,6,9,12],random(715+level)).slice(0,level<5?2:3).map(hour=>hour*60);
+    return {count:times.length,times,afternoon:false,halfHours:false};
+  }
   const count=MEETING_COUNTS[level],afternoon=level>=3,halfHours=level>=4;
   const hours=shuffled(afternoon?[13,14,15,16,17]:[8,9,10,11,12],random(150+level)).slice(0,count);
   const times=hours.map((hour,i)=>hour*60+(halfHours&&i%2===(level===7?0:1)?30:0));
@@ -18,6 +22,7 @@ export function clockLesson(level:number) {
 
 export interface LearningGuide { steps:readonly [string,string,string]; stages:readonly string[]; }
 export const HINTS:Record<SceneGameId,readonly [string,string]>={
+  schulte:['Посмотри на число вверху.','Найди карточку с таким же числом.'],
   shadows:['У предмета и его тени одинаковая форма.','Сравни выступы, отверстия и края. Цвет предмета здесь не важен.'],
   anagrams:['Произнеси название картинки медленно.','Прислушайся к следующему звуку и найди его букву внизу.'],
   ciphers:['У каждого значка в таблице есть своя буква.','Найди в таблице такой же значок, как в первой закрытой клетке.'],
@@ -33,6 +38,10 @@ export const HINTS:Record<SceneGameId,readonly [string,string]>={
   'riddle-wheel':['Послушай или прочитай загадку до конца.','Сравни каждую картинку со всеми словами загадки. Кнопка «Послушать» повторит её.'],
 };
 export const GUIDES:Record<SceneGameId,LearningGuide> = {
+  schulte:{
+    steps:['Посмотрите вместе на число вверху.','Коснись такого же числа на поле.','Когда образец сменится, найди следующее число.'],
+    stages:['Ищем два числа','Два числа на новых местах','Ищем три числа','Три числа на новых местах','Ищем четыре числа','Четыре числа на новых местах','Ищем пять чисел','Ищем шесть чисел'],
+  },
   'hidden-objects':{
     steps:['Рассмотри картинки вещей гостей внизу.','Найди такие же предметы в комнате и коснись их.','Найденная вещь исчезнет из комнаты, а в списке появится галочка.'],
     stages:['Три забытые вещи','Новая встреча гостей','Четыре предмета','Осматриваем полки и стол','Пять вещей гостей','Ищем внимательнее','Шесть забытых вещей','Порядок в лаборатории'],
@@ -86,7 +95,40 @@ export const GUIDES:Record<SceneGameId,LearningGuide> = {
     stages:['Учимся вести один провод','Первое пересечение','Два провода','Три провода','Три провода','Закрепляем навык','Четыре провода','Распутываем всё'],
   },
 };
-export function guideForLevel(id:SceneGameId,level:number):LearningGuide['steps'] {
+export const ADULT_PROMPT:Record<SceneGameId,string>={
+  shadows:'Вместе обведите край тени пальцем.',
+  proofreading:'Ведите пальцем под буквами образца слева направо.',
+  anagrams:'Назовите картинку и покажите первую букву.',
+  ciphers:'Покажите одну пару значков, следующую найдёт ребёнок.',
+  alarms:'Сравните, куда смотрят короткие стрелки.',
+  rearrangement:'Назовите вместе, что стоит слева и справа.',
+  'color-sort':'Спросите, куда можно перелить верхний цвет.',
+  'maze-codes':'Назовите букву в конце дорожки.',
+  'maze-sort':'Помогите сравнить находку со значком на ящике.',
+  tangles:'Покажите белую точку, с которой начинается провод.',
+  'hidden-objects':'Назовите одну вещь из списка и дайте ребёнку найти её.',
+  'math-coloring':'Считайте вслух вместе с ребёнком по одной точке.',
+  'riddle-wheel':'Прочитайте загадку вслух и дайте время выбрать картинку.',
+  schulte:'Назовите число вверху. Пусть ребёнок найдёт его на поле.',
+};
+const TOGETHER_STEPS:Partial<Record<SceneGameId,LearningGuide['steps']>>={
+  shadows:['Рассмотрите тень вместе.','Покажи картинку такой же формы.','Если появится кнопка «Следующая тень», нажми её.'],
+  anagrams:['Попроси взрослого назвать картинку.','Выбери букву внизу.','Положи её на такую же букву в клеточке.'],
+  alarms:['Рассмотрите маленькие часы рядом с героями.','Выбери часы внизу.','Коснись героя, у которого стрелки смотрят так же.'],
+  ciphers:['Выбери значок в таблице.','Найди такой же значок в записке и коснись его.','Когда откроются буквы, попроси взрослого прочесть слово.'],
+  'math-coloring':['Коснись белой части робота.','Посчитайте точки вместе.','Нажми на число, чтобы раскрасить эту часть.'],
+  'riddle-wheel':['Нажми кнопку «Крутить колесо».','Послушай загадку. Взрослый может прочитать её вслух.','Покажи ответ на картинке.'],
+  'maze-codes':['Поставь палец на белую точку.','Веди её по дорожке к букве. Можно нажимать соседние клетки.','Пусть взрослый назовёт найденную букву.'],
+};
+export function guideForLevel(id:SceneGameId,level:number,mode:AgeMode='solo'):LearningGuide['steps'] {
+  if(mode==='together'){
+    if(id==='proofreading')return [
+      'Посмотрите на слово «'+proofreadingLesson(level,mode).target+'». Взрослый может назвать буквы.',
+      'Найди точно такую же надпись и коснись её.',
+      'Отметь все одинаковые с образцом надписи.',
+    ];
+    if(TOGETHER_STEPS[id])return TOGETHER_STEPS[id]!;
+  }
   if(id==='proofreading')return [
     'Сравни каждую надпись с образцом: '+proofreadingLesson(level).target+'.',
     'Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть».',

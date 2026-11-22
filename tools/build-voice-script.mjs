@@ -2,12 +2,12 @@ import {createServer} from 'vite';
 import ts from 'typescript';
 import {mkdirSync,readFileSync,readdirSync,writeFileSync,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-const server=await createServer({configFile:false,appType:'custom',server:{middlewareMode:true}});
+const server=await createServer({configFile:false,cacheDir:'node_modules/.vite-voice-script',appType:'custom',server:{middlewareMode:true}});
 try{
-  const {GAMES}=await server.ssrLoadModule('/src/catalog.ts');
+  const {GAMES,gameById}=await server.ssrLoadModule('/src/catalog.ts');
   const {guideForLevel,HINTS}=await server.ssrLoadModule('/src/learning.ts');
   const {RIDDLES,paintLesson}=await server.ssrLoadModule('/src/expansion.ts');
-  const {PROOFREAD_WORDS}=await server.ssrLoadModule('/src/challenges.ts');
+  const {PROOFREAD_WORDS,proofreadingLesson}=await server.ssrLoadModule('/src/challenges.ts');
   const lines=[],byText=new Map();
   function add(id,kind,game,text,priority){
     text=text.replace(/\s+/g,' ').trim();if(!text)return;
@@ -15,15 +15,18 @@ try{
     const line={id,filename:id+'.mp3',priority,kind,game,voice:'narrator-ru',text,sha256:createHash('sha256').update(text).digest('hex'),uses:[id]};
     lines.push(line);byText.set(text,line);
   }
-  for(const game of GAMES.filter(g=>!g.standalone)){
+  for(const entry of GAMES){
+    const game=entry.standalone?gameById(entry.id,'together'):entry;
     add('story-'+game.id,'История',game.title,game.story,1);
-    for(let n=0;n<game.levels;n++)add('guide-'+game.id+'-'+String(n+1).padStart(2,'0'),'Правила',game.title,guideForLevel(game.id,n).join(' '),1);
+    if(!entry.standalone)for(let n=0;n<game.levels;n++)add('guide-'+game.id+'-'+String(n+1).padStart(2,'0'),'Правила',game.title,guideForLevel(game.id,n).join(' '),1);
+    for(let n=0;n<game.levels;n++)add('guide-together-'+game.id+'-'+String(n+1).padStart(2,'0'),'Правила 4–5 лет',game.title,guideForLevel(game.id,n,'together').join(' '),1);
     HINTS[game.id].forEach((text,i)=>add('hint-'+game.id+'-'+(i+1),'Подсказка',game.title,text,2));
     const file=ts.createSourceFile(game.id+'.ts',readFileSync('src/games/'+game.id+'.ts','utf8'),ts.ScriptTarget.Latest,true);
-    let counter=0;
-    const collect=expr=>{
-      if(ts.isStringLiteralLike(expr))add('task-'+game.id+'-'+(++counter),'Задание',game.title,expr.text,1);
-      else if(ts.isConditionalExpression(expr)){collect(expr.whenTrue);collect(expr.whenFalse);}
+    let counter=0,juniorCounter=0;
+    const collect=(expr,junior=false)=>{
+      if(ts.isStringLiteralLike(expr))add((junior?'task-together-':'task-')+game.id+'-'+(junior?++juniorCounter:++counter),'Задание',game.title,expr.text,1);
+      else if(ts.isConditionalExpression(expr)){const condition=expr.condition.getText(file);
+        collect(expr.whenTrue,junior||condition.includes('together')||condition==='counting');collect(expr.whenFalse,junior);}
     };
     const visit=node=>{
       if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.name.text==='instruction'&&node.arguments[0])collect(node.arguments[0]);
@@ -31,6 +34,10 @@ try{
     };visit(file);
   }
   for(const [i,word] of PROOFREAD_WORDS.entries())add('task-proofreading-word-'+(i+1),'Задание','Стоп, ошибка!','Образец: '+word+'. Выбери кнопку и коснись надписи — линия появится сама.',1);
+  for(let n=0;n<8;n++){
+    const {target}=proofreadingLesson(n,'together');
+    add('task-together-proofreading-word-'+(n+1),'Задание 4–5 лет','Стоп, ошибка!','Найди все надписи как на образце: '+target+'.',1);
+  }
   for(const r of RIDDLES)add('riddle-'+r.id,'Загадка','Колесо загадок',r.text,1);
   const anagrams=['КОТ','ДОМ','СЫР','МЯЧ','РЫБА','ЛУНА','ЖУК','ТОРТ'];
   anagrams.forEach((word,i)=>{

@@ -14,7 +14,7 @@ const create:RoundFactory=(c)=>{
     if(slots[dest]!==null){c.hooks.feedback('Эта клеточка уже занята. Выбери пустую.');render();return;}
     if(letters[source]!==word[dest]){selected=null;render();c.hooks.feedback('Здесь нужна другая буква. Посмотри на картинку.','try');return;}
     slots[dest]=source;selected=null;hinted=-1;hintStep=0;render();
-    if(slots.every((s)=>s!==null)){solved=true;render();c.hooks.win('Получилось слово «'+word+'». Прочитай его!');}
+    if(slots.every((s)=>s!==null)){solved=true;render();c.hooks.win('Получилось слово «'+word+'»!');}
     else c.hooks.feedback('Верно! Продолжай собирать слово.','good');
   }
   function render(){
@@ -25,7 +25,7 @@ const create:RoundFactory=(c)=>{
     else label(c,360,h*.425,'ПРОЧИТАЙ СЛОВО',25,{color:'#9391a6',letterSpacing:1});
     coords().forEach((p,i)=>{
       panel(c,p.x,p.y,100,112,slots[i]===null?'#edf4fa':'#eff9f2',hinted===i?c.info.accent:'#d7e5ee',18);
-      label(c,p.x,p.y,slots[i]===null?'':letters[slots[i]!],44,{fontStyle:'bold'});
+      label(c,p.x,p.y,slots[i]===null?(c.mode==='together'?word[i]:''):letters[slots[i]!],44,{fontStyle:'bold',color:slots[i]===null?'#7a89a2':'#314b68'});
       if(!solved&&slots[i]===null)target(c,'slot-'+i,p.x,p.y,100,112,()=>{if(selected!==null)place(selected,i);else c.hooks.feedback('Сначала выбери букву внизу, затем коснись клеточки.');});
     });
     label(c,360,h*.71,solved?'СЛОВО СОБРАНО!':selected===null?'Перенеси буквы в клеточки':'Теперь выбери клеточку',26,{color:'#8391a8'});
@@ -37,7 +37,7 @@ const create:RoundFactory=(c)=>{
       },()=>{selected=i;render();c.hooks.feedback('Буква «'+letter+'» выбрана. Теперь коснись пустой клеточки.');},selected===i);
     });
   }
-  c.hooks.instruction('Собери слово: переставь буквы под картинкой.');
+  c.hooks.instruction(c.mode==='together'?'Положи каждую букву на такую же букву в клеточке.':'Собери слово: переставь буквы под картинкой.');
   return {render,hasProgress:()=>slots.some(s=>s!==null),hint(){const i=slots.findIndex((s)=>s===null);if(i>=0){if(hintStep++===0){c.hooks.listen('На картинке '+word.toLowerCase()+'. Произнеси слово медленно и прислушайся к звукам.');return;}hinted=i;render();c.hooks.feedback('В выделенной клеточке нужна буква «'+word[i]+'».');}},inspect:()=>({word,letters,slots,solved})};
 };
 export default create;

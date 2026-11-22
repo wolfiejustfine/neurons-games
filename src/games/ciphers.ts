@@ -4,7 +4,7 @@ import { CIPHER_WORDS } from '../learning';
 import type { RoundFactory } from '../play/types';
 const GLYPHS=['●','▲','◆','★','✚','■','♥','✦'];
 const create:RoundFactory=(c)=>{
-  const word=CIPHER_WORDS[c.level],alphabet=shuffled([...new Set(word)],random(811+c.level));
+  const word=(c.mode==='together'?['АУ','МЫ','УХ','ОН','МАМА','ПАПА','КОТ','ДОМ']:CIPHER_WORDS)[c.level],alphabet=shuffled([...new Set(word)],random(811+c.level));
   const mapping=Object.fromEntries(alphabet.map((letter,i)=>[letter,GLYPHS[i]]));
   const solved=Array<boolean>(word.length).fill(false);let selected:string|null=null,highlight=-1,finished=false;
   const points=()=>[...word].map((_,i)=>({x:360-(word.length-1)*103/2+i*103,y:c.height*.75}));

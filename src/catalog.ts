@@ -1,5 +1,6 @@
-export type SceneGameId = 'shadows' | 'anagrams' | 'ciphers' | 'proofreading' | 'alarms' | 'rearrangement' | 'color-sort' | 'maze-codes' | 'maze-sort' | 'tangles' | 'hidden-objects' | 'math-coloring' | 'riddle-wheel';
-export type GameId = SceneGameId | 'schulte';
+export type AgeMode = 'together' | 'solo';
+export type SceneGameId = 'schulte' | 'shadows' | 'anagrams' | 'ciphers' | 'proofreading' | 'alarms' | 'rearrangement' | 'color-sort' | 'maze-codes' | 'maze-sort' | 'tangles' | 'hidden-objects' | 'math-coloring' | 'riddle-wheel';
+export type GameId = SceneGameId;
 export type Hero = 'Vinch' | 'Newt' | 'Jays' | 'Aris' | 'Ren';
 interface GameDetails {
   title: string; short: string; story: string; action: string;
@@ -24,7 +25,14 @@ export const GAMES: GameInfo[] = [
   { id:'riddle-wheel', title:'Колесо загадок', short:'Слушай и отгадывай', story:'Рэн приготовил колесо с загадками. Крути его, слушай и выбирай подходящие картинки!', action:'Крути колесо, слушай загадку и выбирай картинку-ответ.', skill:'Логика и речь', hero:'Ren', accent:'#d5a653', icon:'wheel', age:'6+', levels:8 },
   { id:'schulte', standalone:'schulte/', title:'Таблицы Шульте', short:'30 уровней и таблица дня', story:'Твоя готовая игра с Винчем: пять миров, таблица дня и экран для родителей.', action:'Нажимай числа или буквы в порядке, который показан в задании.', skill:'Внимание', hero:'Vinch', accent:'#638fd2', icon:'table', age:'6–9 лет', levels:30 },
 ];
-export const gameById = (id: string) => GAMES.find((g) => g.id === id);
+export function gameById(id:string,mode:AgeMode='solo'):GameInfo|undefined {
+  const game=GAMES.find(g=>g.id===id);
+  if(mode==='together' && game?.standalone){
+    const {standalone, ...details}=game;
+    return {...details, levels:8, short:'Найди числа по образцу', story:'Винч разложил карточки с числами. Помоги ему найти их по порядку!', action:'Посмотри на число вверху. Найди такое же на поле.'};
+  }
+  return game;
+}
 export const GAME_GROUPS:readonly {id:string;title:string;description:string;games:readonly GameId[]}[]=[
   {id:'attention',title:'Внимание и восприятие',description:'Замечаем детали, сравниваем формы и ищем нужное.',games:['shadows','proofreading','tangles','hidden-objects','schulte']},
   {id:'reading',title:'Чтение и речь',description:'Собираем слова, открываем послания и разгадываем загадки.',games:['anagrams','ciphers','maze-codes','riddle-wheel']},

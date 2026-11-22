@@ -1,13 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { random, shuffled, deranged, makeMaze, neighbors, route, pour, sortedTubes, tubeSolution, TUBE_LEVELS, clockHands, formatClock } from '../src/rules.ts';
+import { random, shuffled, deranged, makeMaze, neighbors, route, pour, sortedTubes, tubeSolution, TOGETHER_TUBES, TUBE_LEVELS, clockHands, formatClock } from '../src/rules.ts';
 import { clockLesson, guideForLevel, MEMORY_COUNTS, WIRE_COUNTS, SHADOW_OPTIONS, CIPHER_WORDS, GUIDES } from '../src/learning.ts';
 import {searchLesson,SEARCH_COUNTS,paintLesson,riddleLesson,riddleChoices,RIDDLES} from '../src/expansion.ts';
 import {readSchulteCompleted,SCHULTE_LEVELS} from '../src/standalone-progress.ts';
 import {TOTAL_LEVELS as ORIGINAL_SCHULTE_LEVELS,LEVELS as SCHULTE_RULES,buildPuzzle as buildSchultePuzzle} from '../vendor/schulte/src/config.js';
+import {selectMode,complete,isLevelUnlocked,finishedCount} from '../src/save.ts';
 import { canOpenLevel,firstPendingLevel } from '../src/progression.ts';
 import { shadowLesson,SHADOW_ROUNDS,SHADOW_TEXTURES,buildProofreadingLesson,proofreadingLesson } from '../src/challenges.ts';
-import { GAMES,GAME_GROUPS } from '../src/catalog.ts';
+import { GAMES,GAME_GROUPS,gameById } from '../src/catalog.ts';
 import { normalizeVoiceText,recordingForText } from '../src/voice-text.ts';
 import { existsSync,readFileSync } from 'node:fs';
 
@@ -78,7 +79,7 @@ test('memory, silhouette and tracing lessons begin small and grow gradually',()=
   for(let i=1;i<CIPHER_WORDS.length;i++)assert.ok(CIPHER_WORDS[i].length>=CIPHER_WORDS[i-1].length);
 });
 test('every collection scene has three concrete instructions and guidance for all eight lessons',()=>{
-  assert.equal(Object.keys(GUIDES).length,13);
+  assert.equal(Object.keys(GUIDES).length,14);
   for(const guide of Object.values(GUIDES)){
     assert.equal(guide.steps.length,3);assert.equal(guide.stages.length,8);
     assert.ok([...guide.steps,...guide.stages].every(text=>text.trim().length>8));
@@ -211,4 +212,67 @@ test('voice handoff contains unique portable filenames and covers every current 
     for(let n=0;n<game.levels;n++)assert.ok(texts.has(guideForLevel(game.id,n).join(' ')));
   }
   for(const riddle of RIDDLES)assert.ok(texts.has(riddle.text));
+});
+
+test('both age routes cover all fourteen games and junior instructions match the playable round',()=>{
+  const plans=JSON.parse(readFileSync(new URL('../assets/voice/script.json',import.meta.url),'utf8'));
+  const spoken=new Set(plans.lines.map((line:{text:string})=>line.text));
+  for(const game of GAMES){
+    const junior=gameById(game.id,'together')!;
+    assert.equal(junior.levels,8);
+    assert.equal(junior.standalone,undefined);
+    assert.ok(spoken.has(junior.story));
+    for(let n=0;n<8;n++)assert.ok(spoken.has(guideForLevel(game.id,n,'together').join(' ')));
+  }
+  assert.equal(gameById('schulte','solo')?.levels,30);
+  for(const mode of ['solo','together'] as const){
+    const words=new Set<string>();
+    for(let n=0;n<8;n++){
+      const lesson=proofreadingLesson(n,mode);
+      words.add(lesson.target);
+      assert.ok(lesson.words.includes(lesson.target)&&lesson.words.some(w=>w!==lesson.target));
+      assert.ok(guideForLevel('proofreading',n,mode)[0].includes(lesson.target));
+    }
+    assert.equal(words.size,8);
+  }
+});
+test('adult-assisted tasks are solvable with small sets and visual matching',()=>{
+  TOGETHER_TUBES.forEach((tubes,i)=>{
+    const solution=tubeSolution(tubes);
+    assert.ok(solution?.length,'junior tubes '+i);
+    assert.ok(sortedTubes(solution.reduce((state,[a,b])=>pour(state,a,b)!,tubes)));
+    const maze=makeMaze(i,23,5);assert.ok(route(maze).length);
+    assert.ok(maze.cells.filter(Boolean).length>=5);
+    assert.ok(clockLesson(i,'together').times.every(n=>n%60===0&&n<=720));
+    assert.ok(paintLesson(i,'together').problems.every(p=>p.answer===p.expression.length&&p.answer<=5));
+    assert.ok(searchLesson(i,'together').targets.length<searchLesson(i).targets.length);
+    assert.ok(riddleLesson(i,'together').choiceCount<riddleLesson(i).choiceCount);
+    const shadow=shadowLesson(i,0,'together');
+    assert.equal(shadow.rotation,0);assert.ok(shadow.options.includes(shadow.answer));
+  });
+});
+
+test('switching ages keeps legacy, assisted and original Schulte progress independent',()=>{
+  const old=JSON.stringify({version:1,sound:false,completed:{shadows:[0,3]}});
+  const native=JSON.stringify({levels:{1:{stars:2},2:{stars:1}}});
+  const store=new Map([['neurons-play-v1',old],['shulte.v3',native]]);
+  const original=Object.getOwnPropertyDescriptor(globalThis,'localStorage');
+  Object.defineProperty(globalThis,'localStorage',{configurable:true,value:{
+    getItem:(k:string)=>store.get(k)??null,setItem:(k:string,v:string)=>store.set(k,v),
+  }});
+  try {
+    selectMode('together');
+    assert.equal(finishedCount('shadows'),0);assert.equal(finishedCount('schulte'),0);
+    complete('shadows',1);assert.equal(finishedCount('shadows'),0);
+    complete('shadows',0);complete('schulte',0);
+    assert.equal(store.get('neurons-play-v1'),old);
+    selectMode('solo');assert.equal(finishedCount('shadows'),2);assert.equal(finishedCount('schulte'),2);
+    assert.ok(isLevelUnlocked('shadows',3));assert.equal(isLevelUnlocked('shadows',2),false);
+    selectMode('together');assert.equal(finishedCount('shadows'),1);assert.equal(finishedCount('schulte'),1);
+    assert.equal(store.get('shulte.v3'),native);
+  } finally {
+    selectMode('solo');
+    if(original)Object.defineProperty(globalThis,'localStorage',original);
+    else Reflect.deleteProperty(globalThis,'localStorage');
+  }
 });

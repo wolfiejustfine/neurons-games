@@ -45,7 +45,9 @@ export async function solve(page,id){
       state=(await inspect(page)).round;
     }
   }
-  else if(id==='anagrams'){
+  else if(id==='schulte'){
+    for(let n=1;n<=state.numbers.length;n++)await tap(page,'number-'+n);
+  }else if(id==='anagrams'){
     for(let i=0;i<state.word.length;i++){
       state=(await inspect(page)).round;
       const source=state.letters.findIndex((letter,j)=>letter===state.word[i]&&!state.slots.includes(j));
@@ -55,7 +57,9 @@ export async function solve(page,id){
     for(let i=0;i<state.word.length;i++){await tap(page,'key-'+state.word[i]);await tap(page,'code-'+i);}
   }else if(id==='proofreading'){
     for(let i=0;i<state.words.length;i++){
-      await tap(page,state.words[i]===state.sample?'tool-good':'tool-bad');await tap(page,'sign-'+i);
+      if(state.together&&state.words[i]!==state.sample)continue;
+      if(!state.together)await tap(page,state.words[i]===state.sample?'tool-good':'tool-bad');
+      await tap(page,'sign-'+i);
     }
   }else if(id==='alarms'){
     for(let i=0;i<state.times.length;i++){await tap(page,'clock-'+state.times[i]);await tap(page,'meeting-'+i);}
@@ -95,7 +99,7 @@ export async function solve(page,id){
       if(state.done[i])continue;
       await tap(page,'region-'+i);await page.locator('#number-value').waitFor({state:'visible'});
       for(const digit of String(state.problems[i].answer))await page.locator('[data-number="'+digit+'"]').tap();
-      await page.locator('[data-number="✓"]').tap();await page.locator('#modal').waitFor({state:'hidden'});
+      if(!state.problems[i].expression.includes('●'))await page.locator('[data-number="✓"]').tap();await page.locator('#modal').waitFor({state:'hidden'});
       await page.waitForTimeout(80);
     }
   }else if(id==='riddle-wheel'){

@@ -4,7 +4,7 @@ import { panel,label,target,color,button } from '../play/draw';
 import type { RoundFactory } from '../play/types';
 const HEROES=[['Aris','Арис'],['Jays','Джейс'],['Ren','Рэн'],['Newt','Ньют']];
 const create:RoundFactory=(c)=>{
-  const {count,times,halfHours,afternoon}=clockLesson(c.level);
+  const {count,times,halfHours,afternoon}=clockLesson(c.level,c.mode);
   const sources=shuffled(times,random(805+c.level)),matched=Array<boolean>(count).fill(false);
   let selected:number|null=null,highlight=-1,solved=false;
   const cardPositions=()=>Array.from({length:count},(_,i)=>count===4?{x:195+(i%2)*330,y:c.height*(.22+Math.floor(i/2)*.25),w:300,h:c.height*.215}:{x:360-(count-1)*220/2+i*220,y:c.height*.32,w:count===2?250:200,h:c.height*.37});
@@ -22,7 +22,15 @@ const create:RoundFactory=(c)=>{
     c.clear();const h=c.height;
     cardPositions().forEach((p,i)=>{
       panel(c,p.x,p.y,p.w,p.h,matched[i]?'#eef9f2':'#ffffff',highlight===i?c.info.accent:'#dce8f0',25);
-      const hero=c.scene.add.image(p.x,p.y-p.h*.08,'hero-'+HEROES[i][0]);hero.setScale(Math.min(p.w*.52/hero.width,p.h*.60/hero.height));c.root.add(hero);
+      if(c.mode==='together'){
+        const cx=p.x+p.w*.23,cy=p.y-p.h*.06,r=Math.min(41,p.h*.23);
+        const face=c.scene.add.graphics();c.root.add(face);
+        face.fillStyle(0xffffff).fillCircle(cx,cy,r).lineStyle(3,0x9bbfcb).strokeCircle(cx,cy,r);
+        const hands=clockHands(times[i]);
+        face.lineStyle(4,0x3895b7).lineBetween(cx,cy,cx,cy-r*.8);
+        face.lineStyle(7,0x7660ac).lineBetween(cx,cy,cx+Math.cos(hands.hour)*r*.56,cy+Math.sin(hands.hour)*r*.56);
+      }
+      const hero=c.scene.add.image(p.x-(c.mode==='together'?p.w*.2:0),p.y-p.h*.08,'hero-'+HEROES[i][0]);hero.setScale(Math.min(p.w*.52/hero.width,p.h*.60/hero.height));c.root.add(hero);
       label(c,p.x,p.y+p.h*.28,HEROES[i][1]+' · '+formatClock(times[i]),count===4?27:28,{fontStyle:'bold'});
       if(matched[i])label(c,p.x+p.w/2-25,p.y-p.h/2+24,'✓',27,{color:'#68a98a'});
       if(!solved)target(c,'meeting-'+i,p.x,p.y,p.w,p.h,()=>{if(selected!==null)place(selected,i);else c.hooks.feedback('Сначала выбери часы внизу.');});
@@ -57,7 +65,7 @@ const create:RoundFactory=(c)=>{
       c.hooks.clockPreview(selected);
     });
   }
-  c.hooks.instruction(halfHours?'Длинная стрелка на 6 — 30 минут. Короткая — между часами. Подбери будильники.':afternoon?'Теперь встречи после полудня: например, 13:00 — час дня. Раздай будильники.':'Короткая стрелка показывает часы. Подбери будильник для каждой встречи.');
+  c.hooks.instruction(c.mode==='together'?'Посмотри на стрелки. Найди герою часы с такими же стрелками.':halfHours?'Длинная стрелка на 6 — 30 минут. Короткая — между часами. Подбери будильники.':afternoon?'Теперь встречи после полудня: например, 13:00 — час дня. Раздай будильники.':'Короткая стрелка показывает часы. Подбери будильник для каждой встречи.');
   return {render,hasProgress:()=>matched.some(Boolean),hint(){highlight=matched.findIndex((v)=>!v);if(highlight>=0){selected=times[highlight];render();c.hooks.feedback('Подходящие часы и встреча выделены. Время: '+formatClock(selected)+'.');}},inspect:()=>({times,sources,matched,selected,solved})};
 };
 export default create;

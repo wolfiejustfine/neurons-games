@@ -4,7 +4,7 @@ import { MEMORY_COUNTS } from '../learning';
 import { panel,label,picture,movable,target,button } from '../play/draw';
 import type { RoundFactory } from '../play/types';
 const create:RoundFactory=(c)=>{
-  const count=MEMORY_COUNTS[c.level],rng=random(450+c.level);
+  const count=c.mode==='together'?(c.level<4?2:3):MEMORY_COUNTS[c.level],rng=random(450+c.level);
   const order=shuffled(PROPS,rng).slice(0,count),tray=shuffled(order,rng),placed=Array<boolean>(count).fill(false);
   let preview=true,started=false,selected:string|null=null,hintIndex=-1,solved=false;
   const positions=()=>order.map((_,i)=>({x:145+(i%3)*215,y:c.height*(.17+Math.floor(i/3)*.25)}));
@@ -27,7 +27,7 @@ const create:RoundFactory=(c)=>{
       if(preview||placed[i])picture(c,order[i],p.x,p.y,125);
       else{
         panel(c,p.x,p.y,154,132,hintIndex===i?'#fffcf5':'#f4eee7',hintIndex===i?c.info.accent:'#e4d9cc',20);
-        if(hintIndex===i)picture(c,order[i],p.x,p.y,113).setAlpha(.35);
+        if(hintIndex===i||(c.mode==='together'&&c.level<2))picture(c,order[i],p.x,p.y,113).setAlpha(.35);
         else label(c,p.x,p.y,'?',40,{color:'#c4b8a5'});
         target(c,'shelf-'+i,p.x,p.y,154,132,()=>{if(selected)place(selected,i);else c.hooks.feedback('Сначала выбери вещь внизу, затем коснись её прежнего места.');});
       }

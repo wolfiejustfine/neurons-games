@@ -31,3 +31,41 @@
 .dialog[data-kind=story],.dialog[data-kind=guide]{display:flex;flex-direction:column;overflow:hidden}.dialog[data-kind=story]>h2,.dialog[data-kind=guide]>h2,.intro-step{flex-shrink:0}.intro-content{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:0 2px 4px;flex-shrink:1}.intro-actions{flex-shrink:0;padding-top:4px;background:linear-gradient(#fbfdff,#f7fbff)}.intro-actions .guide-read{margin-top:8px}.intro-actions .primary{margin-top:12px}.intro-actions .intro-back{margin-top:6px;min-height:40px}.dialog[data-kind=guide] .intro-content>.guide-steps{margin-top:4px}
 @media(max-width:650px){.category-nav{gap:7px;margin-bottom:25px}.category-nav a{font-size:12px;padding:9px 12px}.group-heading h3{font-size:20px}.group-heading p{font-size:13px}.catalog-groups{gap:29px}.dialog[data-kind=story],.dialog[data-kind=guide]{padding:22px 20px}.dialog[data-kind=story] h2,.dialog[data-kind=guide] h2{font-size:30px}.story-bubble{font-size:21px;padding:18px}.story-hero{height:140px}.dialog[data-kind=guide] .guide-steps li{font-size:18px}.dialog[data-kind=guide] .guide-example{padding:12px 10px}.instruction{font-size:16px;min-height:44px}.stage-caption{font-size:12px}}
 @media(max-height:700px){.story-hero{height:82px;margin:8px 0 18px}.story-bubble{font-size:20px;line-height:1.45;padding:15px}.dialog[data-kind=story] h2,.dialog[data-kind=guide] h2{font-size:27px;margin:12px 0}.dialog[data-kind=guide] .guide-example{margin:12px 0}.dialog[data-kind=guide] .guide-example figcaption{font-size:13px}.dialog[data-kind=guide] .guide-steps li{font-size:17px}.dialog[data-kind=guide] .guide-steps{gap:12px;margin:14px 0}.dialog[data-kind=guide] .guide-read{font-size:15px}.instruction{font-size:15px;min-height:42px}.dialog[data-kind=guide] .primary{font-size:17px}.intro-step{font-size:13px}}
+
+.age-switch {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  width: min(100%, 440px);
+  margin: 0 auto 16px;
+  padding: 4px;
+  border: 1px solid #bdcedf;
+  border-radius: 20px;
+  background: #e4eff8;
+}
+.age-switch button {
+  min-height: 54px;
+  padding: 7px 10px;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  background: transparent;
+  color: #445c78;
+  line-height: 1.25;
+}
+.age-switch button[aria-pressed="true"] {
+  border-color: #7585c9;
+  background: white;
+  color: #35498b;
+  box-shadow: 0 2px 6px #7589b329;
+}
+.age-switch strong,.age-switch span {display:block}
+.age-switch strong {font-size:18px}
+.age-switch span {font-size:14px}
+.counting-dots {margin:22px auto;color:#4c66a4;font-size:clamp(28px,8vw,44px);line-height:1.2}
+.counting-choices {display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:16px auto 0}
+.dialog .counting-choices button {width:46px;min-height:48px;padding:6px;margin:0;font-size:22px}
+
+@media (max-width:400px) {
+  .welcome h1 {font-size:clamp(32px,10vw,40px)}
+  .welcome p {max-width:58%}
+  .welcome-hero {width:37%;right:0}
+}

@@ -1,13 +1,13 @@
 import { PROP_NAMES } from '../catalog';
-import { SHADOW_ROUNDS,shadowLesson } from '../challenges';
+import { SHADOW_ROUNDS,TOGETHER_SHADOW_ROUNDS,shadowLesson } from '../challenges';
 import { panel,picture,target,label,confetti,button } from '../play/draw';
 import type { RoundFactory } from '../play/types';
 const create:RoundFactory=(c)=>{
-  let part=0,question=shadowLesson(c.level,part),solved=false,itemSolved=false,hinted=false,wrong:string[]=[];
-  const count=SHADOW_ROUNDS[c.level];
+  let part=0,question=shadowLesson(c.level,part,c.mode),solved=false,itemSolved=false,hinted=false,wrong:string[]=[];
+  const count=(c.mode==='together'?TOGETHER_SHADOW_ROUNDS:SHADOW_ROUNDS)[c.level];
   const name=(key:string)=>PROP_NAMES[key.startsWith('shadow-')?key.split('-')[1]:key];
   function next(){
-    part++;question=shadowLesson(c.level,part);itemSolved=false;hinted=false;wrong=[];
+    part++;question=shadowLesson(c.level,part,c.mode);itemSolved=false;hinted=false;wrong=[];
     render();c.hooks.feedback('Новая тень. Сравни детали.');
   }
   function render(){
@@ -22,7 +22,7 @@ const create:RoundFactory=(c)=>{
     }
     const cardW=260,cardH=Math.min(190,h*.245);
     question.options.forEach((key,i)=>{
-      const x=question.options.length===3&&i===2?360:i%2===0?205:515,y=h*(i<2?.55:.825),isAnswer=key===question.answer;
+      const x=question.options.length===3&&i===2?360:i%2===0?205:515,y=h*(question.options.length===2?.67:i<2?.55:.825),isAnswer=key===question.answer;
       panel(c,x,y,cardW,cardH,hinted&&isAnswer?'#edf9f2':wrong.includes(key)?'#fff5f1':'#fff',hinted&&isAnswer?'#72bd9a':'#dbe7f1');
       picture(c,key,x,y-12,Math.min(cardH-32,150));
       label(c,x,y+cardH/2-21,name(key),26);
@@ -35,7 +35,7 @@ const create:RoundFactory=(c)=>{
       });
     });
   }
-  c.hooks.instruction('Найди предмет с точно такой же формой. Тень может быть немного повёрнута.');
+  c.hooks.instruction(c.mode==='together'?'Посмотри на тень. Покажи предмет такой же формы.':'Найди предмет с точно такой же формой. Тень может быть немного повёрнута.');
   return {render,hasProgress:()=>part>0||itemSolved||wrong.length>0,hint(){hinted=true;render();c.hooks.feedback('Нужный предмет подсвечен. Сравни его края с тенью.');},inspect:()=>({...question,part,count,itemSolved,solved})};
 };
 export default create;

@@ -12,27 +12,30 @@ const ROCKET=[
   {x:255,y:390,w:75,h:90,r:30},{x:345,y:390,w:75,h:90,r:30},
 ];
 const create:RoundFactory=c=>{
-  const lesson=paintLesson(c.level),done=Array<boolean>(lesson.count).fill(false);
+  const lesson=paintLesson(c.level,c.mode),done=Array<boolean>(lesson.count).fill(false);
   let selected=-1,highlight=-1,solved=false;
+  const counting=c.mode==='together';
+  const partColor=(i:number)=>PAINT_COLORS[counting?lesson.problems[i].answer-1:i];
   const parts=lesson.count===4?[ROBOT[0],ROBOT[1],ROBOT[4],ROBOT[5]]:lesson.theme==='rocket'?ROCKET:ROBOT;
   function choose(i:number){
     if(solved||done[i])return;selected=i;render();
     const problem=lesson.problems[i];
     c.hooks.numberQuestion(problem.expression,answer=>{
-      if(answer!==problem.answer){c.hooks.feedback(problem.operation==='+'?'Начни с '+problem.a+' и прибавь '+problem.b+'. Попробуй ещё.':'Начни с '+problem.a+' и отними '+problem.b+'. Попробуй ещё.','try');return false;}
+      if(answer!==problem.answer){c.hooks.feedback(counting?'Посчитай точки ещё раз. Касайся пальцем каждой по очереди.':problem.operation==='+'?'Начни с '+problem.a+' и прибавь '+problem.b+'. Попробуй ещё.':'Начни с '+problem.a+' и отними '+problem.b+'. Попробуй ещё.','try');return false;}
       done[i]=true;highlight=-1;selected=-1;
-      if(done.every(Boolean)){solved=true;render();c.hooks.win('Рисунок раскрашен! Все примеры решены.');}
+      if(done.every(Boolean)){solved=true;render();c.hooks.win(counting?'Ты посчитал точки и раскрасил робота!':'Рисунок раскрашен! Все примеры решены.');}
       else{render();c.hooks.feedback('Верно: '+problem.expression+' = '+answer+'. Область раскрасилась!','good');}
       return true;
     });
   }
   function render(){
     c.clear();const h=c.height,s=Math.min(1.35,h*.69/450),top=h*.19;
-    label(c,360,h*.035,'ЧИСЛО ПОДСКАЖЕТ ЦВЕТ',24,{color:'#8d91a9'});
-    lesson.problems.forEach((problem,i)=>{
-      const step=96,x=360-(lesson.count-1)*step/2+i*step;
+    label(c,360,h*.035,counting?'СКОЛЬКО ТОЧЕК?':'ЧИСЛО ПОДСКАЖЕТ ЦВЕТ',24,{color:'#8d91a9'});
+    const palette=counting?Array.from({length:lesson.max},(_,i)=>i+1):lesson.problems.map(p=>p.answer);
+    palette.forEach((answer,i)=>{
+      const step=96,x=360-(palette.length-1)*step/2+i*step;
       panel(c,x,h*.11,80,62,PAINT_COLORS[i],'#ffffff',15);
-      label(c,x,h*.11,String(problem.answer),29,{color:'#304363',fontStyle:'bold'});
+      label(c,x,h*.11,String(answer),29,{color:'#304363',fontStyle:'bold'});
     });
     const g=c.scene.add.graphics();c.root.add(g);
     const px=(x:number)=>360+(x-300)*s,py=(y:number)=>top+y*s;
@@ -47,9 +50,9 @@ const create:RoundFactory=c=>{
       g.fillStyle(0xe9f2fa).fillEllipse(360,py(445),250*s,18*s);
     }
     parts.forEach((p,i)=>{
-      g.fillStyle(color(done[i]?PAINT_COLORS[i]:'#ffffff')).fillRoundedRect(px(p.x-p.w/2),py(p.y-p.h/2),p.w*s,p.h*s,p.r*s);
+      g.fillStyle(color(done[i]?partColor(i):'#ffffff')).fillRoundedRect(px(p.x-p.w/2),py(p.y-p.h/2),p.w*s,p.h*s,p.r*s);
       g.lineStyle((highlight===i||selected===i?6:4)*s,color(highlight===i||selected===i?'#d4af59':'#94acc4')).strokeRoundedRect(px(p.x-p.w/2),py(p.y-p.h/2),p.w*s,p.h*s,p.r*s);
-      const y=p.y-(i===0?22:lesson.theme==='rocket'&&i===1?50:0),expression=done[i]?String(lesson.problems[i].answer):lesson.problems[i].expression;
+      const y=p.y-(i===0?22:lesson.theme==='rocket'&&i===1?50:0),expression=done[i]?String(lesson.problems[i].answer):counting?'?':lesson.problems[i].expression;
       label(c,px(p.x),py(y),expression,Math.min(31,28*s),{fontStyle:'bold',color:done[i]?'#355d70':'#637991'});
       if(!done[i]&&!solved)target(c,'region-'+i,px(p.x),py(p.y),p.w*s,p.h*s,()=>choose(i));
     });
@@ -62,7 +65,7 @@ const create:RoundFactory=c=>{
     }
     label(c,360,h*.94,solved?'ЦВЕТНОЕ ОТКРЫТИЕ ГОТОВО!':'Выбери белую область · '+done.filter(Boolean).length+' / '+lesson.count,27,{color:'#7f8da4'});
   }
-  c.hooks.instruction('Коснись белой области, реши пример и введи ответ — появится цвет.');
-  return {render,hasProgress:()=>done.some(Boolean),hint(){highlight=done.findIndex(v=>!v);if(highlight>=0){render();const p=lesson.problems[highlight];c.hooks.feedback('В выделенной области '+p.expression+' = '+p.answer+'. Коснись её и набери ответ.');}},inspect:()=>({...lesson,done,selected,highlight,solved})};
+  c.hooks.instruction(counting?'Коснись белой части робота. Посчитай точки и выбери число.':'Коснись белой области, реши пример и введи ответ — появится цвет.');
+  return {render,hasProgress:()=>done.some(Boolean),hint(){highlight=done.findIndex(v=>!v);if(highlight>=0){render();const p=lesson.problems[highlight];c.hooks.feedback(counting?'Открой выделенную часть. Посчитай точки вместе со взрослым.':'В выделенной области '+p.expression+' = '+p.answer+'. Коснись её и набери ответ.');}},inspect:()=>({...lesson,done,selected,highlight,solved})};
 };
 export default create;
