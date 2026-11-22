@@ -1,9 +1,9 @@
 import type { SceneGameId } from './catalog';
 import { random, shuffled } from './rules.ts';
+import { SHADOW_ROUNDS, proofreadingLesson, PROOFREAD_COUNTS } from './challenges.ts';
+export { SHADOW_OPTIONS, PROOFREAD_COUNTS } from './challenges.ts';
 
 export const MEMORY_COUNTS = [2,3,3,4,4,5,5,6] as const;
-export const PROOFREAD_COUNTS = [4,4,6,6,6,9,9,9] as const;
-export const SHADOW_OPTIONS = [2,3,3,3,4,4,4,4] as const;
 export const SORT_COUNTS = [2,2,4,4,4,6,6,6] as const;
 export const WIRE_COUNTS = [1,2,2,3,3,3,4,4] as const;
 export const CIPHER_WORDS = ['КОТ','ДОМ','ЛУНА','ДРУГ','КНИГА','НАУКА','ПРИВЕТ','ПОБЕДА'] as const;
@@ -46,8 +46,8 @@ export const GUIDES:Record<SceneGameId,LearningGuide> = {
     stages:['Две простые загадки','Ещё две загадки','Три загадки о знакомых вещах','Ищем по описанию','Загадки о предметах','Внимательно слушаем','Четыре загадки','Последние загадки Рэна'],
   },
   shadows:{
-    steps:['Рассмотри форму тени.','Коснись предмета с такой же формой.','Узнай следующий предмет.'],
-    stages:['Два предмета на выбор','Три предмета на выбор','Три предмета на выбор','Закрепляем узнавание','Четыре предмета на выбор','Сравниваем формы','Сравниваем формы','Всё получается!'],
+    steps:['Рассмотри форму тени: края, ручку и выступы.','Коснись предмета с точно такой же формой. Похожие предметы могут отличаться деталями.','После верного ответа нажми «Следующая тень». Узнай все предметы в задании.'],
+    stages:SHADOW_ROUNDS.map((n,i)=>i===0?'Две тени · три варианта':i<3?n+' похожих силуэта':n+' силуэта · тень повёрнута'),
   },
   anagrams:{
     steps:['Назови предмет. Кнопка «Что на картинке?» подскажет его название.','Перенеси буквы в пустые клетки по порядку.','Можно нажать на букву, затем на клетку.'],
@@ -87,6 +87,11 @@ export const GUIDES:Record<SceneGameId,LearningGuide> = {
   },
 };
 export function guideForLevel(id:SceneGameId,level:number):LearningGuide['steps'] {
+  if(id==='proofreading')return [
+    'Сравни каждую надпись с образцом: '+proofreadingLesson(level).target+'.',
+    'Для верной выбери «Подчеркнуть», для ошибочной — «Зачеркнуть».',
+    'Коснись надписи — линия появится сама. Проверь все знаки.',
+  ];
   if(id==='alarms'){
     const lesson=clockLesson(level);
     if(!lesson.afternoon)return [

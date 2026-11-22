@@ -25,6 +25,13 @@ export const GAMES: GameInfo[] = [
   { id:'schulte', standalone:'schulte/', title:'Таблицы Шульте', short:'30 уровней и таблица дня', story:'Твоя готовая игра с Винчем: пять миров, таблица дня и экран для родителей.', action:'Нажимай числа или буквы в порядке, который показан в задании.', skill:'Внимание', hero:'Vinch', accent:'#638fd2', icon:'table', age:'6–9 лет', levels:30 },
 ];
 export const gameById = (id: string) => GAMES.find((g) => g.id === id);
+export const GAME_GROUPS:readonly {id:string;title:string;description:string;games:readonly GameId[]}[]=[
+  {id:'attention',title:'Внимание и восприятие',description:'Замечаем детали, сравниваем формы и ищем нужное.',games:['shadows','proofreading','tangles','hidden-objects','schulte']},
+  {id:'reading',title:'Чтение и речь',description:'Собираем слова, открываем послания и разгадываем загадки.',games:['anagrams','ciphers','maze-codes','riddle-wheel']},
+  {id:'logic',title:'Логика и пространство',description:'Находим путь и наводим порядок.',games:['color-sort','maze-sort']},
+  {id:'memory',title:'Память',description:'Запоминаем расположение и возвращаем вещи на места.',games:['rearrangement']},
+  {id:'math',title:'Математика и время',description:'Считаем, раскрашиваем и знакомимся с часами.',games:['math-coloring','alarms']},
+];
 export const HERO_NAMES: Record<Hero,string> = { Vinch:'Винч', Newt:'Ньют', Jays:'Джейс', Aris:'Арис', Ren:'Рэн' };
 export const PROP_NAMES: Record<string,string> = { lamp:'лампа', book:'книга', key:'ключ', sign:'знак', clock:'часы', box:'коробка', flask:'колба', compass:'компас', hammer:'молоток', cable:'провод', apple:'яблоко', leaf:'лист', cup:'чашка', rocket:'ракета', fish:'рыба', house:'дом', ball:'мяч', cheese:'сыр', cake:'торт', moon:'луна', cat:'кот', beetle:'жук', screw:'винт', nail:'гвоздь' };
 export const PROPS = ['key','book','flask','hammer','apple','cup','rocket','lamp','leaf','clock','ball','fish'];

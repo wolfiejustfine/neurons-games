@@ -1,4 +1,6 @@
 import { save } from './save';
+import recordedVoices from './voice-recordings.json' with {type:'json'};
+import { recordingForText } from './voice-text';
 let audio: AudioContext | undefined;
 let narration:HTMLAudioElement|undefined;
 let narrationToken=0;
@@ -15,9 +17,8 @@ export function tone(kind:'tap'|'good'|'try'|'win'='tap') {
     });
   } catch { /* Sound is optional. */ }
 }
-export function say(text:string) {
-  if (!save.sound || !('speechSynthesis' in window)) return false;
-  silence();
+function systemSay(text:string) {
+  if(!('speechSynthesis' in window))return false;
   const utterance=new SpeechSynthesisUtterance(text);
   utterance.lang='ru-RU'; utterance.rate=.88;
   const voice=speechSynthesis.getVoices().find((v)=>v.lang.startsWith('ru'));
@@ -25,12 +26,25 @@ export function say(text:string) {
   speechSynthesis.speak(utterance);
   return true;
 }
+async function playNarration(source:string,text:string){
+  const token=narrationToken;
+  narration=new Audio(source);narration.preload='auto';narration.volume=.85;
+  try{await narration.play();}catch{if(token===narrationToken&&save.sound)systemSay(text);}
+}
+export function say(text:string) {
+  if(!save.sound)return false;
+  silence();
+  const recording=recordingForText(text,recordedVoices);
+  if(recording){void playNarration(import.meta.env.BASE_URL+'audio/voice/'+recording,text);return true;}
+  return systemSay(text);
+}
+export function narrationSource(text:string,id:string){
+  const recording=recordingForText(text,recordedVoices);
+  return import.meta.env.BASE_URL+'audio/'+(recording?'voice/'+recording:'riddle-'+id+'.mp3');
+}
 export async function narrate(text:string,id:string){
   silence();if(!save.sound)return;
-  const token=narrationToken;
-  narration=new Audio(import.meta.env.BASE_URL+'audio/riddle-'+id+'.mp3');
-  narration.preload='auto';narration.volume=.85;
-  try{await narration.play();}catch{if(token===narrationToken&&save.sound)say(text);}
+  await playNarration(narrationSource(text,id),text);
 }
 export function silence() {
   narrationToken++;if(narration){narration.pause();narration.removeAttribute('src');narration.load();narration=undefined;}

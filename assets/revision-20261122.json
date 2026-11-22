@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-22",
+  "request": "Feedback action plan supplied by the user",
+  "implemented": [
+    "Separate character story and large instructions before play",
+    "Fixed audio and start controls on small screens",
+    "Five catalog groups by development direction",
+    "Sequential level unlock with replay and legacy save preservation",
+    "24 silhouette comparisons across 8 levels, 16 related shape variants and gentle rotations",
+    "Configurable proofreading word pack and varied missing, swapped and substituted letters",
+    "154-line recording handoff, 69 first-priority lines and MP3 import pipeline"
+  ],
+  "pending": [
+    "User supplies new recordings after choosing a voice from three samples",
+    "Nastya supplies new words and game-specific difficulty suggestions",
+    "Nastya and team observe child playtests and adjust balance"
+  ],
+  "voice": {
+    "files": "assets/voice/",
+    "new_recordings_received": 0,
+    "existing_draft_narration_retained_as_fallback": true,
+    "elevenlabs_account_access": "not attempted, per user instruction"
+  },
+  "shadow_assets": {
+    "generator": "tools/build-shadow-assets.mjs",
+    "files": "public/props/shadow-*.svg",
+    "count": 16,
+    "size": [200, 200],
+    "total_bytes": 12457,
+    "provenance": "Project-authored vector variations of existing key, cup, flask and rocket props; same palettes and rounded outlines",
+    "approval": "Prototype for Nastya review; no child playtest or four-year-old suitability claim"
+  }
+}

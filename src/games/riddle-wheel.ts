@@ -3,13 +3,14 @@ import { PROP_NAMES } from '../catalog';
 import { label,panel,picture,target,button,color } from '../play/draw';
 import type { RoundFactory } from '../play/types';
 import type Phaser from 'phaser';
+import { narrationSource } from '../audio';
 const TINTS=['#9dcee4','#b7a4dd','#efc77e','#9dd1bd'];
 const create:RoundFactory=c=>{
   const {riddles,order,choiceCount}=riddleLesson(c.level),done=Array<boolean>(riddles.length).fill(false);
   let active:number|null=null,spinning=false,solved=false,angle=0,wrong:string[]=[],highlight:string|null=null;
   let wheel:Phaser.GameObjects.Container|undefined;
   let wheelLabels:Phaser.GameObjects.Text[]=[];
-  for(const riddle of riddles)void fetch(import.meta.env.BASE_URL+'audio/riddle-'+riddle.id+'.mp3').catch(()=>{});
+  for(const riddle of riddles)void fetch(narrationSource(riddle.text,riddle.id)).catch(()=>{});
   function spin(){
     if(spinning||solved||(active!==null&&!done[active]))return;
     const next=order.find(i=>!done[i]);if(next===undefined)return;

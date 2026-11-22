@@ -1,9 +1,10 @@
 import './style.css';
-import { GAMES, gameById, HERO_NAMES, type GameInfo, type SceneGameInfo } from './catalog';
-import { save, persist, complete, nextLevel, finishedCount } from './save';
+import { GAMES, GAME_GROUPS, gameById, HERO_NAMES, type GameInfo, type SceneGameInfo } from './catalog';
+import { save, persist, complete, nextLevel, finishedCount, isLevelUnlocked } from './save';
 import { tone, say, silence, narrate } from './audio';
 import { GUIDES, HINTS, guideForLevel } from './learning';
 import { clockFace,guideVisual } from './guide-visuals';
+import { proofreadingLesson } from './challenges';
 import type { Engine } from './play/engine';
 
 const base=import.meta.env.BASE_URL;
@@ -19,6 +20,7 @@ const svg=(name:string)=>{
     reset:'<path d="M4 10a8 8 0 1 1 2 8M4 4v6h6"/>',
     star:'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z"/>',
     close:'<path d="m6 6 12 12M6 18 18 6"/>',
+    lock:'<rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/>',
   };
   return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+(paths[name]??paths.star)+'</svg>';
 };
@@ -26,7 +28,7 @@ app.innerHTML=[
   '<main id="home" class="home">',
   '<header class="site-header"><a class="brand" href="#" aria-label="Нейроны — главная"><span class="brand-mark">н</span><span>нейроны<small>ИГРЫ МОЗГОПОЛИСА</small></span></a><button class="icon-button sound-toggle" aria-label="Выключить звук">'+svg('sound')+'</button></header>',
   '<section class="welcome"><div class="welcome-copy"><span class="eyebrow">МИР МАЛЕНЬКИХ ОТКРЫТИЙ</span><h1>Навстречу<br>открытиям!</h1><p>Помоги героям Мозгополиса.<br>Наблюдай, пробуй и находи решения.</p><button id="continue" class="primary">Начать приключение '+svg('arrow')+'</button></div><img class="welcome-hero" src="'+base+'art/Vinch.webp" alt="Винч рад встрече" fetchpriority="high"><img class="hero-cloud" src="'+base+'art/cloud.webp" alt=""><span class="floating-spark one">✦</span><span class="floating-spark two">✧</span></section>',
-  '<section class="adventures"><div class="section-heading"><div><span class="eyebrow">ТВОИ ПРИКЛЮЧЕНИЯ</span><h2>Что откроем сегодня?</h2></div><span id="collection-progress" class="collection-progress"></span></div><div id="game-grid" class="game-grid"></div></section>',
+  '<section class="adventures"><div class="section-heading"><div><span class="eyebrow">ТВОИ ПРИКЛЮЧЕНИЯ</span><h2>Что откроем сегодня?</h2></div><span id="collection-progress" class="collection-progress"></span></div><nav class="category-nav" aria-label="Направления развития">'+GAME_GROUPS.map(g=>'<a href="#group-'+g.id+'" data-category="'+g.id+'">'+g.title+'</a>').join('')+'</nav><div id="game-grid" class="catalog-groups"></div></section>',
   '<section class="world-note"><img loading="lazy" src="'+base+'art/world.webp" alt="Парящие острова Мозгополиса"><div><span class="eyebrow">ДОБРО ПОЖАЛОВАТЬ ДОМОЙ</span><h2>Здесь живёт любопытство</h2><p>На каждом острове тебя ждёт новое открытие.</p></div></section>',
   '<footer class="site-footer"><span>Нейроны · Учимся играя</span><button id="about-open" class="text-button">Для родителей</button></footer>',
   '</main>',
@@ -49,29 +51,33 @@ function home(){
   hideModal();el('home').classList.remove('hidden');el('play').classList.add('hidden');
   const completeGames=GAMES.filter((g)=>finishedCount(g.id)===g.levels).length;
   el('collection-progress').innerHTML=svg('star')+completeGames+' / '+GAMES.length;
-  el('game-grid').innerHTML=GAMES.map((g,i)=>{
+  const card=(g:GameInfo)=>{
+    const i=GAMES.indexOf(g);
     const count=finishedCount(g.id);
     return '<button class="game-card" data-game="'+g.id+'" style="--accent:'+g.accent+';--delay:'+(i*30)+'ms"><div class="card-art"><img src="'+base+'props/'+g.icon+'.svg" alt="" loading="lazy"><span class="card-number">'+String(i+1).padStart(2,'0')+'</span></div><div class="card-copy"><span class="card-skill">'+g.skill+'</span><h3>'+g.title+'</h3><p>'+g.short+'</p><div class="card-bottom"><span>'+(count?count+' из '+g.levels+' пройдено':g.age)+'</span>'+svg(count===g.levels?'star':'arrow')+'</div></div></button>';
-  }).join('');
+  };
+  el('game-grid').innerHTML=GAME_GROUPS.map(group=>'<section class="game-group" id="group-'+group.id+'" aria-labelledby="group-title-'+group.id+'"><header class="group-heading"><h3 id="group-title-'+group.id+'">'+group.title+'</h3><p>'+group.description+'</p></header><div class="game-grid">'+group.games.map(id=>card(gameById(id)!)).join('')+'</div></section>').join('');
   el('continue').innerHTML=(GAMES.some((g)=>finishedCount(g.id))?'Продолжить открытия':'Начать приключение')+svg('arrow');
 }
-function showModal(html:string,onClose:()=>void){
+function showModal(html:string,onClose:()=>void,kind='default'){
   modalCleanup?.();modalCleanup=undefined;silence();
   engine?.setInputEnabled(false);
   focusBeforeModal=document.activeElement as HTMLElement;
-  el('dialog').innerHTML=html;el('modal').classList.remove('hidden');modalClose=onClose;
+  el('dialog').innerHTML=html;el('dialog').dataset.kind=kind;el('modal').classList.remove('hidden');modalClose=onClose;
   (el('dialog').querySelector<HTMLElement>('.primary')??el('dialog')).focus({preventScroll:true});
   el('dialog').scrollTop=0;
 }
 function hideModal(){
+  silence();
   modalCleanup?.();modalCleanup=undefined;
   el('modal').classList.add('hidden');modalClose=undefined;
   engine?.setInputEnabled(true);
   if(focusBeforeModal?.isConnected)focusBeforeModal.focus();focusBeforeModal=null;
 }
 function guideSteps(info:SceneGameInfo,n=level){
-  return guideVisual(info.id,n)+'<ol class="guide-steps">'+guideForLevel(info.id,n).map((text,i)=>'<li><span class="guide-number">'+(i+1)+'</span><span>'+text+'</span></li>').join('')+'</ol><button id="guide-read" class="guide-read">'+svg('sound')+'Послушать правила</button>';
+  return '<ol class="guide-steps">'+guideForLevel(info.id,n).map((text,i)=>'<li><span class="guide-number">'+(i+1)+'</span><span>'+text+'</span></li>').join('')+'</ol>'+guideVisual(info.id,n);
 }
+const guideReadButton=()=>'<button id="guide-read" class="guide-read">'+svg('sound')+'Послушать правила</button>';
 function numberQuestion(expression:string,accept:(answer:number)=>boolean){
   showModal('<button id="number-close" class="dialog-close icon-button" aria-label="Вернуться к рисунку">'+svg('close')+'</button><span class="eyebrow">ЦВЕТНЫЕ ОТКРЫТИЯ</span><h2 id="dialog-title">Реши пример</h2><div class="number-expression">'+expression+' = <output id="number-value" aria-live="polite">?</output></div><p id="number-note" class="number-note" role="status">Набери ответ и нажми зелёную галочку.</p><div class="number-pad">'+['1','2','3','4','5','6','7','8','9','⌫','0','✓'].map(key=>'<button data-number="'+key+'" class="'+(key==='✓'?'number-check':'')+'" aria-label="'+(key==='⌫'?'Стереть цифру':key==='✓'?'Проверить ответ':key)+'">'+key+'</button>').join('')+'</div><button id="number-read" class="guide-read">'+svg('sound')+'Послушать пример</button>',hideModal);
   let value='';
@@ -97,17 +103,29 @@ function numberQuestion(expression:string,accept:(answer:number)=>boolean){
 }
 function bindGuideRead(info:SceneGameInfo,n:number){
   el('guide-read').onclick=()=>{
-    const text=guideForLevel(info.id,n).join(' ')+' '+(el('dialog').querySelector('figcaption')?.textContent??'');
+    if(!save.sound){save.sound=true;persist();updateSound();}
+    const text=guideForLevel(info.id,n).join(' ');
     if(!say(text))el('guide-read').textContent=save.sound?'Голос недоступен · правила выше':'Включи звук кнопкой вверху';
   };
 }
 function intro(info:GameInfo){
   if(info.id==='schulte'){silence();location.href=base+info.standalone;return;}
   const n=nextLevel(info.id);
-  showModal('<button class="dialog-close icon-button" id="intro-close" aria-label="Закрыть">'+svg('close')+'</button><div class="intro-portrait" style="--accent:'+info.accent+'"><img src="'+base+'art/'+info.hero+'.webp" alt="'+HERO_NAMES[info.hero]+'"></div><span class="eyebrow">'+info.skill+' · '+info.age+'</span><h2 id="dialog-title">'+info.title+'</h2><p>'+info.story+'</p>'+guideSteps(info,n)+'<button id="intro-start" class="primary">'+(n?'Продолжить · задание '+(n+1):'Начать играть')+svg('arrow')+'</button><p class="dialog-footnote">'+info.levels+' заданий · можно играть в своём темпе</p>',hideModal);
+  showModal('<button class="dialog-close icon-button" id="intro-close" aria-label="Вернуться к выбору игр">'+svg('close')+'</button><span class="intro-step">История <span aria-hidden="true">● ○</span></span><h2 id="dialog-title">'+info.title+'</h2><div class="intro-content"><div class="story-hero"><img src="'+base+'art/'+info.hero+'.webp" alt="'+HERO_NAMES[info.hero]+'"><span>'+HERO_NAMES[info.hero]+'</span></div><blockquote class="story-bubble" id="story-text">'+info.story+'</blockquote></div><div class="intro-actions"><button id="story-read" class="guide-read">'+svg('sound')+'Послушать историю</button><button id="story-next" class="primary">Далее '+svg('arrow')+'</button></div>',hideModal,'story');
   el('intro-close').onclick=hideModal;
-  bindGuideRead(info,n);
-  el('intro-start').onclick=()=>{hideModal();if(location.hash.slice(1)!==info.id)location.hash=info.id;else void start(info,n);};
+  el('story-read').onclick=()=>{if(!save.sound){save.sound=true;persist();updateSound();}if(!say(info.story))el('story-read').textContent='История написана в окошке выше';};
+  el('story-next').onclick=()=>introGuide(info,n,true);
+}
+function introGuide(info:SceneGameInfo,n:number,fromStory:boolean){
+  const allowed=isLevelUnlocked(info.id,n)?n:nextLevel(info.id);
+  showModal('<button class="dialog-close icon-button" id="intro-close" aria-label="Закрыть">'+svg('close')+'</button><span class="intro-step">Задание '+(allowed+1)+' из '+info.levels+' <span aria-hidden="true">○ ●</span></span><h2 id="dialog-title">Что будем делать?</h2><div class="intro-content">'+guideSteps(info,allowed)+'</div><div class="intro-actions">'+guideReadButton()+'<button id="intro-start" class="primary">Начать задание '+svg('arrow')+'</button><button id="intro-back" class="text-button intro-back">'+(fromStory?'Вернуться к истории':'Вернуться к игре')+'</button></div>',hideModal,'guide');
+  el('intro-close').onclick=hideModal;bindGuideRead(info,allowed);
+  el('intro-back').onclick=()=>fromStory?intro(info):hideModal();
+  el('intro-start').onclick=()=>{
+    hideModal();
+    if(location.hash.slice(1)!==info.id)history.pushState(null,'','#'+info.id);
+    void start(info,allowed);
+  };
 }
 async function ensureEngine(){
   if(engine)return engine;
@@ -118,6 +136,7 @@ async function ensureEngine(){
 }
 async function start(info:GameInfo,n:number){
   if(info.id==='schulte'){silence();location.href=base+info.standalone;return;}
+  if(!isLevelUnlocked(info.id,n))n=nextLevel(info.id);
   current=info;level=n;won=false;hintStep=0;const token=++runToken;
   silence();hideModal();
   el('completion').classList.add('hidden');el('play-tools').classList.remove('hidden');
@@ -161,11 +180,14 @@ function result(info:SceneGameInfo,n:number){
   const last=n+1>=info.levels;
   el('play-tools').classList.add('hidden');el('completion').classList.remove('hidden');
   el('next-round').innerHTML=(last?'К приключениям':'Дальше')+svg('arrow');
-  el('next-round').onclick=()=>{if(last)location.hash='';else void start(info,n+1);};
+  el('next-round').onclick=()=>{if(last)location.hash='';else introGuide(info,n+1,false);};
   el('replay-round').onclick=()=>void start(info,n);
 }
 el('game-grid').onclick=(event)=>{const button=(event.target as HTMLElement).closest<HTMLElement>('[data-game]');if(button){tone();intro(gameById(button.dataset.game!)!);}};
 el('continue').onclick=()=>intro(GAMES.find((g)=>finishedCount(g.id)<g.levels)??GAMES[0]);
+document.querySelectorAll<HTMLAnchorElement>('[data-category]').forEach(link=>link.onclick=event=>{
+  event.preventDefault();document.getElementById('group-'+link.dataset.category)?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
+});
 el('back-home').onclick=()=>{tone();location.hash='';};
 el('rotate-home').onclick=()=>{location.hash='';};
 function hint(){
@@ -173,6 +195,7 @@ function hint(){
   if(hintStep<2){
     let text=HINTS[current.id][hintStep++];
     if(current.id==='alarms')text=guideForLevel('alarms',level)[hintStep-1];
+    if(current.id==='proofreading'&&hintStep===1)text='Сравни надпись с образцом: '+proofreadingLesson(level).target+'.';
     el('feedback').textContent=text;el('feedback').dataset.kind='info';
   }else engine?.hint();
 }
@@ -180,7 +203,7 @@ el('hint').onclick=hint;
 el('how-to').onclick=()=>{
   if(!current||won)return;
   const info=current;
-  showModal('<button id="how-close" class="dialog-close icon-button" aria-label="Закрыть">'+svg('close')+'</button><span class="eyebrow">'+info.title+'</span><h2 id="dialog-title">Как играть</h2>'+guideSteps(info)+'<button id="how-resume" class="primary">Понятно, играем</button><button id="how-hint" class="secondary">Нужна подсказка</button>',hideModal);
+  showModal('<button id="how-close" class="dialog-close icon-button" aria-label="Закрыть">'+svg('close')+'</button><span class="eyebrow">'+info.title+'</span><h2 id="dialog-title">Как играть</h2><div class="intro-content">'+guideSteps(info)+'</div><div class="intro-actions">'+guideReadButton()+'<button id="how-resume" class="primary">Понятно, играем</button><button id="how-hint" class="secondary">Нужна подсказка</button></div>',hideModal,'guide');
   el('how-close').onclick=hideModal;el('how-resume').onclick=hideModal;
   bindGuideRead(info,level);
   el('how-hint').onclick=()=>{hideModal();hint();};
@@ -198,29 +221,29 @@ el('read-aloud').onclick=()=>{
   }
 };
 el('round-count').onclick=()=>{
-  if(!current||won)return;
+  if(!current)return;
   const info=current;
-  showModal('<button id="levels-close" class="dialog-close icon-button" aria-label="Закрыть">'+svg('close')+'</button><span class="eyebrow">'+info.title+'</span><h2 id="dialog-title">Выбери задание</h2><div class="level-grid">'+Array.from({length:info.levels},(_,i)=>'<button class="level-choice '+(i===level?'selected':'')+'" data-level="'+i+'" aria-label="Задание '+(i+1)+'">'+(i+1)+'<small>'+(save.completed[info.id]?.includes(i)?'✓':'')+'</small></button>').join('')+'</div>',hideModal);
+  showModal('<button id="levels-close" class="dialog-close icon-button" aria-label="Закрыть">'+svg('close')+'</button><span class="eyebrow">'+info.title+'</span><h2 id="dialog-title">Выбери задание</h2><p class="levels-note">Пройди открытое задание, чтобы открыть следующее. К готовым можно возвращаться.</p><div class="level-grid">'+Array.from({length:info.levels},(_,i)=>{const unlocked=isLevelUnlocked(info.id,i),done=save.completed[info.id]?.includes(i);return '<button class="level-choice '+(i===level?'selected':'')+(done?' completed':'')+'" data-level="'+i+'" '+(unlocked?'':'disabled ')+'aria-label="Задание '+(i+1)+(unlocked?'':', пока закрыто')+'">'+(i+1)+'<small>'+(done?'✓':unlocked?'':svg('lock'))+'</small></button>';}).join('')+'</div>',hideModal,'levels');
   el('levels-close').onclick=hideModal;
-  el('dialog').querySelectorAll<HTMLButtonElement>('[data-level]').forEach(button=>button.onclick=()=>void start(info,Number(button.dataset.level)));
+  el('dialog').querySelectorAll<HTMLButtonElement>('[data-level]:not(:disabled)').forEach(button=>button.onclick=()=>introGuide(info,Number(button.dataset.level),false));
 };
 document.querySelectorAll<HTMLButtonElement>('.sound-toggle').forEach((button)=>button.onclick=()=>{save.sound=!save.sound;persist();updateSound();if(save.sound)tone();else silence();});
 el('about-open').onclick=()=>{
-  showModal('<span class="eyebrow">ДЛЯ РОДИТЕЛЕЙ</span><h2 id="dialog-title">Открытия в своём темпе</h2><p>Коллекция из '+GAMES.length+' игр по предложениям психолога Анастасии Левшиной. Часть заданий предполагает знакомство с буквами, часами или счётом — ориентируйтесь на интерес и умения ребёнка.</p><p>Здесь можно пользоваться подсказками и пробовать снова. Прогресс сохраняется только в этом браузере на этом устройстве. Регистрации и рекламы нет.</p><p>Чтение вслух использует доступный голос устройства. Для первого открытия игры требуется интернет; посещённые игры могут работать без сети после сохранения браузером.</p><button id="about-close" class="primary">Понятно</button>',hideModal);
+  showModal('<span class="eyebrow">ДЛЯ РОДИТЕЛЕЙ</span><h2 id="dialog-title">Открытия в своём темпе</h2><p>Коллекция из '+GAMES.length+' игр по предложениям психолога Анастасии Левшиной. Часть заданий предполагает знакомство с буквами, часами или счётом — ориентируйтесь на интерес и умения ребёнка.</p><p>Игры собраны по направлениям развития. Следующее задание открывается после успешного завершения текущего. Готовые задания можно повторять, пользоваться подсказками и пробовать снова.</p><p>Прогресс сохраняется только в этом браузере на этом устройстве. Регистрации и рекламы нет. Чтение вслух использует готовые записи или доступный голос устройства. Для первого открытия игры требуется интернет; посещённые игры могут работать без сети после сохранения браузером.</p><button id="about-close" class="primary">Понятно</button>',hideModal);
   el('about-close').onclick=hideModal;
 };
 document.addEventListener('keydown',(event)=>{
   if(el('modal').classList.contains('hidden'))return;
   if(event.key==='Escape'){event.preventDefault();modalClose?.();}
   if(event.key==='Tab'){
-    const controls=[...el('dialog').querySelectorAll<HTMLElement>('button,a[href],[tabindex="0"]')];
+    const controls=[...el('dialog').querySelectorAll<HTMLElement>('button:not(:disabled),a[href],[tabindex="0"]')];
     const first=controls[0],last=controls.at(-1);
     if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}
     else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus();}
   }
 });
 document.addEventListener('visibilitychange',()=>{if(document.hidden)silence();});
-window.addEventListener('hashchange',()=>{const info=gameById(location.hash.slice(1));if(info)void start(info,nextLevel(info.id));else home();});
+window.addEventListener('hashchange',()=>{const info=gameById(location.hash.slice(1));if(info)intro(info);else home();});
 window.addEventListener('pageshow',event=>{if(event.persisted&&!current)home();});
 updateSound();home();
 const initial=gameById(location.hash.slice(1));if(initial)intro(initial);

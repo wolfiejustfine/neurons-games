@@ -19,6 +19,7 @@ export async function drag(page,source,destination){
 export async function open(page,id){
   await page.goto('http://127.0.0.1:5173/');
   await page.locator('[data-game="'+id+'"]').tap();
+  await page.locator('#story-next').tap();
   await page.locator('#intro-start').tap();
   await page.waitForFunction(expected=>window.__neurons?.inspect()?.game===expected&&window.__neurons.inspect().controls?.length>0,id);
   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
@@ -29,13 +30,21 @@ export async function waitResult(page){
 }
 export async function next(page){
   const previous=await inspect(page);await page.locator('#next-round').tap();
+  await page.locator('#intro-start').tap();
   await page.waitForFunction(old=>window.__neurons?.inspect()?.level===old+1,previous.level);
   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
   await page.waitForTimeout(120);
 }
 export async function solve(page,id){
   let state=(await inspect(page)).round;
-  if(id==='shadows'){await tap(page,'choice-'+state.answer);}
+  if(id==='shadows'){
+    while(!state.solved){
+      if(!state.itemSolved)await tap(page,'choice-'+state.answer);
+      state=(await inspect(page)).round;
+      if(!state.solved&&state.itemSolved){await tap(page,'next-shadow');await page.waitForTimeout(100);}
+      state=(await inspect(page)).round;
+    }
+  }
   else if(id==='anagrams'){
     for(let i=0;i<state.word.length;i++){
       state=(await inspect(page)).round;
@@ -46,7 +55,7 @@ export async function solve(page,id){
     for(let i=0;i<state.word.length;i++){await tap(page,'key-'+state.word[i]);await tap(page,'code-'+i);}
   }else if(id==='proofreading'){
     for(let i=0;i<state.words.length;i++){
-      await tap(page,state.words[i]==='СТОП'?'tool-good':'tool-bad');await tap(page,'sign-'+i);
+      await tap(page,state.words[i]===state.sample?'tool-good':'tool-bad');await tap(page,'sign-'+i);
     }
   }else if(id==='alarms'){
     for(let i=0;i<state.times.length;i++){await tap(page,'clock-'+state.times[i]);await tap(page,'meeting-'+i);}

@@ -1,6 +1,7 @@
 import type { SceneGameId } from './catalog';
 import { clockLesson } from './learning';
 import { clockHands,formatClock } from './rules';
+import { proofreadingLesson } from './challenges';
 
 export function clockFace(minutes:number) {
   const hands=clockHands(minutes);
@@ -23,7 +24,7 @@ export function guideVisual(id:SceneGameId,level:number):string {
   }
   if(id==='color-sort')return example('<span class="example-tube">●<br>●<br>●<br>●</span><strong>✓</strong><span class="example-tube empty"></span>','Готово: весь цвет в одной полной пробирке — 4 слоя. Лишние пробирки остаются пустыми. Значок на жидкости обозначает цвет, номер внизу — пробирку.');
   if(id==='ciphers')return example('<span class="example-tile">★ = А</span>'+arrow+'<span class="example-tile">★ → А</span>','Пример: таблица говорит, что ★ — это А. Выбери ★ А в таблице, затем коснись ★ в записке.');
-  if(id==='proofreading')return example('<span class="example-tile"><u>СТОП</u></span><span class="example-tile"><s>СТП</s></span>','Так выглядят готовые отметки. Рисовать линии не нужно: выбери кнопку, затем коснись надписи.');
+  if(id==='proofreading'){const sample=proofreadingLesson(level).target;return example('<span class="example-tile"><u>'+sample+'</u></span><span class="example-tile"><s>'+sample.slice(0,-1)+'</s></span>','Так выглядят готовые отметки. Рисовать линии не нужно: выбери кнопку, затем коснись надписи.');}
   if(id==='maze-sort')return example(prop('screw')+arrow+'<span class="example-bin">'+prop('screw')+'<small>ВИНТЫ</small></span>','Пример: винт относим в ящик «Винты». Гвозди — в ящик «Гвозди». Ящики с такими же значками стоят на концах дорожки.');
   if(id==='anagrams')return example('<span class="example-tile">А</span>'+arrow+'<span class="example-slot">А</span>','Пример: коснись буквы, затем пустой клетки. Если назвал картинку иначе, нажми «Что на картинке?» в игре.');
   if(id==='shadows')return example('<span class="example-shadow">'+prop('key')+'</span>'+arrow+prop('key'),'Пример: у тени и ключа одинаковые зубчики и отверстие.');

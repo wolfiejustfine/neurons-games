@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-11-09",
+  "updated_on": "2026-11-22",
   "project_name": "Игры «Нейроны»",
   "project_use": "noncommercial-or-educational-user-confirmed",
   "confirmed_requirements": {
@@ -298,5 +298,17 @@
     "original_storage_key": "shulte.v3",
     "source_js_unchanged": true,
     "qa": "artifacts/schulte/qa-report.json"
+  },
+  "revision_2026_11_22": {
+    "scope": "Story/instructions flow, grouped catalog, sequential unlocking, silhouette comparison prototype and narration handoff",
+    "manifest": "assets/revision-20261122.json",
+    "voice_script": "assets/voice/script.json",
+    "word_pack": "assets/proofreading-content.json",
+    "pending": [
+      "New recordings from the user",
+      "New words and difficulty variants from Nastya",
+      "Child playtests"
+    ],
+    "account_access": "Do not access ElevenLabs; user creates recordings"
   }
 }

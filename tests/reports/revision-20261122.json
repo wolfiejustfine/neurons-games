@@ -1,0 +1,278 @@
+{
+  "date": "2026-11-22",
+  "inventory": [
+    "Grouped catalog: category links preserve navigation and include 14 games once",
+    "Separate story, Next, instructions, Back, close, read and start controls",
+    "Sequential locking: new and existing profiles, replay, next, refresh, invalid selection",
+    "24 shadow comparisons across 8 sessions, similar distractors, rotations, hint, wrong and next-shadow",
+    "8 proofreading fields, error tools, unique mistakes and configurable word pack",
+    "First rounds of all other mechanics through revised shared flow",
+    "360x640, 390x844, tablet and desktop text and controls",
+    "Production PWA, Schulte link, save, offline entry and cancellation of draft narration",
+    "Voice script and MP3 import validation; no account or paid service accessed"
+  ],
+  "checks": [
+    "New profile: 7 of 8 shadow levels locked; first session needs 2 separate comparisons and opens level 2 after success",
+    "All 8 shadow sessions passed by ordinary touches: 24 comparisons, matched details and rotations, deliberate Next between items",
+    "All 8 proofreading fields passed through both marking tools; current target remains STOP until Nastya supplies words",
+    "Shared flow and first round passed: anagrams",
+    "Shared flow and first round passed: ciphers",
+    "Shared flow and first round passed: alarms",
+    "Shared flow and first round passed: rearrangement",
+    "Shared flow and first round passed: color-sort",
+    "Shared flow and first round passed: maze-codes",
+    "Shared flow and first round passed: maze-sort",
+    "Shared flow and first round passed: tangles",
+    "Shared flow and first round passed: hidden-objects",
+    "Shared flow and first round passed: math-coloring",
+    "Shared flow and first round passed: riddle-wheel",
+    "All 13 story and guide screens fit 360x640: story text at least 20px, rules at least 17px, audio and start controls remain visible",
+    "Category links scroll without changing the game route",
+    "Legacy non-contiguous save preserved byte for byte; completed level 4 can be replayed, only first pending level 2 newly opens; original Schulte storage untouched",
+    "Direct #game entry shows story before creating an engine",
+    "All 8 sessions and their changing rules verified: alarms",
+    "All 8 sessions and their changing rules verified: rearrangement",
+    "All 8 sessions and their changing rules verified: math-coloring",
+    "All 8 sessions and their changing rules verified: riddle-wheel",
+    "Real draft MP3 playback verified through Audio-element observation; opening instructions and muting stop narration. No ElevenLabs account accessed.",
+    "Story and guide layout inspected at 768x1024 and 1280x800; Escape closes guide"
+  ],
+  "errors": [],
+  "resources": [],
+  "smallStory": {
+    "font": "20px",
+    "height": 497,
+    "scroll": 497,
+    "buttonBottom": 546.265625,
+    "screen": 640
+  },
+  "smallGuide": {
+    "font": "17px",
+    "height": 606,
+    "scroll": 733,
+    "buttonBottom": 671.546875,
+    "screen": 640
+  },
+  "smallLayouts": [
+    {
+      "game": "shadows",
+      "story": {
+        "font": 20,
+        "bottom": 551.265625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "anagrams",
+      "story": {
+        "font": 20,
+        "bottom": 536.765625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "ciphers",
+      "story": {
+        "font": 20,
+        "bottom": 551.265625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "alarms",
+      "story": {
+        "font": 20,
+        "bottom": 551.265625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "rearrangement",
+      "story": {
+        "font": 20,
+        "bottom": 565.765625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "color-sort",
+      "story": {
+        "font": 20,
+        "bottom": 565.765625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "maze-codes",
+      "story": {
+        "font": 20,
+        "bottom": 551.265625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "maze-sort",
+      "story": {
+        "font": 20,
+        "bottom": 565.765625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "tangles",
+      "story": {
+        "font": 20,
+        "bottom": 565.765625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "hidden-objects",
+      "story": {
+        "font": 20,
+        "bottom": 594.765625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "math-coloring",
+      "story": {
+        "font": 20,
+        "bottom": 565.765625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "riddle-wheel",
+      "story": {
+        "font": 20,
+        "bottom": 551.265625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    },
+    {
+      "game": "proofreading",
+      "story": {
+        "font": 20,
+        "bottom": 565.765625
+      },
+      "guide": {
+        "font": 17,
+        "bottom": 555,
+        "audioBottom": 489,
+        "overflow": false
+      }
+    }
+  ],
+  "production": {
+    "errors": [],
+    "resources": [],
+    "initialPhaserRequests": 0,
+    "shadowRoundSaved": true,
+    "wrongAndHint": true,
+    "offlineCatalog": true,
+    "offlineShadowNextLevel": true,
+    "schulteRoundTrip": true,
+    "offlineSchulte": true,
+    "updateActivated": true
+  },
+  "unitTests": {
+    "passed": 20,
+    "failed": 0
+  },
+  "build": "passed",
+  "playedLevels": {
+    "allEight": [
+      "shadows",
+      "proofreading",
+      "alarms",
+      "rearrangement",
+      "math-coloring",
+      "riddle-wheel"
+    ],
+    "firstLevel": [
+      "anagrams",
+      "ciphers",
+      "color-sort",
+      "maze-codes",
+      "maze-sort",
+      "tangles",
+      "hidden-objects"
+    ],
+    "total": 55
+  },
+  "voice": {
+    "lines": 154,
+    "priority1": 69,
+    "newRecordings": 0,
+    "accountAccess": false,
+    "validMp3Check": "passed using existing draft audio as a format fixture",
+    "corruptMp3Rejected": true
+  },
+  "childPlaytest": false,
+  "pending": [
+    "New recordings from user",
+    "Nastya word list and balancing notes",
+    "Child playtest"
+  ]
+}

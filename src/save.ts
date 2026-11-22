@@ -1,5 +1,6 @@
 import { GAMES, type GameId } from './catalog';
 import { readSchulteCompleted } from './standalone-progress';
+import { canOpenLevel, firstPendingLevel } from './progression';
 const KEY = 'neurons-play-v1';
 export interface Saved { version:1; sound:boolean; completed:Partial<Record<GameId,number[]>>; }
 export function readSave(raw: string|null): Saved {
@@ -20,6 +21,7 @@ function stored() { try { return localStorage.getItem(KEY); } catch { return nul
 export const save = readSave(typeof localStorage === 'undefined' ? null : stored());
 export function persist() { try { localStorage.setItem(KEY, JSON.stringify(save)); } catch { /* Playing remains available without persistent storage. */ } }
 export function complete(id:GameId,level:number) {
+  if(!isLevelUnlocked(id,level))return;
   const levels=save.completed[id] ?? [];
   if (!levels.includes(level)) levels.push(level);
   save.completed[id]=levels; persist();
@@ -29,5 +31,9 @@ export const finishedCount = (id:GameId) => id==='schulte'?schulteCompleted().le
 export const nextLevel = (id:GameId) => {
   const info=GAMES.find((g)=>g.id===id)!;
   const completed=id==='schulte'?schulteCompleted():save.completed[id]??[];
-  return Array.from({length:info.levels},(_,i)=>i).find((n)=>!completed.includes(n)) ?? 0;
+  return firstPendingLevel(completed,info.levels);
 };
+export function isLevelUnlocked(id:GameId,level:number){
+  const info=GAMES.find(g=>g.id===id);
+  return !!info&&canOpenLevel(id==='schulte'?schulteCompleted():save.completed[id]??[],level,info.levels);
+}

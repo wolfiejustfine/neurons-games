@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { PROPS, type SceneGameId, type SceneGameInfo } from '../catalog';
 import type { Hooks, PlayContext, Round, RoundFactory } from './types';
+import { SHADOW_TEXTURES } from '../challenges';
 
 const factories:Record<SceneGameId,()=>Promise<{default:RoundFactory}>> = {
   shadows:()=>import('../games/shadows'), anagrams:()=>import('../games/anagrams'),
@@ -23,6 +24,7 @@ class PlayScene extends Phaser.Scene {
   preload(){
     this.load.setPath(import.meta.env.BASE_URL+'props/');
     for(const key of ALL_PROPS) if(!this.textures.exists(key)) this.load.svg(key,key+'.svg',{width:200,height:200});
+    if(this.runData.info.id==='shadows')for(const key of SHADOW_TEXTURES)if(!this.textures.exists(key))this.load.svg(key,key+'.svg',{width:200,height:200});
     if(this.runData.info.id==='hidden-objects'&&!this.textures.exists('newt-lab')){
       this.load.setPath(import.meta.env.BASE_URL+'art/');this.load.image('newt-lab','newt-lab.webp');
     }

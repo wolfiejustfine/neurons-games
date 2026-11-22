@@ -5,6 +5,11 @@ import { clockLesson, guideForLevel, MEMORY_COUNTS, WIRE_COUNTS, SHADOW_OPTIONS,
 import {searchLesson,SEARCH_COUNTS,paintLesson,riddleLesson,riddleChoices,RIDDLES} from '../src/expansion.ts';
 import {readSchulteCompleted,SCHULTE_LEVELS} from '../src/standalone-progress.ts';
 import {TOTAL_LEVELS as ORIGINAL_SCHULTE_LEVELS,LEVELS as SCHULTE_RULES,buildPuzzle as buildSchultePuzzle} from '../vendor/schulte/src/config.js';
+import { canOpenLevel,firstPendingLevel } from '../src/progression.ts';
+import { shadowLesson,SHADOW_ROUNDS,SHADOW_TEXTURES,buildProofreadingLesson,proofreadingLesson } from '../src/challenges.ts';
+import { GAMES,GAME_GROUPS } from '../src/catalog.ts';
+import { normalizeVoiceText,recordingForText } from '../src/voice-text.ts';
+import { existsSync,readFileSync } from 'node:fs';
 
 test('all eight colour puzzles have legal complete solutions and conserve their liquids',()=>{
   TUBE_LEVELS.forEach((initial,index)=>{
@@ -69,7 +74,7 @@ test('memory, silhouette and tracing lessons begin small and grow gradually',()=
     assert.equal(counts.length,8);
     for(let i=1;i<counts.length;i++)assert.ok(counts[i]>=counts[i-1]&&counts[i]-counts[i-1]<=1);
   }
-  assert.equal(MEMORY_COUNTS[0],2);assert.equal(WIRE_COUNTS[0],1);assert.equal(SHADOW_OPTIONS[0],2);
+  assert.equal(MEMORY_COUNTS[0],2);assert.equal(WIRE_COUNTS[0],1);assert.equal(SHADOW_OPTIONS[0],3);
   for(let i=1;i<CIPHER_WORDS.length;i++)assert.ok(CIPHER_WORDS[i].length>=CIPHER_WORDS[i-1].length);
 });
 test('every collection scene has three concrete instructions and guidance for all eight lessons',()=>{
@@ -132,4 +137,78 @@ test('clock instructions introduce afternoon time and half hours only when neede
   assert.ok(guideForLevel('alarms',3).join(' ').includes('13:00'));
   assert.ok(!guideForLevel('alarms',3).join(' ').includes('получас'));
   assert.ok(guideForLevel('alarms',4).join(' ').includes('получас'));
+});
+
+test('levels open sequentially, retain old completed levels, and reject invalid or skipped selections',()=>{
+  const done:number[]=[];
+  for(let next=0;next<8;next++){
+    assert.equal(firstPendingLevel(done,8),next);
+    for(let n=0;n<8;n++)assert.equal(canOpenLevel(done,n,8),n<=next);
+    done.push(next);
+  }
+  assert.ok(done.every(n=>canOpenLevel(done,n,8)));
+  for(const invalid of [-1,8,1.5,NaN,Infinity])assert.equal(canOpenLevel([],invalid,8),false);
+  assert.equal(canOpenLevel([0,3],3,8),true);
+  assert.equal(canOpenLevel([0,3],1,8),true);
+  assert.equal(canOpenLevel([0,3],4,8),false);
+});
+
+test('catalog groups include every game once and keep Schulte in attention',()=>{
+  const grouped=GAME_GROUPS.flatMap(g=>g.games);
+  assert.deepEqual([...grouped].sort(),GAMES.map(g=>g.id).sort());
+  assert.equal(new Set(grouped).size,GAMES.length);
+  assert.ok(GAME_GROUPS.find(g=>g.id==='attention')?.games.includes('schulte'));
+});
+
+test('shadow sessions require multiple comparisons and always have one exact match among distinct options',()=>{
+  let total=0;
+  for(let level=0;level<8;level++){
+    total+=SHADOW_ROUNDS[level];
+    for(let part=0;part<SHADOW_ROUNDS[level];part++){
+      const q=shadowLesson(level,part);
+      assert.equal(q.options.filter(key=>key===q.answer).length,1);
+      assert.equal(new Set(q.options).size,q.options.length);
+      assert.ok(q.options.length>=3&&q.options.length<=4);
+      if(q.family)assert.ok(q.options.every(key=>key.startsWith('shadow-'+q.family+'-')));
+      assert.ok(Math.abs(q.rotation)<=22);
+      for(const key of q.options)assert.ok(existsSync(new URL('../public/props/'+key+'.svg',import.meta.url)));
+    }
+  }
+  assert.equal(total,24);
+  const assets=SHADOW_TEXTURES.map(key=>readFileSync(new URL('../public/props/'+key+'.svg',import.meta.url),'utf8'));
+  assert.equal(new Set(assets).size,SHADOW_TEXTURES.length);
+});
+
+test('proofreading supports new word packs with valid targets, real errors and no repeated distractor in a field',()=>{
+  for(const word of ['СТОП','МОСТ','ШКОЛА','МОЛОКО'])for(const count of [4,6,9]){
+    const lesson=buildProofreadingLesson(word,count,714);
+    const wrong=lesson.words.filter(text=>text!==word);
+    assert.equal(lesson.words.length,count);assert.ok(wrong.length>0&&wrong.length<count);
+    assert.equal(new Set(wrong).size,wrong.length);
+    assert.ok(wrong.every(text=>text!==word&&text.length<=word.length));
+  }
+  for(let n=0;n<8;n++)assert.ok(guideForLevel('proofreading',n)[0].includes(proofreadingLesson(n).target));
+  for(const bad of ['','ABCD','СТОП!','АБ'])assert.throws(()=>buildProofreadingLesson(bad,4,1));
+});
+
+test('recorded voices match exact current text and do not play a stale recording after an edit',()=>{
+  const text='Рассмотри форму тени.';
+  assert.equal(normalizeVoiceText('  Рассмотри\nформу тени.  '),text);
+  assert.equal(recordingForText('Рассмотри  форму тени.',{[text]:'guide.mp3'}),'guide.mp3');
+  assert.equal(recordingForText('Рассмотри другую тень.',{[text]:'guide.mp3'}),undefined);
+});
+
+test('voice handoff contains unique portable filenames and covers every current story, guide and riddle',()=>{
+  const manifest=JSON.parse(readFileSync(new URL('../assets/voice/script.json',import.meta.url),'utf8'));
+  const lines=manifest.lines as {filename:string;text:string}[];
+  assert.equal(new Set(lines.map(l=>l.filename)).size,lines.length);
+  assert.equal(new Set(lines.map(l=>l.text)).size,lines.length);
+  assert.ok(lines.every(l=>/^[a-z0-9-]+\.mp3$/.test(l.filename)));
+  const texts=new Set(lines.map(l=>normalizeVoiceText(l.text)));
+  for(const game of GAMES){
+    if(game.id==='schulte')continue;
+    assert.ok(texts.has(game.story));
+    for(let n=0;n<game.levels;n++)assert.ok(texts.has(guideForLevel(game.id,n).join(' ')));
+  }
+  for(const riddle of RIDDLES)assert.ok(texts.has(riddle.text));
 });

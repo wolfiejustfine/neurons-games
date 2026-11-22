@@ -8,3 +8,4 @@ artifacts/
 !.env.example
 playwright-report/
 test-results/
+assets/voice-inbox/
